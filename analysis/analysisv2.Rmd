@@ -1,0 +1,373 @@
+---
+title: "Analysis v2"
+author: "Tina Lasisi"
+date: "`r format(Sys.Date(), '%d %B, %Y')`"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+
+```{r setup}
+
+library(readxl)
+library(ggplot2)
+library(ggridges)
+library(ggpubr)
+library(tidyverse)
+library(ggfortify)
+library(corrplot)
+library(factoextra)
+library(GGally)
+
+
+```
+
+## Clusters
+
+
+```{r import-data}
+
+df_saliva <- read_csv("data/df_saliva.csv")
+
+```
+
+First, we will do a PCA using genetic and protein variables to see if there are any clusters in our dataset.
+
+```{r var-include}
+
+vars_include <- c("Primer1_Diploid", "Primer2_Diploid", "Total_Protein_Before_1_ug_mL", "Total_Protein_Before_2_ug_mL", "Total_Protein_After_1_ug_mL", "Total_Protein_After_2_ug_mL", "TP_Change", "sAA_Mean_Collection_Before_U_mL", "sAA_Mean_Collection_After_U_mL", "sAA_Change", "Weight_Saliva_g_1", "Weight_Saliva_g_2", "Flow_Rate_1_g_min", "Flow_Rate_2_g_min", "Sample_ID")
+
+```
+
+
+We will do the analysis first by omitting na values.
+```{r}
+
+# Scale the Data
+df_saliva_scaled <- df_saliva %>%
+  select(all_of(vars_include)) %>% 
+  select(-"Sample_ID") %>% 
+  na.omit() %>% 
+  mutate(across(everything(), ~ as.numeric(.) %>% scale))
+
+# Data unscaled
+df_saliva_unscaled <- df_saliva %>%
+  select(all_of(vars_include)) %>% 
+  select(-"Sample_ID") %>% 
+  na.omit()
+
+# Perform PCA
+pca <- df_saliva_scaled %>%
+  prcomp(center = FALSE, scale. = FALSE)
+
+# Print the summary of the PCA object
+summary(pca)
+
+
+```
+
+```{r}
+# Compute a correlation matrix
+cor.matrix <- cor(df_saliva_scaled)
+
+# Create a correlation heatmap 
+corrplot(cor.matrix, method = "color", type = "upper", tl.cex = .7, insig = "blank")
+
+corrplot(cor.matrix, type = "upper", order = "hclust", 
+         tl.col = "black", tl.srt = 45, tl.cex = .7, insig = "blank")
+```
+
+```{r}
+# Scree plot of variances
+fviz_eig(pca)
+
+```
+
+```{r}
+# Plot the variable factors 
+fviz_pca_var(pca, col.var="contrib", 
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+             repel = TRUE)
+
+```
+
+
+We repeat the analysis with means replacing missing values.
+```{r}
+
+# Scale the Data
+df_saliva_scaled <- df_saliva %>%
+  select(all_of(vars_include)) %>% 
+  select(-"Sample_ID") %>% 
+  # na.omit() %>% 
+  mutate(across(everything(), ~ replace(., is.na(.), mean(., na.rm = TRUE)))) %>%
+    mutate(across(everything(), ~ as.numeric(.) %>% scale))
+
+
+# Perform PCA
+pca <- df_saliva_scaled %>%
+  prcomp(center = FALSE, scale. = FALSE)
+
+# Print the summary of the PCA object
+summary(pca)
+```
+
+
+```{r}
+# Compute a correlation matrix
+cor.matrix <- cor(df_saliva_scaled)
+
+# Create a correlation heatmap 
+corrplot(cor.matrix, method = "color", type = "upper", tl.cex = .7, insig = "blank")
+
+corrplot(cor.matrix, type = "upper", order = "hclust", 
+         tl.col = "black", tl.srt = 45, tl.cex = .7, insig = "blank")
+```
+
+```{r}
+# Scree plot of variances
+fviz_eig(pca)
+
+```
+
+```{r}
+# Plot the variable factors 
+fviz_pca_var(pca, col.var="contrib", 
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+             repel = TRUE)
+
+```
+
+In both cases, it appears as though it would be sufficient to take the following variables as they are highly correlated in the same directions (or a summary value representing both:
+- Total_Protein_Before_Mean_ug_mL
+- Total_Protein_Mean_After_ug_mL
+- Primer2_Diploid
+- TP_Change
+- sAA_Change
+- Flow_Rate_1_g_mean
+
+```{r}
+
+# Let's ensure ID column is a factor
+df_saliva$Sample_ID <- as.factor(df_saliva$Sample_ID)
+
+# Save your non-numeric variable
+df_label <- df_saliva$Sample_ID
+starch_freq <- df_saliva$Starch_Frequency
+
+df_saliva_final <- df_saliva %>% 
+  mutate(Flow_Rate_mean = (Flow_Rate_1_g_min + Flow_Rate_2_g_min)/2) %>% 
+  select(Total_Protein_Before_Mean_ug_mL, Total_Protein_Mean_After_ug_mL, Primer2_Diploid, TP_Change, sAA_Change, Flow_Rate_mean)
+
+```
+
+```{r}
+# Scale your numeric data and store original row names
+  
+scaled_df <- df_saliva_final %>% 
+  na.omit() %>% 
+  mutate(across(everything(), ~ replace(., is.na(.), mean(., na.rm = TRUE)))) %>%
+  mutate(across(everything(), ~scale(.x)))  
+
+# Save the original order of your data
+row_order <- row.names(scaled_df)
+```
+
+
+```{r}
+# Perform PCA
+pca_results <- prcomp(scaled_df, center = FALSE, scale = FALSE)
+
+# Print the summary of the PCA object
+summary(pca_results)
+
+# Add original row names back to the scores. 
+rownames(pca_results$x) <- row_order
+
+# Add Starch_Frequency back as a factor 
+df_final <- data.frame(pca_results$x, Starch_Frequency = starch_freq[match(row_order, df_label)])
+
+
+```
+
+```{r}
+fviz_pca_ind(pca_results, 
+             label = "none", 
+             habillage = df_final$Starch_Frequency, 
+             addEllipses = TRUE,
+             palette = "jco",
+             legend.title = "Starch Frequency")
+```
+
+
+```{r}
+# Before adding `Primer2_Diploid` variable to our new dataframe, ensure it's numeric
+df_final$Primer2_Diploid <- as.numeric(df_saliva$Primer2_Diploid[match(row_order, df_label)])
+
+# Plot the PCA scores
+ggplot(df_final, aes(x = PC1, y = PC2)) + 
+  geom_point(aes(color = Primer2_Diploid)) + 
+  scale_color_gradient(low = "blue", high = "green") +
+  theme_minimal() +
+  labs(color = "Primer2_Diploid levels")
+
+
+
+```
+
+```{r}
+# Select only numeric columns
+df_numeric <- df_saliva_final[, sapply(df_saliva_final, is.numeric)]
+
+# Create the scatter plot matrix
+ggpairs(df_numeric)
+
+```
+
+```{r}
+# Create the scatter plot matrix using spearman correlation
+ggpairs(df_numeric, upper = list(continuous = wrap("cor", method = "spearman")))
+
+```
+
+## Relationship between CNV, protein and sAA
+
+```{r}
+df_saliva_lm <- df_saliva %>% 
+  mutate(Flow_Rate_mean = (Flow_Rate_1_g_min + Flow_Rate_2_g_min)/2) %>% 
+  select(c(Primer1_Diploid, Primer2_Diploid, sAA_Mean_Collection_Before_U_mL, sAA_Mean_Collection_After_U_mL, sAA_Change, Total_Protein_Before_Mean_ug_mL, Total_Protein_Mean_After_ug_mL, TP_Change, Flow_Rate_mean)) %>% 
+  na.omit()
+  
+```
+
+## Mediator models
+
+### Before
+
+```{r}
+# Load required packages 
+library(mediation)
+library(lavaan)
+
+# Running the mediation model separately for before/after scenarios
+# Before scenario
+# Define the mediation model
+mediation_model_before <- '
+        # direct effect
+        sAA_Mean_Collection_Before_U_mL ~ c*Primer1_Diploid
+        # mediator
+        Flow_Rate_mean ~ a*Primer1_Diploid
+        Total_Protein_Before_Mean_ug_mL ~ m*Primer1_Diploid
+        sAA_Mean_Collection_Before_U_mL ~ b*Flow_Rate_mean + n*Total_Protein_Before_Mean_ug_mL
+        # indirect effect (a*b and m*n)
+        indirect1 := a*b
+        indirect2 := m*n
+        # total effect
+        total := c + (a*b) + (m*n)
+     '
+
+# Fit the model
+fit_before <- sem(mediation_model_before, data=df_saliva_lm)
+
+# Summarize the results
+summary(fit_before)
+
+```
+
+```{r}
+# Running the mediation model for 'after' scenario
+# Define the mediation model
+mediation_model_after <- '
+        # direct effect
+        sAA_Mean_Collection_After_U_mL ~ c*Primer2_Diploid
+        # mediator
+        Flow_Rate_mean ~ a*Primer2_Diploid
+        Total_Protein_Mean_After_ug_mL ~ m*Primer2_Diploid
+        sAA_Mean_Collection_After_U_mL ~ b*Flow_Rate_mean + n*Total_Protein_Mean_After_ug_mL
+        # indirect effect (a*b and m*n)
+        indirect1 := a*b
+        indirect2 := m*n
+        # total effect
+        total := c + (a*b) + (m*n)
+     '
+
+# Fit the model
+fit_after <- sem(mediation_model_after, data=df_saliva_lm)
+
+# Summarize the results
+summary(fit_after)
+
+```
+
+```{r}
+# Running the mediation model with TP Change and sAA Change variables
+# Define the mediation model
+mediation_model_change <- '
+        # direct effect
+        sAA_Change ~ c*Primer2_Diploid
+        # mediator
+        Flow_Rate_mean ~ a*Primer2_Diploid
+        TP_Change ~ m*Primer2_Diploid
+        sAA_Change ~ b*Flow_Rate_mean + n*TP_Change
+        # indirect effect (a*b and m*n)
+        indirect1 := a*b
+        indirect2 := m*n
+        # total effect
+        total := c + (a*b) + (m*n)
+     '
+
+# Fit the model
+fit_change <- sem(mediation_model_change, data=df_saliva_lm)
+
+# Summarize the results
+summary(fit_change)
+
+```
+
+```{r}
+# install the package if you haven't already
+# install.packages("semPlot")
+
+# load the package
+library(semPlot)
+
+# Your lavann model variable name
+model <- fit_before # replace with your model variable
+
+# create the plot
+semPaths(model, 
+         "std", # standardized coefficients
+         "est", # show estimates
+         curveAdjacent = TRUE, # curved lines for better distinction of paths
+         style = "lisrel") # style of the plot
+
+```
+
+```{r}
+
+# Your lavann model variable name
+model <- fit_after # replace with your model variable
+
+# create the plot
+semPaths(model, 
+         "std", # standardized coefficients
+         "est", # show estimates
+         curveAdjacent = TRUE, # curved lines for better distinction of paths
+         style = "lisrel") # style of the plot
+
+```
+
+```{r}
+
+# Your lavann model variable name
+model <- fit_change # replace with your model variable
+
+# create the plot
+semPaths(model, 
+         "std", # standardized coefficients
+         "est", # show estimates
+         curveAdjacent = TRUE, # curved lines for better distinction of paths
+         style = "lisrel") # style of the plot
+
+```

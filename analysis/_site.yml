@@ -1,0 +1,21 @@
+name: "Goza_AMY_CNV"
+output_dir: ../docs
+navbar:
+  title: "Goza_AMY_CNV"
+  left:
+  - text: Home
+    href: index.html
+  - text: About
+    href: about.html
+  - text: License
+    href: license.html
+  - text: V1 Analyses
+    href: analysis.html
+  - text: V2 Analyses
+    href: analysisv2.html
+output:
+  workflowr::wflow_html:
+    toc: yes
+    toc_float: yes
+    theme: cosmo
+    highlight: textmate

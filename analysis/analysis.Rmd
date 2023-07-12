@@ -1,0 +1,253 @@
+---
+title: "analysis"
+author: "Tina Lasisi"
+date: "2023-06-16"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## Introduction
+
+```{r setup}
+
+library(readxl)
+library(ggplot2)
+library(ggridges)
+library(ggpubr)
+library(tidyverse)
+
+```
+
+```{r}
+amy.d <- read_excel("data/AMY_CNV_data/CNV_sAA_TP_all data.xlsx", sheet = "All data", range = 'A6:AI106')
+head(amy.d)
+str(amy.d)
+
+```
+
+```{r}
+amy.d$`Sample ID` <- as.factor(amy.d$`Sample ID`)
+amy.d$Cluster <- as.factor(amy.d$Cluster)
+
+```
+
+```{r}
+# 1. Histograms for CNV Primer 1 and CNV Primer 2 and metadata
+# CNV Primer 1 targeting AMY1 and AMY2
+cnv.amy12.p <- ggplot(amy.d, aes(x = `Primer1_Diploid`)) +
+   geom_histogram(aes(y = ..density..), color = 'blue', 
+                  fill = 'blue', alpha = .5, binwidth = 1) +
+   #geom_density(alpha = .2, fill = 'blue') +
+  geom_vline(aes(xintercept=12.5),  # mean
+             color="blue", linetype="solid", linewidth=.5) +
+  geom_vline(aes(xintercept=11.6),   #median
+             color="blue", linetype="dashed", linewidth=.5) +
+   xlab(expression(paste(italic("AMY1")," and ",italic("AMY2"),
+                         " diploid gene copy number"))) +
+  xlim(1,28) +
+  ylim(0,0.2) +
+  theme_classic()
+
+cnv.amy12.p
+```
+
+
+```{r}
+# CNV Primer 2 targeting AMY1
+cnv.amy1.p <- ggplot(amy.d, aes(x = `Primer2_Diploid`)) +
+  geom_histogram(aes(y = ..density..), color = 'darkgreen', 
+                 fill = 'darkgreen', alpha = .5, binwidth = 1) +
+ # geom_density(alpha = .2, fill = 'darkgreen') +
+  geom_vline(aes(xintercept=8.1),  #mean
+             color="darkgreen", linetype="solid", size=.5) +
+  geom_vline(aes(xintercept=7.1),
+             color="darkgreen", linetype="dashed", size=.5) +
+  xlab(expression(paste(italic("AMY1")," diploid gene copy number"))) +
+  xlim(1,26) +
+  ylim(0,0.2) +
+  theme_classic()
+cnv.amy1.p
+```
+
+
+```{r}
+# Age
+age.p <- ggplot(amy.d, aes(x = `Age`)) +
+  geom_histogram(aes(y = ..density..), color = 'red', 
+                 fill = 'white') +
+  geom_density(alpha = .2, fill = 'red') +
+  xlab('Age') +
+  theme_classic()
+age.p
+```
+
+
+```{r}
+table(amy.d$Gender)
+
+ggarrange(cnv.amy12.p, cnv.amy1.p,
+          ncol = 1, nrow = 2)
+
+```
+
+```{r}
+# 2. scatter plots sAA vs CNV - before and after, Primer 1 and 2
+#BEFORE
+# 2a ... sAA before over CNV primer 1
+sAAbef.cnv1.p <- ggplot(amy.d, aes(x = `Primer1_Diploid`,
+                                 y = `sAA Mean Collection Before (U/mL)`,
+                                # color = factor(Cluster)
+                                 )) +   geom_point() +
+  geom_smooth(method = 'lm') +
+  stat_regline_equation(label.x = 1, label.y = 800) +
+  stat_cor(aes(label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
+           label.x = 1, label.y = 750) +
+ # xlab() +
+  ylim(0,800) +
+  xlim(1,28) +
+  theme_classic() +
+  theme(legend.position = 'bottom')
+sAAbef.cnv1.p
+```
+
+
+```{r}
+# 2b ... sAA before over CNV primer 2
+sAAbef.cnv2.p <- ggplot(amy.d, aes(x = `Primer2_Diploid`,
+                                    y = `sAA Mean Collection Before (U/mL)`,
+                                    # color = factor(Cluster)
+)) +   geom_point() +
+  geom_smooth(method = 'lm') +
+  stat_regline_equation(label.x = 1, label.y = 800) +
+  stat_cor(aes(label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
+           label.x = 1, label.y = 750) +
+  # xlab() +
+  ylim(0,800) +
+  xlim(1,28) +
+  theme_classic() +
+  theme(legend.position = 'bottom')
+sAAbef.cnv2.p
+```
+
+
+```{r}
+# AFTER
+# 2c ... sAA after over CNV primer 1
+sAAaft.cnv1.p <- ggplot(amy.d, aes(x = `Primer1_Diploid`,
+                                    y = `sAA Mean Collection After (U/mL)`,
+                                    #color = factor(Cluster)
+                                    )) +  geom_point() +
+  geom_smooth(method = 'lm') +
+  stat_regline_equation(label.x = 1, label.y = 800) +
+  stat_cor(aes(label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
+           label.x = 1, label.y = 750) +
+  ylim(0,800) +
+  xlim(1,28) +
+  theme_classic() +
+  theme(legend.position = 'bottom')
+sAAaft.cnv1.p
+```
+
+
+```{r}
+# 2d ... sAA after over CNV primer 2
+sAAaft.cnv2.p <- ggplot(amy.d, aes(x = `Primer2_Diploid`,
+                                    y = `sAA Mean Collection After (U/mL)`,
+                                    #color = factor(Cluster)
+                                )) +  geom_point() +
+  geom_smooth(method = 'lm') +
+  stat_regline_equation(label.x = 1, label.y = 800) +
+  stat_cor(aes(label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
+           label.x = 1, label.y = 750) +
+  ylim(0,800) +
+  xlim(1,28) +
+  theme_classic() +
+  theme(legend.position = 'bottom')
+sAAaft.cnv2.p
+
+```
+
+```{r all-figs-SAA-Primer1}
+# sAA vs. Primer 1 (AMY1+2) and Primer 2 (AMY1) before and after
+ggarrange(sAAbef.cnv1.p, sAAaft.cnv1.p, 
+          sAAbef.cnv2.p, sAAaft.cnv2.p,
+          nrow = 2, ncol = 2)
+
+
+```
+
+```{r}
+
+
+create_glm_and_summary_plots <- function(outcome_vars, input_vars, data) {
+  plots_list <- list()
+  
+  for (outcome_var in outcome_vars) {
+    outcome_variable_plots <- list()
+    for (input_var in input_vars) {
+      plot_title <- paste(outcome_var, " ~ ", input_var)
+      scatter_plot <- ggplot(data, aes_string(x = input_var , y = outcome_var)) +
+        geom_point() + 
+        geom_smooth(method = 'lm') +
+        stat_regline_equation(label.x.npc = 0.1, label.y.npc = 0.9) +
+        stat_cor(aes(label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
+                 label.x.npc = 0.1, label.y.npc = 0.85) +
+        theme_classic() +
+        labs(title = plot_title) +
+        theme(legend.position = 'bottom')
+      
+      outcome_variable_plots[[length(outcome_variable_plots) + 1]] <- scatter_plot
+    }
+    plots_list[[length(plots_list) + 1]] <- outcome_variable_plots
+  }
+  
+  return(plots_list)
+}
+
+
+```
+
+
+```{r}
+outcome_variables <- c("`sAA Mean Collection Before (U/mL)`",
+                       "`sAA Mean Collection After (U/mL)`",
+                       "`sAA Change`",
+                       "`Total Protein Before Mean  (ug/mL)`",
+                       "`Total Protein Mean After (ug/mL)`",
+                       "`TP Change`")
+
+
+input_variables <- c("Primer1_Diploid",
+                     "Primer2_Diploid")
+```
+
+```{r}
+chunk_list <- function(x, n) {
+  lapply(seq(1, length(x), by = n), function(i) {x[i:(i + n - 1)]})
+}
+
+```
+
+```{r}
+all_plots <- create_glm_and_summary_plots(outcome_variables, input_variables, amy.d)
+plot_subsets <- chunk_list(all_plots, 3)
+
+```
+
+```{r}
+for(i in seq_along(plot_subsets)) {
+  subset_plots <- plot_subsets[[i]]
+  plot_list <- c()
+  
+  for (j in 1:length(subset_plots)) {
+    plot_list <- c(plot_list, subset_plots[[j]])
+  }
+  
+  combined_plots <- ggarrange(plotlist = plot_list, nrow = 3, ncol = 2)
+  print(combined_plots)
+}
+
+
+```
+
