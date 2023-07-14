@@ -8,19 +8,28 @@ editor_options:
 ---
 
 
-```{r setup}
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
 
 library(readxl)
 library(ggplot2)
 library(ggridges)
 library(ggpubr)
-library(tidyverse)
 library(ggfortify)
 library(corrplot)
 library(factoextra)
 library(GGally)
+library(mediation)
+library(lavaan)
+library(tidyverse)
 
 
+knitr::opts_chunk$set(
+	fig.height = 6,
+	fig.width = 7,
+	message = FALSE,
+	warning = FALSE,
+	results = "markup"
+)
 ```
 
 ## Clusters
@@ -28,26 +37,34 @@ library(GGally)
 
 ```{r import-data}
 
-df_saliva <- read_csv("data/df_saliva.csv")
-
+df_saliva <- read_csv("data/df_saliva.csv") %>% 
+  rename(TP_Before_1 = Total_Protein_Before_1_ug_mL,
+         TP_Before_2 = Total_Protein_Before_2_ug_mL,
+         TP_After_1 = Total_Protein_After_1_ug_mL,
+         TP_After_2 = Total_Protein_After_2_ug_mL,
+         sAA_Before = sAA_Mean_Collection_Before_U_mL,
+         sAA_After = sAA_Mean_Collection_After_U_mL,
+         TP_Before = Total_Protein_Before_Mean_ug_mL,
+         TP_After = Total_Protein_Mean_After_ug_mL)
 ```
 
 First, we will do a PCA using genetic and protein variables to see if there are any clusters in our dataset.
 
 ```{r var-include}
 
-vars_include <- c("Primer1_Diploid", "Primer2_Diploid", "Total_Protein_Before_1_ug_mL", "Total_Protein_Before_2_ug_mL", "Total_Protein_After_1_ug_mL", "Total_Protein_After_2_ug_mL", "TP_Change", "sAA_Mean_Collection_Before_U_mL", "sAA_Mean_Collection_After_U_mL", "sAA_Change", "Weight_Saliva_g_1", "Weight_Saliva_g_2", "Flow_Rate_1_g_min", "Flow_Rate_2_g_min", "Sample_ID")
+vars_include <- c("Primer1_Diploid", "Primer2_Diploid", "TP_Before_1", "TP_Before_2", "TP_After_1", "TP_After_2", "TP_Change", "sAA_Before", "sAA_After", "sAA_Change", "Weight_Saliva_g_1", "Weight_Saliva_g_2", "Flow_Rate_1_g_min", "Flow_Rate_2_g_min", "Sample_ID")
 
 ```
 
 
+### NA values omitted
 We will do the analysis first by omitting na values.
-```{r}
+```{r df-pca-na-omit}
 
 # Scale the Data
 df_saliva_scaled <- df_saliva %>%
   select(all_of(vars_include)) %>% 
-  select(-"Sample_ID") %>% 
+  select(-Sample_ID) %>% 
   na.omit() %>% 
   mutate(across(everything(), ~ as.numeric(.) %>% scale))
 
@@ -67,7 +84,7 @@ summary(pca)
 
 ```
 
-```{r}
+```{r cor-matrix-na-omit}
 # Compute a correlation matrix
 cor.matrix <- cor(df_saliva_scaled)
 
@@ -78,13 +95,13 @@ corrplot(cor.matrix, type = "upper", order = "hclust",
          tl.col = "black", tl.srt = 45, tl.cex = .7, insig = "blank")
 ```
 
-```{r}
+```{r scree-na-omit}
 # Scree plot of variances
 fviz_eig(pca)
 
 ```
 
-```{r}
+```{r contrib-na-omit}
 # Plot the variable factors 
 fviz_pca_var(pca, col.var="contrib", 
              gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
@@ -92,9 +109,9 @@ fviz_pca_var(pca, col.var="contrib",
 
 ```
 
-
+### NA replaced with mean
 We repeat the analysis with means replacing missing values.
-```{r}
+```{r df-pca-na-mean}
 
 # Scale the Data
 df_saliva_scaled <- df_saliva %>%
@@ -114,7 +131,7 @@ summary(pca)
 ```
 
 
-```{r}
+```{r cor-matrix-na-mean}
 # Compute a correlation matrix
 cor.matrix <- cor(df_saliva_scaled)
 
@@ -125,13 +142,13 @@ corrplot(cor.matrix, type = "upper", order = "hclust",
          tl.col = "black", tl.srt = 45, tl.cex = .7, insig = "blank")
 ```
 
-```{r}
+```{r scree-na-mean}
 # Scree plot of variances
 fviz_eig(pca)
 
 ```
 
-```{r}
+```{r contrib-na-mean}
 # Plot the variable factors 
 fviz_pca_var(pca, col.var="contrib", 
              gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
@@ -139,15 +156,16 @@ fviz_pca_var(pca, col.var="contrib",
 
 ```
 
+### Reduced variable PCA
 In both cases, it appears as though it would be sufficient to take the following variables as they are highly correlated in the same directions (or a summary value representing both:
-- Total_Protein_Before_Mean_ug_mL
-- Total_Protein_Mean_After_ug_mL
+- TP_Before
+- TP_After
 - Primer2_Diploid
 - TP_Change
 - sAA_Change
 - Flow_Rate_1_g_mean
 
-```{r}
+```{r df-saliva-final}
 
 # Let's ensure ID column is a factor
 df_saliva$Sample_ID <- as.factor(df_saliva$Sample_ID)
@@ -155,14 +173,15 @@ df_saliva$Sample_ID <- as.factor(df_saliva$Sample_ID)
 # Save your non-numeric variable
 df_label <- df_saliva$Sample_ID
 starch_freq <- df_saliva$Starch_Frequency
+citrus_length <- df_saliva$Citrus_Sum_120sec
 
 df_saliva_final <- df_saliva %>% 
   mutate(Flow_Rate_mean = (Flow_Rate_1_g_min + Flow_Rate_2_g_min)/2) %>% 
-  select(Total_Protein_Before_Mean_ug_mL, Total_Protein_Mean_After_ug_mL, Primer2_Diploid, TP_Change, sAA_Change, Flow_Rate_mean)
+  select(TP_Before, TP_After, Primer2_Diploid, TP_Change, sAA_Change, sAA_Before, sAA_After, Flow_Rate_mean, Starch_Frequency, Citrus_Sum_120sec)
 
 ```
 
-```{r}
+```{r df-saliva-final-scale}
 # Scale your numeric data and store original row names
   
 scaled_df <- df_saliva_final %>% 
@@ -175,7 +194,7 @@ row_order <- row.names(scaled_df)
 ```
 
 
-```{r}
+```{r df-final-pca}
 # Perform PCA
 pca_results <- prcomp(scaled_df, center = FALSE, scale = FALSE)
 
@@ -189,9 +208,12 @@ rownames(pca_results$x) <- row_order
 df_final <- data.frame(pca_results$x, Starch_Frequency = starch_freq[match(row_order, df_label)])
 
 
+
 ```
 
-```{r}
+#### Starch Frequency PCA
+
+```{r df-final-contrib-starch}
 fviz_pca_ind(pca_results, 
              label = "none", 
              habillage = df_final$Starch_Frequency, 
@@ -201,7 +223,8 @@ fviz_pca_ind(pca_results,
 ```
 
 
-```{r}
+#### CNV gradient PCA
+```{r fig-final-pca-gradient}
 # Before adding `Primer2_Diploid` variable to our new dataframe, ensure it's numeric
 df_final$Primer2_Diploid <- as.numeric(df_saliva$Primer2_Diploid[match(row_order, df_label)])
 
@@ -214,9 +237,30 @@ ggplot(df_final, aes(x = PC1, y = PC2)) +
 
 
 
+
+
 ```
 
-```{r}
+
+#### Citrus gradient PCA
+```{r fig-final-pca-gradient-citrus}
+# Before adding `Citrus_Sum_120sec` variable to our new dataframe, ensure it's numeric
+df_final$Citrus_Sum_120sec <- as.numeric(df_saliva$Citrus_Sum_120sec[match(row_order, df_label)])
+
+# Plot the PCA scores
+ggplot(df_final, aes(x = PC1, y = PC2)) + 
+  geom_point(aes(color = Citrus_Sum_120sec)) + 
+  scale_color_gradient(low = "blue", high = "green") +
+  theme_minimal() +
+  labs(color = "Citrus Length")
+
+
+
+```
+
+
+```{r fig-scatter-matrix-pearson, fig.cap="Pearson's correlation", fig.width=10, fig.height=10}
+
 # Select only numeric columns
 df_numeric <- df_saliva_final[, sapply(df_saliva_final, is.numeric)]
 
@@ -225,7 +269,7 @@ ggpairs(df_numeric)
 
 ```
 
-```{r}
+```{r fig-scatter-matrix-spearman, fig.cap="Spearman's rank correlation", fig.width=10, fig.height=10}
 # Create the scatter plot matrix using spearman correlation
 ggpairs(df_numeric, upper = list(continuous = wrap("cor", method = "spearman")))
 
@@ -233,141 +277,397 @@ ggpairs(df_numeric, upper = list(continuous = wrap("cor", method = "spearman")))
 
 ## Relationship between CNV, protein and sAA
 
-```{r}
+```{r df-med}
 df_saliva_lm <- df_saliva %>% 
   mutate(Flow_Rate_mean = (Flow_Rate_1_g_min + Flow_Rate_2_g_min)/2) %>% 
-  select(c(Primer1_Diploid, Primer2_Diploid, sAA_Mean_Collection_Before_U_mL, sAA_Mean_Collection_After_U_mL, sAA_Change, Total_Protein_Before_Mean_ug_mL, Total_Protein_Mean_After_ug_mL, TP_Change, Flow_Rate_mean)) %>% 
+  select(c(Primer1_Diploid, Primer2_Diploid, sAA_Before, sAA_After, sAA_Change, TP_Before, TP_After, TP_Change, Flow_Rate_mean, Citrus_Sum_120sec)) %>% 
   na.omit()
   
 ```
 
-## Mediator models
+### Mediator models
 
-### Before
-
-```{r}
-# Load required packages 
-library(mediation)
-library(lavaan)
-
-# Running the mediation model separately for before/after scenarios
-# Before scenario
-# Define the mediation model
-mediation_model_before <- '
+```{r func-med-model}
+# Generalized function to toggle different timepoints or changes
+run_mediation_model <- function(df, timepoint_or_change) {
+    mediation_model <- paste("
         # direct effect
-        sAA_Mean_Collection_Before_U_mL ~ c*Primer1_Diploid
+        sAA_", timepoint_or_change, " ~ c*Primer2_Diploid
         # mediator
-        Flow_Rate_mean ~ a*Primer1_Diploid
-        Total_Protein_Before_Mean_ug_mL ~ m*Primer1_Diploid
-        sAA_Mean_Collection_Before_U_mL ~ b*Flow_Rate_mean + n*Total_Protein_Before_Mean_ug_mL
+        Flow_Rate_mean ~ a*Primer2_Diploid
+        TP_", timepoint_or_change, " ~ m*Primer2_Diploid
+        sAA_", timepoint_or_change, " ~ b*Flow_Rate_mean + n*TP_", timepoint_or_change, "
         # indirect effect (a*b and m*n)
         indirect1 := a*b
         indirect2 := m*n
         # total effect
         total := c + (a*b) + (m*n)
-     '
+     ", sep="")
 
-# Fit the model
-fit_before <- sem(mediation_model_before, data=df_saliva_lm)
+    # Fit the model
+    fit <- sem(mediation_model, data=df)
+
+    # Return the model
+    return(fit)
+}
+
+library(semPlot)
+
+plot_sem_model <- function(model) {
+  # create the plot
+  semPaths(model, 
+           "std", # standardized coefficients
+           "est", # show estimates
+           curveAdjacent = TRUE, # curved lines for better distinction of paths
+           style = "lisrel") # style of the plot
+}
+
+
+```
+
+
+#### Before
+
+```{r med-model-before}
+
+fit_before <- run_mediation_model(df_saliva_lm, 'Before')
 
 # Summarize the results
 summary(fit_before)
 
 ```
 
-```{r}
-# Running the mediation model for 'after' scenario
-# Define the mediation model
-mediation_model_after <- '
-        # direct effect
-        sAA_Mean_Collection_After_U_mL ~ c*Primer2_Diploid
-        # mediator
-        Flow_Rate_mean ~ a*Primer2_Diploid
-        Total_Protein_Mean_After_ug_mL ~ m*Primer2_Diploid
-        sAA_Mean_Collection_After_U_mL ~ b*Flow_Rate_mean + n*Total_Protein_Mean_After_ug_mL
-        # indirect effect (a*b and m*n)
-        indirect1 := a*b
-        indirect2 := m*n
-        # total effect
-        total := c + (a*b) + (m*n)
-     '
 
-# Fit the model
-fit_after <- sem(mediation_model_after, data=df_saliva_lm)
+```{r fig-med-before, fig.cap="Mediator model for values before experiment}
+
+plot_sem_model(fit_before)
+
+```
+
+#### After
+```{r med-model-after}
+
+fit_after <- run_mediation_model(df_saliva_lm, 'After')
 
 # Summarize the results
 summary(fit_after)
 
 ```
 
-```{r}
-# Running the mediation model with TP Change and sAA Change variables
-# Define the mediation model
-mediation_model_change <- '
-        # direct effect
-        sAA_Change ~ c*Primer2_Diploid
-        # mediator
-        Flow_Rate_mean ~ a*Primer2_Diploid
-        TP_Change ~ m*Primer2_Diploid
-        sAA_Change ~ b*Flow_Rate_mean + n*TP_Change
-        # indirect effect (a*b and m*n)
-        indirect1 := a*b
-        indirect2 := m*n
-        # total effect
-        total := c + (a*b) + (m*n)
-     '
 
-# Fit the model
-fit_change <- sem(mediation_model_change, data=df_saliva_lm)
+```{r fig-med-after, fig.cap="Mediator model for values after experiment"}
+
+plot_sem_model(fit_after)
+
+```
+
+#### Change
+```{r med-model-change}
+
+fit_change <- run_mediation_model(df_saliva_lm, 'Change')
+
 
 # Summarize the results
 summary(fit_change)
 
 ```
 
+
+```{r fig-med-change, fig.cap="Mediator model for values changed during experiment"}
+
+plot_sem_model(fit_change)
+```
+
+## Relationship between CNV, sAA, and citrus perception
+
+### Mediator models
+
 ```{r}
-# install the package if you haven't already
-# install.packages("semPlot")
+# Generalized function for mediation model including Flow_Rate_mean
+run_citrus_model <- function(df, timepoint_or_change) {
+  mediation_model <- paste("
+    # direct effect
+    Citrus_Sum_120sec ~ c*Primer2_Diploid
+    # mediators
+    sAA_", timepoint_or_change, " ~ a*Primer2_Diploid
+    Flow_Rate_mean ~ m*Primer2_Diploid
+    Citrus_Sum_120sec ~ b*sAA_", timepoint_or_change, " + n*Flow_Rate_mean
+    # indirect effects (a*b and m*n)
+    indirect1 := a*b
+    indirect2 := m*n
+    # total effect
+    total := c + (a*b) + (m*n)
+  ", sep="")
+  
 
-# load the package
-library(semPlot)
+  # Fit the model
+  fit <- sem(mediation_model, data=df)
 
-# Your lavann model variable name
-model <- fit_before # replace with your model variable
+  # Return the model
+  return(fit)
+}
 
-# create the plot
-semPaths(model, 
-         "std", # standardized coefficients
-         "est", # show estimates
-         curveAdjacent = TRUE, # curved lines for better distinction of paths
-         style = "lisrel") # style of the plot
+```
+
+
+#### Before
+
+```{r}
+citrus_model_before <- run_citrus_model(df_saliva_lm, 'Before')
+
+summary(citrus_model_before)
+```
+
+```{r}
+plot_sem_model(citrus_model_before)
+```
+
+
+#### After
+```{r}
+citrus_model_after <- run_citrus_model(df_saliva_lm, 'After')
+
+summary(citrus_model_after)
+```
+
+```{r}
+plot_sem_model(citrus_model_after)
+```
+
+
+#### Change
+```{r}
+citrus_model_change <- run_citrus_model(df_saliva_lm, 'Change')
+
+summary(citrus_model_change)
+```
+
+```{r}
+plot_sem_model(citrus_model_change)
+```
+
+
+## Flavor perception
+```{r}
+df_flavor <- read_csv("data/df_flavor.csv")
+```
+
+```{r}
+
+data_long <- df_flavor %>%
+  select(-c(Blinding_Code, Sample_Position)) %>%
+  pivot_longer(cols = starts_with("time_"),
+               names_to = "Time",
+               names_prefix = "time_", 
+               values_to = "Value") %>%
+  mutate(Time = as.numeric(str_remove(Time, "s")),
+         Sample_ID = as.factor(Sample_ID),
+         Sample_Name = ifelse(Sample_Name == "Starch-Limonene Inclusion Complex",
+                                "Starch-Limonene IC",
+                                Sample_Name),
+         Sample_Name = as.factor(Sample_Name),
+         Attribute = as.factor(Attribute))
+
+
+```
+
+```{r}
+data_summary <- data_long %>%
+  group_by(Sample_Name, Attribute) %>%
+  summarise(mean = mean(Value, na.rm = TRUE),
+            sd = sd(Value, na.rm = TRUE),
+            .groups = "drop")  # drop grouping afterwards
+
+```
+
+```{r}
+data_summary <- data_long %>%
+  group_by(Sample_Name, Attribute, Time) %>%
+  summarise(mean_value = mean(Value, na.rm = TRUE), .groups = "drop")
+
+
+ggplot(data_summary, aes(x = Time, y = mean_value, color = Attribute)) +
+  geom_line() +
+  facet_wrap(~ Sample_Name) +
+  labs(x = 'Time', y = 'Proportion Perceiving Flavor', color = 'Attribute') +
+  theme_classic()
+
+
+```
+
+```{r fig-diff-starch-free, fig.cap="Positive values indicate higher perception in Free Limonene and negative values indicate higher perception in Starch-Limonene IC"}
+# Pivot data to calculate the difference
+data_diff <- data_summary %>%
+  pivot_wider(names_from = Sample_Name, values_from = mean_value) %>%
+  mutate(Difference = `Free Limonene` - `Starch-Limonene IC`)
+
+# Plot 
+ggplot(data_diff, aes(x = Time, y = Difference, color = Attribute)) +
+  geom_line() +
+  labs(x = 'Time', y = 'Difference in Perception', color = 'Attribute') +
+  theme_classic()
+
+```
+
+```{r}
+# Joining the data
+combined_data <- data_long %>%
+  inner_join(df_saliva, by = "Sample_ID") %>%
+  na.omit()
+  
+```
+
+```{r}
+# Categorize gene copy number into two groups: low and high
+combined_data_CNV <- combined_data %>% 
+  mutate(CNV_group = cut(Primer2_Diploid, breaks = 2, labels = c("Low", "High")))
+
+# Overall proportion perceiving flavor at each time point, by attribute, sample name
+flavor_prop_all <- combined_data_CNV %>% 
+  group_by(Time, Attribute, Sample_Name) %>%
+  summarise(overall_prop = mean(Value), .groups = "drop")
+
+# Proportions perceiving flavor within each CNV group
+flavor_prop_CNV <- combined_data_CNV %>% 
+  filter(Value == 1) %>%
+  group_by(Time, Attribute, Sample_Name, CNV_group) %>%
+  summarise(count_flavor = n(), .groups = "drop") %>%
+  group_by(Time, Attribute, Sample_Name) %>%
+  mutate(proportion_flavor = count_flavor / sum(count_flavor))
+
+# Merge both data frames
+final_data <- merge(flavor_prop_all, flavor_prop_CNV, by = c("Time", "Attribute", "Sample_Name"))
+
+# plot
+ggplot(final_data, aes(x = Time, y = overall_prop, fill = CNV_group)) +
+  geom_col(aes(fill = CNV_group, y = overall_prop * proportion_flavor), position = "stack") +
+  facet_grid(Attribute ~ Sample_Name) +
+  labs(x = 'Time', y = 'Proportion Perceiving Flavor', fill = 'Copy Number Group')
 
 ```
 
 ```{r}
 
-# Your lavann model variable name
-model <- fit_after # replace with your model variable
+# Reshape data to wide format
+df_wide1 <- data_long %>%
+    pivot_wider(
+        names_from = c(Sample_Name, Attribute), 
+        values_from = Value,
+        names_glue = "{Sample_Name}_{Attribute}"
+    )
 
-# create the plot
-semPaths(model, 
-         "std", # standardized coefficients
-         "est", # show estimates
-         curveAdjacent = TRUE, # curved lines for better distinction of paths
-         style = "lisrel") # style of the plot
+```
+
+```{r}
+samples_to_compare <- c("Free Limonene", "Starch-Limonene IC") 
+
+# Generate difference columns
+df_wide_diff <- df_wide1
+for (attrib in unique(data_long$Attribute)) {
+    df_wide_diff <- df_wide_diff %>%
+        mutate(
+            !!paste0("Difference_", attrib) :=
+                df_wide_diff[[paste0(samples_to_compare[1], "_", attrib)]] - 
+                df_wide_diff[[paste0(samples_to_compare[2], "_", attrib)]]
+        )
+}
+
+df_wide_diff
+
 
 ```
 
 ```{r}
 
-# Your lavann model variable name
-model <- fit_change # replace with your model variable
+k <- 10
 
-# create the plot
-semPaths(model, 
-         "std", # standardized coefficients
-         "est", # show estimates
-         curveAdjacent = TRUE, # curved lines for better distinction of paths
-         style = "lisrel") # style of the plot
+df_saliva_filter <- df_saliva %>% 
+  mutate(Flow_Rate_mean = (Flow_Rate_1_g_min + Flow_Rate_2_g_min)/2) %>% 
+  select(c(Sample_ID, Primer1_Diploid, Primer2_Diploid, sAA_Before, sAA_After, sAA_Change, TP_Before, TP_After, TP_Change, Flow_Rate_mean, Citrus_Sum_120sec)) %>% 
+  na.omit()
+
+combined_data_diff <- df_wide_diff %>%
+  inner_join(df_saliva_filter, by = "Sample_ID") %>% 
+  na.omit(Primer2_Diploid) %>% 
+  mutate(CNV_group = cut(Primer2_Diploid, breaks = 2, labels = c("Low", "High")),
+         sAA_After_group = cut(sAA_After, breaks = 2, labels = c("Low", "High")),
+         sAA_Change_group = cut(sAA_Change, breaks = 2, labels = c("Low", "High")),
+         sAA_flowrate = sAA_After*Flow_Rate_mean,
+         sAA_flow_group = cut(sAA_flowrate, breaks = 2, labels = c("Low", "High")))
+# mutate(CNV_group = if_else(Primer2_Diploid > k, "High", "Low"))
+
+
+
 
 ```
+
+
+```{r}
+plot_perception <- function(data, group_col, group_labels, color_vector = c("blue", "red", "green")) {
+  
+  # Ensure group column is a factor
+  data[[group_col]] <- as.factor(data[[group_col]])
+
+  # Get the name of the group_col variable for use in labels
+  group_col_name <- deparse(substitute(group_col))
+  
+  # Calculate proportions
+  data_plot <- data %>%
+    gather(key = "Attribute", value = "Difference", starts_with("Difference_")) %>% 
+    mutate(Positive_Change = Difference > 0,
+           Negative_Change = Difference < 0,
+           No_Change = Difference == 0) %>%
+    group_by(Attribute, !!sym(group_col), Time) %>%
+    summarize(Prop_Positive_Change = mean(Positive_Change),
+              Prop_Negative_Change = mean(Negative_Change),
+              Prop_No_Change = mean(No_Change), .groups = 'drop') %>%
+    pivot_longer(starts_with("Prop_"), names_to = "Change", values_to = "Proportion") 
+
+  # Plot
+  ggplot(data_plot, aes(x = Time, y = Proportion, color = !!sym(group_col), linetype = Change)) +
+    geom_line() +
+    scale_y_continuous(labels = scales::percent) +
+    scale_color_manual(values = color_vector, labels = group_labels) +
+    scale_linetype_manual(values = c("Prop_Positive_Change" = "solid", "Prop_Negative_Change" = "dashed", "Prop_No_Change" = "dotted")) +
+    labs(y = "Proportion of Change in Perception",
+         x = "Time",
+         color = group_col_name, 
+         linetype = "Change Type") +
+    theme_minimal() +
+    facet_wrap(~ Attribute, nrow = 3) + 
+    ggtitle("Positive, Negative, and No Change in Flavor Perception Over Time")
+  
+}
+
+
+```
+
+
+```{r}
+# Use function
+plot_perception(combined_data_diff, "CNV_group", c("Low", "High"))
+
+```
+
+
+```{r}
+# Use function
+plot_perception(combined_data_diff, "sAA_After_group", c("Low", "High"))
+
+
+```
+
+```{r}
+# Use function
+plot_perception(combined_data_diff, "sAA_Change_group", c("Low", "High"))
+
+
+```
+
+```{r}
+# Use function
+plot_perception(combined_data_diff, "sAA_flow_group", c("Low", "High"))
+
+
+```
+

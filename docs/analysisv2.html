@@ -338,6 +338,12 @@ div.tocify {
 <li>
   <a href="license.html">License</a>
 </li>
+<li>
+  <a href="analysis.html">V1 Analyses</a>
+</li>
+<li>
+  <a href="analysisv2.html">V2 Analyses</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -515,15 +521,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtinalasisiGozaAMYCNVtreed5ee383e23737a09c6b1dcc1f7d2168238f47248targetblankd5ee383a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtinalasisiGozaAMYCNVtree07ec9306556753cb5847b51e0594ab20e52e480dtargetblank07ec930a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/tree/d5ee383e23737a09c6b1dcc1f7d2168238f47248" target="_blank">d5ee383</a>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/tree/07ec9306556753cb5847b51e0594ab20e52e480d" target="_blank">07ec930</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomtinalasisiGozaAMYCNVtreed5ee383e23737a09c6b1dcc1f7d2168238f47248targetblankd5ee383a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomtinalasisiGozaAMYCNVtree07ec9306556753cb5847b51e0594ab20e52e480dtargetblank07ec930a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -533,7 +539,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/tree/d5ee383e23737a09c6b1dcc1f7d2168238f47248" target="_blank">d5ee383</a>.
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/tree/07ec9306556753cb5847b51e0594ab20e52e480d" target="_blank">07ec930</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -551,8 +557,9 @@ Ignored files:
     Ignored:    .DS_Store
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
+    Ignored:    analysis/figure/
     Ignored:    data/.DS_Store
-    Ignored:    data/AMY_CNV_data/.DS_Store
+    Ignored:    data/AMY_CNV_data/
 
 Unstaged changes:
     Modified:   analysis/analysisv2.Rmd
@@ -606,7 +613,7 @@ Message
 Rmd
 </td>
 <td>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/d5ee383e23737a09c6b1dcc1f7d2168238f47248/analysis/analysisv2.Rmd" target="_blank">d5ee383</a>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/07ec9306556753cb5847b51e0594ab20e52e480d/analysis/analysisv2.Rmd" target="_blank">07ec930</a>
 </td>
 <td>
 Tina Lasisi
@@ -615,7 +622,24 @@ Tina Lasisi
 2023-07-12
 </td>
 <td>
-Start new analyses
+Publish repo
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/tinalasisi/Goza_AMY_CNV/07ec9306556753cb5847b51e0594ab20e52e480d/docs/analysisv2.html" target="_blank">07ec930</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-12
+</td>
+<td>
+Publish repo
 </td>
 </tr>
 </tbody>
@@ -625,48 +649,27 @@ Start new analyses
 </div>
 </div>
 </div>
-<pre class="r"><code>library(readxl)
-library(ggplot2)
-library(ggridges)
-library(ggpubr)
-library(tidyverse)</code></pre>
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.2     ✔ readr     2.1.4
-✔ forcats   1.0.0     ✔ stringr   1.5.0
-✔ lubridate 1.9.2     ✔ tibble    3.2.1
-✔ purrr     1.0.1     ✔ tidyr     1.3.0
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-<pre class="r"><code>library(ggfortify)
-library(corrplot)</code></pre>
-<pre><code>corrplot 0.92 loaded</code></pre>
-<pre class="r"><code>library(factoextra)</code></pre>
-<pre><code>Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa</code></pre>
-<pre class="r"><code>library(GGally)</code></pre>
-<pre><code>Registered S3 method overwritten by &#39;GGally&#39;:
-  method from   
-  +.gg   ggplot2</code></pre>
 <div id="clusters" class="section level2">
 <h2>Clusters</h2>
-<pre class="r"><code>df_saliva &lt;- read_csv(&quot;data/df_saliva.csv&quot;)</code></pre>
-<pre><code>Rows: 100 Columns: 35
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: &quot;,&quot;
-chr  (2): Gender, Race
-dbl (33): Sample_ID, Cluster, Primer_1_target, Primer_1_ref, Ratio_for_prime...
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>df_saliva &lt;- read_csv(&quot;data/df_saliva.csv&quot;) %&gt;% 
+  rename(TP_Before_1 = Total_Protein_Before_1_ug_mL,
+         TP_Before_2 = Total_Protein_Before_2_ug_mL,
+         TP_After_1 = Total_Protein_After_1_ug_mL,
+         TP_After_2 = Total_Protein_After_2_ug_mL,
+         sAA_Before = sAA_Mean_Collection_Before_U_mL,
+         sAA_After = sAA_Mean_Collection_After_U_mL,
+         TP_Before = Total_Protein_Before_Mean_ug_mL,
+         TP_After = Total_Protein_Mean_After_ug_mL)</code></pre>
 <p>First, we will do a PCA using genetic and protein variables to see if
 there are any clusters in our dataset.</p>
-<pre class="r"><code>vars_include &lt;- c(&quot;Primer1_Diploid&quot;, &quot;Primer2_Diploid&quot;, &quot;Total_Protein_Before_1_ug_mL&quot;, &quot;Total_Protein_Before_2_ug_mL&quot;, &quot;Total_Protein_After_1_ug_mL&quot;, &quot;Total_Protein_After_2_ug_mL&quot;, &quot;TP_Change&quot;, &quot;sAA_Mean_Collection_Before_U_mL&quot;, &quot;sAA_Mean_Collection_After_U_mL&quot;, &quot;sAA_Change&quot;, &quot;Weight_Saliva_g_1&quot;, &quot;Weight_Saliva_g_2&quot;, &quot;Flow_Rate_1_g_min&quot;, &quot;Flow_Rate_2_g_min&quot;, &quot;Sample_ID&quot;)</code></pre>
+<pre class="r"><code>vars_include &lt;- c(&quot;Primer1_Diploid&quot;, &quot;Primer2_Diploid&quot;, &quot;TP_Before_1&quot;, &quot;TP_Before_2&quot;, &quot;TP_After_1&quot;, &quot;TP_After_2&quot;, &quot;TP_Change&quot;, &quot;sAA_Before&quot;, &quot;sAA_After&quot;, &quot;sAA_Change&quot;, &quot;Weight_Saliva_g_1&quot;, &quot;Weight_Saliva_g_2&quot;, &quot;Flow_Rate_1_g_min&quot;, &quot;Flow_Rate_2_g_min&quot;, &quot;Sample_ID&quot;)</code></pre>
+<div id="na-values-omitted" class="section level3">
+<h3>NA values omitted</h3>
 <p>We will do the analysis first by omitting na values.</p>
 <pre class="r"><code># Scale the Data
 df_saliva_scaled &lt;- df_saliva %&gt;%
   select(all_of(vars_include)) %&gt;% 
-  select(-&quot;Sample_ID&quot;) %&gt;% 
+  select(-Sample_ID) %&gt;% 
   na.omit() %&gt;% 
   mutate(across(everything(), ~ as.numeric(.) %&gt;% scale))
 
@@ -700,18 +703,21 @@ cor.matrix &lt;- cor(df_saliva_scaled)
 
 # Create a correlation heatmap 
 corrplot(cor.matrix, method = &quot;color&quot;, type = &quot;upper&quot;, tl.cex = .7, insig = &quot;blank&quot;)</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/analysisv2.Rmd/cor-matrix-na-omit-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>corrplot(cor.matrix, type = &quot;upper&quot;, order = &quot;hclust&quot;, 
          tl.col = &quot;black&quot;, tl.srt = 45, tl.cex = .7, insig = &quot;blank&quot;)</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-2-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/analysisv2.Rmd/cor-matrix-na-omit-2.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code># Scree plot of variances
 fviz_eig(pca)</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/analysisv2.Rmd/scree-na-omit-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code># Plot the variable factors 
 fviz_pca_var(pca, col.var=&quot;contrib&quot;, 
              gradient.cols = c(&quot;#00AFBB&quot;, &quot;#E7B800&quot;, &quot;#FC4E07&quot;),
              repel = TRUE)</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/analysisv2.Rmd/contrib-na-omit-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="na-replaced-with-mean" class="section level3">
+<h3>NA replaced with mean</h3>
 <p>We repeat the analysis with means replacing missing values.</p>
 <pre class="r"><code># Scale the Data
 df_saliva_scaled &lt;- df_saliva %&gt;%
@@ -746,33 +752,36 @@ cor.matrix &lt;- cor(df_saliva_scaled)
 
 # Create a correlation heatmap 
 corrplot(cor.matrix, method = &quot;color&quot;, type = &quot;upper&quot;, tl.cex = .7, insig = &quot;blank&quot;)</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/analysisv2.Rmd/cor-matrix-na-mean-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>corrplot(cor.matrix, type = &quot;upper&quot;, order = &quot;hclust&quot;, 
          tl.col = &quot;black&quot;, tl.srt = 45, tl.cex = .7, insig = &quot;blank&quot;)</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-6-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/analysisv2.Rmd/cor-matrix-na-mean-2.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code># Scree plot of variances
 fviz_eig(pca)</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/analysisv2.Rmd/scree-na-mean-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code># Plot the variable factors 
 fviz_pca_var(pca, col.var=&quot;contrib&quot;, 
              gradient.cols = c(&quot;#00AFBB&quot;, &quot;#E7B800&quot;, &quot;#FC4E07&quot;),
              repel = TRUE)</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/analysisv2.Rmd/contrib-na-mean-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="reduced-variable-pca" class="section level3">
+<h3>Reduced variable PCA</h3>
 <p>In both cases, it appears as though it would be sufficient to take
 the following variables as they are highly correlated in the same
-directions (or a summary value representing both: -
-Total_Protein_Before_Mean_ug_mL - Total_Protein_Mean_After_ug_mL -
-Primer2_Diploid - TP_Change - sAA_Change - Flow_Rate_1_g_mean</p>
+directions (or a summary value representing both: - TP_Before - TP_After
+- Primer2_Diploid - TP_Change - sAA_Change - Flow_Rate_1_g_mean</p>
 <pre class="r"><code># Let&#39;s ensure ID column is a factor
 df_saliva$Sample_ID &lt;- as.factor(df_saliva$Sample_ID)
 
 # Save your non-numeric variable
 df_label &lt;- df_saliva$Sample_ID
 starch_freq &lt;- df_saliva$Starch_Frequency
+citrus_length &lt;- df_saliva$Citrus_Sum_120sec
 
 df_saliva_final &lt;- df_saliva %&gt;% 
   mutate(Flow_Rate_mean = (Flow_Rate_1_g_min + Flow_Rate_2_g_min)/2) %&gt;% 
-  select(Total_Protein_Before_Mean_ug_mL, Total_Protein_Mean_After_ug_mL, Primer2_Diploid, TP_Change, sAA_Change, Flow_Rate_mean)</code></pre>
+  select(TP_Before, TP_After, Primer2_Diploid, TP_Change, sAA_Change, sAA_Before, sAA_After, Flow_Rate_mean, Starch_Frequency, Citrus_Sum_120sec)</code></pre>
 <pre class="r"><code># Scale your numeric data and store original row names
   
 scaled_df &lt;- df_saliva_final %&gt;% 
@@ -788,23 +797,31 @@ pca_results &lt;- prcomp(scaled_df, center = FALSE, scale = FALSE)
 # Print the summary of the PCA object
 summary(pca_results)</code></pre>
 <pre><code>Importance of components:
-                          PC1    PC2    PC3     PC4     PC5       PC6
-Standard deviation     1.4948 1.2007 1.1492 0.75543 0.65754 2.007e-16
-Proportion of Variance 0.3724 0.2403 0.2201 0.09511 0.07206 0.000e+00
-Cumulative Proportion  0.3724 0.6127 0.8328 0.92794 1.00000 1.000e+00</code></pre>
+                         PC1    PC2    PC3     PC4     PC5     PC6     PC7
+Standard deviation     1.783 1.4194 1.2277 0.98650 0.96006 0.75462 0.67718
+Proportion of Variance 0.318 0.2015 0.1507 0.09732 0.09217 0.05695 0.04586
+Cumulative Proportion  0.318 0.5195 0.6702 0.76754 0.85971 0.91666 0.96252
+                           PC8       PC9      PC10
+Standard deviation     0.61223 2.703e-16 1.574e-16
+Proportion of Variance 0.03748 0.000e+00 0.000e+00
+Cumulative Proportion  1.00000 1.000e+00 1.000e+00</code></pre>
 <pre class="r"><code># Add original row names back to the scores. 
 rownames(pca_results$x) &lt;- row_order
 
 # Add Starch_Frequency back as a factor 
 df_final &lt;- data.frame(pca_results$x, Starch_Frequency = starch_freq[match(row_order, df_label)])</code></pre>
+<div id="starch-frequency-pca" class="section level4">
+<h4>Starch Frequency PCA</h4>
 <pre class="r"><code>fviz_pca_ind(pca_results, 
              label = &quot;none&quot;, 
              habillage = df_final$Starch_Frequency, 
              addEllipses = TRUE,
              palette = &quot;jco&quot;,
              legend.title = &quot;Starch Frequency&quot;)</code></pre>
-<pre><code>Too few points to calculate an ellipse</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/analysisv2.Rmd/df-final-contrib-starch-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="cnv-gradient-pca" class="section level4">
+<h4>CNV gradient PCA</h4>
 <pre class="r"><code># Before adding `Primer2_Diploid` variable to our new dataframe, ensure it&#39;s numeric
 df_final$Primer2_Diploid &lt;- as.numeric(df_saliva$Primer2_Diploid[match(row_order, df_label)])
 
@@ -814,124 +831,63 @@ ggplot(df_final, aes(x = PC1, y = PC2)) +
   scale_color_gradient(low = &quot;blue&quot;, high = &quot;green&quot;) +
   theme_minimal() +
   labs(color = &quot;Primer2_Diploid levels&quot;)</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/analysisv2.Rmd/fig-final-pca-gradient-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="citrus-gradient-pca" class="section level4">
+<h4>Citrus gradient PCA</h4>
+<pre class="r"><code># Before adding `Citrus_Sum_120sec` variable to our new dataframe, ensure it&#39;s numeric
+df_final$Citrus_Sum_120sec &lt;- as.numeric(df_saliva$Citrus_Sum_120sec[match(row_order, df_label)])
+
+# Plot the PCA scores
+ggplot(df_final, aes(x = PC1, y = PC2)) + 
+  geom_point(aes(color = Citrus_Sum_120sec)) + 
+  scale_color_gradient(low = &quot;blue&quot;, high = &quot;green&quot;) +
+  theme_minimal() +
+  labs(color = &quot;Citrus Length&quot;)</code></pre>
+<p><img src="figure/analysisv2.Rmd/fig-final-pca-gradient-citrus-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code># Select only numeric columns
 df_numeric &lt;- df_saliva_final[, sapply(df_saliva_final, is.numeric)]
 
 # Create the scatter plot matrix
 ggpairs(df_numeric)</code></pre>
-<pre><code>Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-Removed 22 rows containing missing values
-
-Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-Removed 22 rows containing missing values</code></pre>
-<pre><code>Warning: Removed 22 rows containing missing values (`geom_point()`).
-Removed 22 rows containing missing values (`geom_point()`).</code></pre>
-<pre><code>Warning: Removed 22 rows containing non-finite values (`stat_density()`).</code></pre>
-<pre><code>Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-Removed 22 rows containing missing values
-
-Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-Removed 22 rows containing missing values
-
-Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-Removed 22 rows containing missing values</code></pre>
-<pre><code>Warning: Removed 22 rows containing missing values (`geom_point()`).
-Removed 22 rows containing missing values (`geom_point()`).
-Removed 22 rows containing missing values (`geom_point()`).</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center">
+<img src="figure/analysisv2.Rmd/fig-scatter-matrix-pearson-1.png" alt="Pearson's correlation" width="672" />
+<p class="caption">
+Pearson’s correlation
+</p>
+</div>
 <pre class="r"><code># Create the scatter plot matrix using spearman correlation
 ggpairs(df_numeric, upper = list(continuous = wrap(&quot;cor&quot;, method = &quot;spearman&quot;)))</code></pre>
-<pre><code>Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-Removed 22 rows containing missing values</code></pre>
-<pre><code>Warning in cor.test.default(x, y, method = method, use = use): Cannot compute
-exact p-value with ties
-
-Warning in cor.test.default(x, y, method = method, use = use): Cannot compute
-exact p-value with ties
-
-Warning in cor.test.default(x, y, method = method, use = use): Cannot compute
-exact p-value with ties</code></pre>
-<pre><code>Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-Removed 22 rows containing missing values</code></pre>
-<pre><code>Warning in cor.test.default(x, y, method = method, use = use): Cannot compute
-exact p-value with ties
-
-Warning in cor.test.default(x, y, method = method, use = use): Cannot compute
-exact p-value with ties
-
-Warning in cor.test.default(x, y, method = method, use = use): Cannot compute
-exact p-value with ties</code></pre>
-<pre><code>Warning: Removed 22 rows containing missing values (`geom_point()`).
-Removed 22 rows containing missing values (`geom_point()`).</code></pre>
-<pre><code>Warning: Removed 22 rows containing non-finite values (`stat_density()`).</code></pre>
-<pre><code>Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-Removed 22 rows containing missing values</code></pre>
-<pre><code>Warning in cor.test.default(x, y, method = method, use = use): Cannot compute
-exact p-value with ties</code></pre>
-<pre><code>Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-Removed 22 rows containing missing values</code></pre>
-<pre><code>Warning in cor.test.default(x, y, method = method, use = use): Cannot compute
-exact p-value with ties</code></pre>
-<pre><code>Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
-Removed 22 rows containing missing values</code></pre>
-<pre><code>Warning in cor.test.default(x, y, method = method, use = use): Cannot compute
-exact p-value with ties</code></pre>
-<pre><code>Warning: Removed 22 rows containing missing values (`geom_point()`).</code></pre>
-<pre><code>Warning in cor.test.default(x, y, method = method, use = use): Cannot compute
-exact p-value with ties
-
-Warning in cor.test.default(x, y, method = method, use = use): Cannot compute
-exact p-value with ties</code></pre>
-<pre><code>Warning: Removed 22 rows containing missing values (`geom_point()`).</code></pre>
-<pre><code>Warning in cor.test.default(x, y, method = method, use = use): Cannot compute
-exact p-value with ties</code></pre>
-<pre><code>Warning: Removed 22 rows containing missing values (`geom_point()`).</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center">
+<img src="figure/analysisv2.Rmd/fig-scatter-matrix-spearman-1.png" alt="Spearman's rank correlation" width="672" />
+<p class="caption">
+Spearman’s rank correlation
+</p>
+</div>
+</div>
+</div>
 </div>
 <div id="relationship-between-cnv-protein-and-saa"
 class="section level2">
 <h2>Relationship between CNV, protein and sAA</h2>
 <pre class="r"><code>df_saliva_lm &lt;- df_saliva %&gt;% 
   mutate(Flow_Rate_mean = (Flow_Rate_1_g_min + Flow_Rate_2_g_min)/2) %&gt;% 
-  select(c(Primer1_Diploid, Primer2_Diploid, sAA_Mean_Collection_Before_U_mL, sAA_Mean_Collection_After_U_mL, sAA_Change, Total_Protein_Before_Mean_ug_mL, Total_Protein_Mean_After_ug_mL, TP_Change, Flow_Rate_mean)) %&gt;% 
+  select(c(Primer1_Diploid, Primer2_Diploid, sAA_Before, sAA_After, sAA_Change, TP_Before, TP_After, TP_Change, Flow_Rate_mean)) %&gt;% 
   na.omit()</code></pre>
-</div>
-<div id="mediator-models" class="section level2">
-<h2>Mediator models</h2>
-<div id="before" class="section level3">
-<h3>Before</h3>
-<pre class="r"><code># Load required packages 
-library(mediation)</code></pre>
-<pre><code>Loading required package: MASS</code></pre>
-<pre><code>
-Attaching package: &#39;MASS&#39;</code></pre>
-<pre><code>The following object is masked from &#39;package:dplyr&#39;:
-
-    select</code></pre>
-<pre><code>Loading required package: Matrix</code></pre>
-<pre><code>
-Attaching package: &#39;Matrix&#39;</code></pre>
-<pre><code>The following objects are masked from &#39;package:tidyr&#39;:
-
-    expand, pack, unpack</code></pre>
-<pre><code>Loading required package: mvtnorm</code></pre>
-<pre><code>Loading required package: sandwich</code></pre>
-<pre><code>mediation: Causal Mediation Analysis
-Version: 4.5.0</code></pre>
-<pre class="r"><code>library(lavaan)</code></pre>
-<pre><code>This is lavaan 0.6-15
-lavaan is FREE software! Please report any bugs.</code></pre>
+<div id="mediator-models" class="section level3">
+<h3>Mediator models</h3>
+<div id="before" class="section level4">
+<h4>Before</h4>
 <pre class="r"><code># Running the mediation model separately for before/after scenarios
 # Before scenario
 # Define the mediation model
 mediation_model_before &lt;- &#39;
         # direct effect
-        sAA_Mean_Collection_Before_U_mL ~ c*Primer1_Diploid
+        sAA_Before ~ c*Primer2_Diploid
         # mediator
-        Flow_Rate_mean ~ a*Primer1_Diploid
-        Total_Protein_Before_Mean_ug_mL ~ m*Primer1_Diploid
-        sAA_Mean_Collection_Before_U_mL ~ b*Flow_Rate_mean + n*Total_Protein_Before_Mean_ug_mL
+        Flow_Rate_mean ~ a*Primer2_Diploid
+        TP_Before ~ m*Primer2_Diploid
+        sAA_Before ~ b*Flow_Rate_mean + n*TP_Before
         # indirect effect (a*b and m*n)
         indirect1 := a*b
         indirect2 := m*n
@@ -940,13 +896,11 @@ mediation_model_before &lt;- &#39;
      &#39;
 
 # Fit the model
-fit_before &lt;- sem(mediation_model_before, data=df_saliva_lm)</code></pre>
-<pre><code>Warning in lav_data_full(data = data, group = group, cluster = cluster, :
-lavaan WARNING: some observed variances are (at least) a factor 1000 times
-larger than others; use varTable(fit) to investigate</code></pre>
-<pre class="r"><code># Summarize the results
+fit_before &lt;- sem(mediation_model_before, data=df_saliva_lm)
+
+# Summarize the results
 summary(fit_before)</code></pre>
-<pre><code>lavaan 0.6.15 ended normally after 16 iterations
+<pre><code>lavaan 0.6.15 ended normally after 1 iteration
 
   Estimator                                         ML
   Optimization method                           NLMINB
@@ -956,7 +910,7 @@ summary(fit_before)</code></pre>
 
 Model Test User Model:
                                                       
-  Test statistic                                17.280
+  Test statistic                                14.539
   Degrees of freedom                                 1
   P-value (Chi-square)                           0.000
 
@@ -967,37 +921,40 @@ Parameter Estimates:
   Information saturated (h1) model          Structured
 
 Regressions:
-                                    Estimate    Std.Err   z-value  P(&gt;|z|)
-  sAA_Mean_Collection_Before_U_mL ~                                       
-    Prmr1_Dpld (c)                      10.448     2.028    5.153    0.000
-  Flow_Rate_mean ~                                                        
-    Prmr1_Dpld (a)                       0.024     0.011    2.190    0.029
-  Total_Protein_Before_Mean_ug_mL ~                                       
-    Prmr1_Dpld (m)                       0.939    13.873    0.068    0.946
-  sAA_Mean_Collection_Before_U_mL ~                                       
-    Flow_Rt_mn (b)                      22.802    22.053    1.034    0.301
-    T_P_B_M__L (n)                       0.089     0.017    5.184    0.000
+                   Estimate    Std.Err   z-value  P(&gt;|z|)
+  sAA_Before ~                                           
+    Prmr2_Dpld (c)     12.276     2.531    4.850    0.000
+  Flow_Rate_mean ~                                       
+    Prmr2_Dpld (a)      0.027     0.013    2.040    0.041
+  TP_Before ~                                            
+    Prmr2_Dpld (m)    -19.974    16.867   -1.184    0.236
+  sAA_Before ~                                           
+    Flow_Rt_mn (b)     36.084    22.199    1.625    0.104
+    TP_Before  (n)      0.107     0.017    6.106    0.000
 
 Variances:
                    Estimate    Std.Err   z-value  P(&gt;|z|)
-   .sAA_Mn_C_B_U_L   5050.515   866.156    5.831    0.000
-   .Flow_Rate_mean      0.153     0.026    5.831    0.000
-   .Ttl_Prt_B_M__L 253114.182 43408.724    5.831    0.000
+   .sAA_Before       5162.654   885.388    5.831    0.000
+   .Flow_Rate_mean      0.154     0.026    5.831    0.000
+   .TP_Before      248016.549 42534.487    5.831    0.000
 
 Defined Parameters:
                    Estimate    Std.Err   z-value  P(&gt;|z|)
-    indirect1           0.538     0.576    0.935    0.350
-    indirect2           0.083     1.232    0.068    0.946
-    total              11.069     2.328    4.755    0.000</code></pre>
+    indirect1           0.979     0.770    1.271    0.204
+    indirect2          -2.134     1.836   -1.163    0.245
+    total              11.121     3.066    3.627    0.000</code></pre>
+</div>
+<div id="after" class="section level4">
+<h4>After</h4>
 <pre class="r"><code># Running the mediation model for &#39;after&#39; scenario
 # Define the mediation model
 mediation_model_after &lt;- &#39;
         # direct effect
-        sAA_Mean_Collection_After_U_mL ~ c*Primer2_Diploid
+        sAA_After ~ c*Primer2_Diploid
         # mediator
         Flow_Rate_mean ~ a*Primer2_Diploid
-        Total_Protein_Mean_After_ug_mL ~ m*Primer2_Diploid
-        sAA_Mean_Collection_After_U_mL ~ b*Flow_Rate_mean + n*Total_Protein_Mean_After_ug_mL
+        TP_After ~ m*Primer2_Diploid
+        sAA_After ~ b*Flow_Rate_mean + n*TP_After
         # indirect effect (a*b and m*n)
         indirect1 := a*b
         indirect2 := m*n
@@ -1006,11 +963,9 @@ mediation_model_after &lt;- &#39;
      &#39;
 
 # Fit the model
-fit_after &lt;- sem(mediation_model_after, data=df_saliva_lm)</code></pre>
-<pre><code>Warning in lav_data_full(data = data, group = group, cluster = cluster, :
-lavaan WARNING: some observed variances are (at least) a factor 1000 times
-larger than others; use varTable(fit) to investigate</code></pre>
-<pre class="r"><code># Summarize the results
+fit_after &lt;- sem(mediation_model_after, data=df_saliva_lm)
+
+# Summarize the results
 summary(fit_after)</code></pre>
 <pre><code>lavaan 0.6.15 ended normally after 17 iterations
 
@@ -1033,28 +988,31 @@ Parameter Estimates:
   Information saturated (h1) model          Structured
 
 Regressions:
-                                   Estimate    Std.Err   z-value  P(&gt;|z|)
-  sAA_Mean_Collection_After_U_mL ~                                       
-    Prmr2_Dpld (c)                      6.568     1.588    4.137    0.000
-  Flow_Rate_mean ~                                                       
-    Prmr2_Dpld (a)                      0.027     0.013    2.040    0.041
-  Total_Protein_Mean_After_ug_mL ~                                       
-    Prmr2_Dpld (m)                      4.573    12.283    0.372    0.710
-  sAA_Mean_Collection_After_U_mL ~                                       
-    Flow_Rt_mn (b)                     -7.465    14.045   -0.532    0.595
-    T_P_M_A__L (n)                      0.016     0.015    1.057    0.291
+                   Estimate    Std.Err   z-value  P(&gt;|z|)
+  sAA_After ~                                            
+    Prmr2_Dpld (c)      6.568     1.588    4.137    0.000
+  Flow_Rate_mean ~                                       
+    Prmr2_Dpld (a)      0.027     0.013    2.040    0.041
+  TP_After ~                                             
+    Prmr2_Dpld (m)      4.573    12.283    0.372    0.710
+  sAA_After ~                                            
+    Flow_Rt_mn (b)     -7.465    14.045   -0.532    0.595
+    TP_After   (n)      0.016     0.015    1.057    0.291
 
 Variances:
                    Estimate    Std.Err   z-value  P(&gt;|z|)
-   .sAA_Mn_C_A_U_L   2066.489   354.400    5.831    0.000
+   .sAA_After        2066.489   354.400    5.831    0.000
    .Flow_Rate_mean      0.154     0.026    5.831    0.000
-   .Ttl_Prt_M_A__L 131519.420 22555.395    5.831    0.000
+   .TP_After       131519.420 22555.395    5.831    0.000
 
 Defined Parameters:
                    Estimate    Std.Err   z-value  P(&gt;|z|)
     indirect1          -0.202     0.394   -0.514    0.607
     indirect2           0.073     0.209    0.351    0.725
     total               6.438     1.555    4.140    0.000</code></pre>
+</div>
+<div id="change" class="section level4">
+<h4>Change</h4>
 <pre class="r"><code># Running the mediation model with TP Change and sAA Change variables
 # Define the mediation model
 mediation_model_change &lt;- &#39;
@@ -1072,11 +1030,9 @@ mediation_model_change &lt;- &#39;
      &#39;
 
 # Fit the model
-fit_change &lt;- sem(mediation_model_change, data=df_saliva_lm)</code></pre>
-<pre><code>Warning in lav_data_full(data = data, group = group, cluster = cluster, :
-lavaan WARNING: some observed variances are (at least) a factor 1000 times
-larger than others; use varTable(fit) to investigate</code></pre>
-<pre class="r"><code># Summarize the results
+fit_change &lt;- sem(mediation_model_change, data=df_saliva_lm)
+
+# Summarize the results
 summary(fit_change)</code></pre>
 <pre><code>lavaan 0.6.15 ended normally after 1 iteration
 
@@ -1136,7 +1092,12 @@ semPaths(model,
          &quot;est&quot;, # show estimates
          curveAdjacent = TRUE, # curved lines for better distinction of paths
          style = &quot;lisrel&quot;) # style of the plot</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center">
+<img src="figure/analysisv2.Rmd/fig-med-before-1.png" alt="Mediator model for values before experiment" width="672" />
+<p class="caption">
+Mediator model for values before experiment
+</p>
+</div>
 <pre class="r"><code># Your lavann model variable name
 model &lt;- fit_after # replace with your model variable
 
@@ -1146,7 +1107,12 @@ semPaths(model,
          &quot;est&quot;, # show estimates
          curveAdjacent = TRUE, # curved lines for better distinction of paths
          style = &quot;lisrel&quot;) # style of the plot</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center">
+<img src="figure/analysisv2.Rmd/fig-med-after-1.png" alt="Mediator model for values after experiment" width="672" />
+<p class="caption">
+Mediator model for values after experiment
+</p>
+</div>
 <pre class="r"><code># Your lavann model variable name
 model &lt;- fit_change # replace with your model variable
 
@@ -1156,7 +1122,18 @@ semPaths(model,
          &quot;est&quot;, # show estimates
          curveAdjacent = TRUE, # curved lines for better distinction of paths
          style = &quot;lisrel&quot;) # style of the plot</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center">
+<img src="figure/analysisv2.Rmd/fig-med-change-1.png" alt="Mediator model for values changed during experiment" width="672" />
+<p class="caption">
+Mediator model for values changed during experiment
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="relationship-between-cnv-saa-and-citrus-perception"
+class="section level2">
+<h2>Relationship between CNV, sAA, and citrus perception</h2>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1181,17 +1158,17 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] semPlot_1.1.6    lavaan_0.6-15    mediation_4.5.0  sandwich_3.0-2  
- [5] mvtnorm_1.1-3    Matrix_1.5-4     MASS_7.3-58.3    GGally_2.1.2    
- [9] factoextra_1.0.7 corrplot_0.92    ggfortify_0.4.16 lubridate_1.9.2 
-[13] forcats_1.0.0    stringr_1.5.0    dplyr_1.1.2      purrr_1.0.1     
-[17] readr_2.1.4      tidyr_1.3.0      tibble_3.2.1     tidyverse_2.0.0 
+ [1] semPlot_1.1.6    lubridate_1.9.2  forcats_1.0.0    stringr_1.5.0   
+ [5] dplyr_1.1.2      purrr_1.0.1      readr_2.1.4      tidyr_1.3.0     
+ [9] tibble_3.2.1     tidyverse_2.0.0  lavaan_0.6-15    mediation_4.5.0 
+[13] sandwich_3.0-2   mvtnorm_1.1-3    Matrix_1.5-4     MASS_7.3-58.3   
+[17] GGally_2.1.2     factoextra_1.0.7 corrplot_0.92    ggfortify_0.4.16
 [21] ggpubr_0.6.0     ggridges_0.5.4   ggplot2_3.4.2    readxl_1.4.2    
 [25] workflowr_1.7.0 
 
 loaded via a namespace (and not attached):
-  [1] backports_1.4.1    Hmisc_5.1-0        plyr_1.8.8        
-  [4] igraph_1.5.0       splines_4.2.2      digest_0.6.31     
+  [1] backports_1.4.1    Hmisc_5.1-0        igraph_1.5.0      
+  [4] plyr_1.8.8         splines_4.2.2      digest_0.6.31     
   [7] htmltools_0.5.5    fansi_1.0.4        magrittr_2.0.3    
  [10] checkmate_2.2.0    lisrelToR_0.1.5    cluster_2.1.4     
  [13] tzdb_0.3.0         openxlsx_4.2.5.2   RcppParallel_5.1.7
@@ -1231,7 +1208,6 @@ loaded via a namespace (and not attached):
 [115] rpart_4.1.19       coda_0.19-4        minqa_1.2.5       
 [118] rmarkdown_2.21     carData_3.0-5      git2r_0.32.0      
 [121] getPass_0.2-2      base64enc_0.1-3   </code></pre>
-</div>
 </div>
 </div>
 
