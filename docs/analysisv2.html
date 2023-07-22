@@ -358,7 +358,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Analysis v2</h1>
 <h4 class="author">Tina Lasisi</h4>
-<h4 class="date">14 July, 2023</h4>
+<h4 class="date">22 July, 2023</h4>
 
 </div>
 
@@ -366,7 +366,7 @@ div.tocify {
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
+workflowr <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -377,8 +377,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> </a>
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -387,13 +387,13 @@ aria-hidden="true"></span> </a>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2023-07-14
+<strong>Last updated:</strong> 2023-07-22
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 1
+aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>Goza_AMY_CNV/</code> <span
@@ -416,21 +416,18 @@ versions</em> tab lists the development history.
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
-<span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
-changes </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguncommittedchanges"
+<div id="strongRMarkdownfilestronguptodate"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of
-the R Markdown file created these results, you’ll want to first commit
-it to the Git repo. If you’re still working on the analysis, you can
-ignore this warning. When you’re finished, you can run
-<code>wflow_publish</code> to commit the R Markdown file and build the
-HTML.</p>
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
 </div>
 </div>
 </div>
@@ -521,15 +518,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtinalasisiGozaAMYCNVtree170c8ef65fdd1fd4c40944e49aab0563198a7516targetblank170c8efa">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtinalasisiGozaAMYCNVtree6e019773d11bd25f82f5d91be75b101a2da374d8targetblank6e01977a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/tree/170c8ef65fdd1fd4c40944e49aab0563198a7516" target="_blank">170c8ef</a>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/tree/6e019773d11bd25f82f5d91be75b101a2da374d8" target="_blank">6e01977</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomtinalasisiGozaAMYCNVtree170c8ef65fdd1fd4c40944e49aab0563198a7516targetblank170c8efa"
+id="strongRepositoryversionstrongahrefhttpsgithubcomtinalasisiGozaAMYCNVtree6e019773d11bd25f82f5d91be75b101a2da374d8targetblank6e01977a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -539,7 +536,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/tree/170c8ef65fdd1fd4c40944e49aab0563198a7516" target="_blank">170c8ef</a>.
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/tree/6e019773d11bd25f82f5d91be75b101a2da374d8" target="_blank">6e01977</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -559,9 +556,6 @@ Ignored files:
     Ignored:    .Rproj.user/
     Ignored:    data/.DS_Store
     Ignored:    data/AMY_CNV_data/
-
-Unstaged changes:
-    Modified:   analysis/analysisv2.Rmd
 
 </code></pre>
 <p>
@@ -607,6 +601,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/6e019773d11bd25f82f5d91be75b101a2da374d8/analysis/analysisv2.Rmd" target="_blank">6e01977</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-22
+</td>
+<td>
+Update analyses
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/tinalasisi/Goza_AMY_CNV/6e019773d11bd25f82f5d91be75b101a2da374d8/docs/analysisv2.html" target="_blank">6e01977</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-22
+</td>
+<td>
+Update analyses
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1098,8 +1126,9 @@ Tina Lasisi
 <h3>Reduced variable PCA</h3>
 <p>In both cases, it appears as though it would be sufficient to take
 the following variables as they are highly correlated in the same
-directions (or a summary value representing both: - TP_Before - TP_After
-- Primer2_Diploid - TP_Change - sAA_Change - Flow_Rate_1_g_mean</p>
+directions (or a summary value representing both) And we will add two
+combined flowrate sAA values based on the sAA after and before, and
+change.</p>
 <pre class="r"><code># Let&#39;s ensure ID column is a factor
 df_saliva$Sample_ID &lt;- as.factor(df_saliva$Sample_ID)
 
@@ -1109,8 +1138,11 @@ starch_freq &lt;- df_saliva$Starch_Frequency
 citrus_length &lt;- df_saliva$Citrus_Sum_120sec
 
 df_saliva_final &lt;- df_saliva %&gt;% 
-  mutate(Flow_Rate_mean = (Flow_Rate_1_g_min + Flow_Rate_2_g_min)/2) %&gt;% 
-  select(TP_Before, TP_After, Primer2_Diploid, TP_Change, sAA_Change, sAA_Before, sAA_After, Flow_Rate_mean, Starch_Frequency, Citrus_Sum_120sec)</code></pre>
+  mutate(Flow_Rate_mean = (Flow_Rate_1_g_min + Flow_Rate_2_g_min)/2,
+         sAA_flow_After = sAA_After*Flow_Rate_mean,
+         sAA_flow_Before = sAA_Before*Flow_Rate_mean,
+         sAA_flow_Change = sAA_Change*Flow_Rate_mean) %&gt;% 
+  select(TP_Before, TP_After, Primer1_Diploid, Primer2_Diploid, TP_Change, sAA_Change, sAA_Before, sAA_After, Flow_Rate_mean, sAA_flow_Before, sAA_flow_After, sAA_flow_Change, Starch_Frequency, Citrus_Sum_120sec)</code></pre>
 <pre class="r"><code># Scale your numeric data and store original row names
   
 scaled_df &lt;- df_saliva_final %&gt;% 
@@ -1126,21 +1158,29 @@ pca_results &lt;- prcomp(scaled_df, center = FALSE, scale = FALSE)
 # Print the summary of the PCA object
 summary(pca_results)</code></pre>
 <pre><code>Importance of components:
-                         PC1    PC2    PC3     PC4     PC5     PC6     PC7
-Standard deviation     1.783 1.4194 1.2277 0.98650 0.96006 0.75462 0.67718
-Proportion of Variance 0.318 0.2015 0.1507 0.09732 0.09217 0.05695 0.04586
-Cumulative Proportion  0.318 0.5195 0.6702 0.76754 0.85971 0.91666 0.96252
-                           PC8       PC9      PC10
-Standard deviation     0.61223 2.703e-16 1.574e-16
-Proportion of Variance 0.03748 0.000e+00 0.000e+00
-Cumulative Proportion  1.00000 1.000e+00 1.000e+00</code></pre>
+                          PC1    PC2    PC3     PC4    PC5     PC6     PC7
+Standard deviation     2.3513 1.5503 1.2667 1.05352 0.9864 0.92254 0.80371
+Proportion of Variance 0.3949 0.1717 0.1146 0.07928 0.0695 0.06079 0.04614
+Cumulative Proportion  0.3949 0.5666 0.6812 0.76045 0.8299 0.89074 0.93688
+                           PC8     PC9   PC10    PC11      PC12      PC13
+Standard deviation     0.68703 0.59484 0.2083 0.11993 8.062e-16 2.519e-16
+Proportion of Variance 0.03372 0.02527 0.0031 0.00103 0.000e+00 0.000e+00
+Cumulative Proportion  0.97060 0.99587 0.9990 1.00000 1.000e+00 1.000e+00
+                            PC14
+Standard deviation     1.943e-16
+Proportion of Variance 0.000e+00
+Cumulative Proportion  1.000e+00</code></pre>
 <pre class="r"><code># Add original row names back to the scores. 
 rownames(pca_results$x) &lt;- row_order
 
 # Add Starch_Frequency back as a factor 
 df_final &lt;- data.frame(pca_results$x, Starch_Frequency = starch_freq[match(row_order, df_label)])</code></pre>
-<div id="starch-frequency-pca" class="section level4">
-<h4>Starch Frequency PCA</h4>
+<pre class="r"><code># Plot the variable factors 
+fviz_pca_var(pca_results, col.var=&quot;contrib&quot;, 
+             gradient.cols = c(&quot;#00AFBB&quot;, &quot;#E7B800&quot;, &quot;#FC4E07&quot;),
+             repel = TRUE)</code></pre>
+<p><img src="figure/analysisv2.Rmd/contrib-na-mean-final-1.png" width="672" style="display: block; margin: auto;" />
+#### Starch Frequency PCA</p>
 <pre class="r"><code>fviz_pca_ind(pca_results, 
              label = &quot;none&quot;, 
              habillage = df_final$Starch_Frequency, 
@@ -1183,7 +1223,6 @@ Tina Lasisi
 </tr>
 </tbody>
 </table>
-</div>
 </div>
 </div>
 <div id="cnv-gradient-pca" class="section level4">
@@ -1320,6 +1359,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/6e019773d11bd25f82f5d91be75b101a2da374d8/docs/figure/analysisv2.Rmd/fig-scatter-matrix-pearson-1.png" target="_blank">6e01977</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-22
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/170c8ef65fdd1fd4c40944e49aab0563198a7516/docs/figure/analysisv2.Rmd/fig-scatter-matrix-pearson-1.png" target="_blank">170c8ef</a>
 </td>
 <td>
@@ -1365,6 +1415,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/6e019773d11bd25f82f5d91be75b101a2da374d8/docs/figure/analysisv2.Rmd/fig-scatter-matrix-spearman-1.png" target="_blank">6e01977</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-22
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/170c8ef65fdd1fd4c40944e49aab0563198a7516/docs/figure/analysisv2.Rmd/fig-scatter-matrix-spearman-1.png" target="_blank">170c8ef</a>
 </td>
 <td>
@@ -1385,13 +1446,16 @@ Tina Lasisi
 class="section level2">
 <h2>Relationship between CNV, protein and sAA</h2>
 <pre class="r"><code>df_saliva_lm &lt;- df_saliva %&gt;% 
-  mutate(Flow_Rate_mean = (Flow_Rate_1_g_min + Flow_Rate_2_g_min)/2) %&gt;% 
-  select(c(Primer1_Diploid, Primer2_Diploid, sAA_Before, sAA_After, sAA_Change, TP_Before, TP_After, TP_Change, Flow_Rate_mean, Citrus_Sum_120sec)) %&gt;% 
+  mutate(Flow_Rate_mean = (Flow_Rate_1_g_min + Flow_Rate_2_g_min)/2,
+         sAA_flow_After = sAA_After*Flow_Rate_mean,
+         sAA_flow_Before = sAA_Before*Flow_Rate_mean,
+         sAA_flow_Change = sAA_Change*Flow_Rate_mean) %&gt;% 
+  select(TP_Before, TP_After, Primer1_Diploid, Primer2_Diploid, TP_Change, sAA_Change, sAA_Before, sAA_After, Flow_Rate_mean, sAA_flow_Before, sAA_flow_After, sAA_flow_Change, Starch_Frequency, Citrus_Sum_120sec) %&gt;% 
   na.omit()</code></pre>
 <div id="mediator-models" class="section level3">
 <h3>Mediator models</h3>
 <pre class="r"><code># Generalized function to toggle different timepoints or changes
-run_mediation_model &lt;- function(df, timepoint_or_change) {
+run_mediation_model_Primer2 &lt;- function(df, timepoint_or_change) {
     mediation_model &lt;- paste(&quot;
         # direct effect
         sAA_&quot;, timepoint_or_change, &quot; ~ c*Primer2_Diploid
@@ -1413,6 +1477,70 @@ run_mediation_model &lt;- function(df, timepoint_or_change) {
     return(fit)
 }
 
+run_mediation_model_Primer1 &lt;- function(df, timepoint_or_change) {
+    mediation_model &lt;- paste(&quot;
+        # direct effect
+        sAA_&quot;, timepoint_or_change, &quot; ~ c*Primer1_Diploid
+        # mediator
+        Flow_Rate_mean ~ a*Primer1_Diploid
+        TP_&quot;, timepoint_or_change, &quot; ~ m*Primer1_Diploid
+        sAA_&quot;, timepoint_or_change, &quot; ~ b*Flow_Rate_mean + n*TP_&quot;, timepoint_or_change, &quot;
+        # indirect effect (a*b and m*n)
+        indirect1 := a*b
+        indirect2 := m*n
+        # total effect
+        total := c + (a*b) + (m*n)
+     &quot;, sep=&quot;&quot;)
+
+    # Fit the model
+    fit &lt;- sem(mediation_model, data=df)
+
+    # Return the model
+    return(fit)
+}
+
+run_mediation_model_Primer1_sAA_flow_TP_mediator &lt;- function(df, timepoint_or_change) {
+    mediation_model &lt;- paste(&quot;
+        # direct effect
+        sAA_flow_&quot;, timepoint_or_change, &quot; ~ c*Primer1_Diploid
+        # mediator
+        TP_&quot;, timepoint_or_change, &quot; ~ a*Primer1_Diploid
+        sAA_flow_&quot;, timepoint_or_change, &quot; ~ b*TP_&quot;, timepoint_or_change, &quot;
+        # indirect effect (a*b)
+        indirect1 := a*b
+        # total effect
+        total := c + (a*b)
+     &quot;, sep=&quot;&quot;)
+
+    # Fit the model
+    fit &lt;- sem(mediation_model, data=df)
+
+    # Return the model
+    return(fit)
+}
+
+run_mediation_model_Primer2_sAA_flow_TP_mediator &lt;- function(df, timepoint_or_change) {
+    mediation_model &lt;- paste(&quot;
+        # direct effect
+        sAA_flow_&quot;, timepoint_or_change, &quot; ~ c*Primer2_Diploid
+        # mediator
+        TP_&quot;, timepoint_or_change, &quot; ~ a*Primer2_Diploid
+        sAA_flow_&quot;, timepoint_or_change, &quot; ~ b*TP_&quot;, timepoint_or_change, &quot;
+        # indirect effect (a*b)
+        indirect1 := a*b
+        # total effect
+        total := c + (a*b)
+     &quot;, sep=&quot;&quot;)
+
+    # Fit the model
+    fit &lt;- sem(mediation_model, data=df)
+
+    # Return the model
+    return(fit)
+}
+
+
+
 library(semPlot)
 
 plot_sem_model &lt;- function(model) {
@@ -1423,12 +1551,68 @@ plot_sem_model &lt;- function(model) {
            curveAdjacent = TRUE, # curved lines for better distinction of paths
            style = &quot;lisrel&quot;) # style of the plot
 }</code></pre>
-<div id="before" class="section level4">
-<h4>Before</h4>
-<pre class="r"><code>fit_before &lt;- run_mediation_model(df_saliva_lm, &#39;Before&#39;)
-
+<div id="cnv-to-saa-with-mediator-tp-and-flow-rate"
+class="section level4">
+<h4>CNV to sAA with mediator TP and Flow rate</h4>
+<div id="before" class="section level5">
+<h5>Before</h5>
+<pre class="r"><code># Run the mediation model for Primer1
+fit_before_P1 &lt;- run_mediation_model_Primer1(df_saliva_lm, &#39;Before&#39;)
 # Summarize the results
-summary(fit_before)</code></pre>
+cat(&quot;Summary for Primer1 Model:\n&quot;)</code></pre>
+<pre><code>Summary for Primer1 Model:</code></pre>
+<pre class="r"><code>summary(fit_before_P1)</code></pre>
+<pre><code>lavaan 0.6.15 ended normally after 16 iterations
+
+  Estimator                                         ML
+  Optimization method                           NLMINB
+  Number of model parameters                         8
+
+  Number of observations                            68
+
+Model Test User Model:
+                                                      
+  Test statistic                                17.280
+  Degrees of freedom                                 1
+  P-value (Chi-square)                           0.000
+
+Parameter Estimates:
+
+  Standard errors                             Standard
+  Information                                 Expected
+  Information saturated (h1) model          Structured
+
+Regressions:
+                   Estimate    Std.Err   z-value  P(&gt;|z|)
+  sAA_Before ~                                           
+    Prmr1_Dpld (c)     10.448     2.028    5.153    0.000
+  Flow_Rate_mean ~                                       
+    Prmr1_Dpld (a)      0.024     0.011    2.190    0.029
+  TP_Before ~                                            
+    Prmr1_Dpld (m)      0.939    13.873    0.068    0.946
+  sAA_Before ~                                           
+    Flow_Rt_mn (b)     22.802    22.053    1.034    0.301
+    TP_Before  (n)      0.089     0.017    5.184    0.000
+
+Variances:
+                   Estimate    Std.Err   z-value  P(&gt;|z|)
+   .sAA_Before       5050.515   866.156    5.831    0.000
+   .Flow_Rate_mean      0.153     0.026    5.831    0.000
+   .TP_Before      253114.182 43408.724    5.831    0.000
+
+Defined Parameters:
+                   Estimate    Std.Err   z-value  P(&gt;|z|)
+    indirect1           0.538     0.576    0.935    0.350
+    indirect2           0.083     1.232    0.068    0.946
+    total              11.069     2.328    4.755    0.000</code></pre>
+<pre class="r"><code># Run the mediation model for Primer2
+fit_before_P2 &lt;- run_mediation_model_Primer2(df_saliva_lm, &#39;Before&#39;)
+# Summarize the results
+cat(&quot;\n\nSummary for Primer2 Model:\n&quot;)</code></pre>
+<pre><code>
+
+Summary for Primer2 Model:</code></pre>
+<pre class="r"><code>summary(fit_before_P2)</code></pre>
 <pre><code>lavaan 0.6.15 ended normally after 1 iteration
 
   Estimator                                         ML
@@ -1472,11 +1656,21 @@ Defined Parameters:
     indirect1           0.979     0.770    1.271    0.204
     indirect2          -2.134     1.836   -1.163    0.245
     total              11.121     3.066    3.627    0.000</code></pre>
-<pre class="r"><code>plot_sem_model(fit_before)</code></pre>
+<pre class="r"><code>layout(matrix(1:2, nrow = 1, byrow = TRUE))
+# Tags/labels for each plot
+layout_title &lt;- c(&quot;Primer 1&quot;, &quot;Primer 2&quot;)
+
+# Create the first plot
+plot_sem_model(fit_before_P1)
+title(layout_title[1])
+
+# Create the second plot
+plot_sem_model(fit_before_P2)
+title(layout_title[2])</code></pre>
 <div class="figure" style="text-align: center">
-<img src="figure/analysisv2.Rmd/fig-med-before-1.png" alt="Mediator model for values before experiment" width="672" />
+<img src="figure/analysisv2.Rmd/fig-med-before-1.png" alt="Mediator models for values before experiment" width="672" />
 <p class="caption">
-Mediator model for values before experiment
+Mediator models for values before experiment
 </p>
 </div>
 <p>
@@ -1517,12 +1711,65 @@ Tina Lasisi
 </div>
 </div>
 </div>
-<div id="after" class="section level4">
-<h4>After</h4>
-<pre class="r"><code>fit_after &lt;- run_mediation_model(df_saliva_lm, &#39;After&#39;)
-
+<div id="after" class="section level5">
+<h5>After</h5>
+<pre class="r"><code># Run the mediation model for Primer1
+fit_after_P1 &lt;- run_mediation_model_Primer1(df_saliva_lm, &#39;After&#39;)
 # Summarize the results
-summary(fit_after)</code></pre>
+cat(&quot;Summary for Primer1 Model:\n&quot;)</code></pre>
+<pre><code>Summary for Primer1 Model:</code></pre>
+<pre class="r"><code>summary(fit_after_P1)</code></pre>
+<pre><code>lavaan 0.6.15 ended normally after 1 iteration
+
+  Estimator                                         ML
+  Optimization method                           NLMINB
+  Number of model parameters                         8
+
+  Number of observations                            68
+
+Model Test User Model:
+                                                      
+  Test statistic                                17.230
+  Degrees of freedom                                 1
+  P-value (Chi-square)                           0.000
+
+Parameter Estimates:
+
+  Standard errors                             Standard
+  Information                                 Expected
+  Information saturated (h1) model          Structured
+
+Regressions:
+                   Estimate    Std.Err   z-value  P(&gt;|z|)
+  sAA_After ~                                            
+    Prmr1_Dpld (c)      6.368     1.267    5.025    0.000
+  Flow_Rate_mean ~                                       
+    Prmr1_Dpld (a)      0.024     0.011    2.190    0.029
+  TP_After ~                                             
+    Prmr1_Dpld (m)     14.561     9.854    1.478    0.139
+  sAA_After ~                                            
+    Flow_Rt_mn (b)    -16.666    13.581   -1.227    0.220
+    TP_After   (n)      0.001     0.015    0.083    0.934
+
+Variances:
+                   Estimate    Std.Err   z-value  P(&gt;|z|)
+   .sAA_After        1915.261   328.465    5.831    0.000
+   .Flow_Rate_mean      0.153     0.026    5.831    0.000
+   .TP_After       127687.632 21898.248    5.831    0.000
+
+Defined Parameters:
+                   Estimate    Std.Err   z-value  P(&gt;|z|)
+    indirect1          -0.393     0.367   -1.071    0.284
+    indirect2           0.018     0.217    0.083    0.934
+    total               5.993     1.220    4.911    0.000</code></pre>
+<pre class="r"><code># Run the mediation model for Primer2
+fit_after_P2 &lt;- run_mediation_model_Primer2(df_saliva_lm, &#39;After&#39;)
+# Summarize the results
+cat(&quot;\n\nSummary for Primer2 Model:\n&quot;)</code></pre>
+<pre><code>
+
+Summary for Primer2 Model:</code></pre>
+<pre class="r"><code>summary(fit_after_P2)</code></pre>
 <pre><code>lavaan 0.6.15 ended normally after 17 iterations
 
   Estimator                                         ML
@@ -1566,7 +1813,18 @@ Defined Parameters:
     indirect1          -0.202     0.394   -0.514    0.607
     indirect2           0.073     0.209    0.351    0.725
     total               6.438     1.555    4.140    0.000</code></pre>
-<pre class="r"><code>plot_sem_model(fit_after)</code></pre>
+<pre class="r"><code># Set up layout
+layout(matrix(1:2, nrow = 1, byrow = TRUE))
+# Tags/labels for each plot
+layout_title &lt;- c(&quot;Primer 1&quot;, &quot;Primer 2&quot;)
+
+# Create the first plot
+plot_sem_model(fit_after_P1)
+title(layout_title[1])
+
+# Create the second plot
+plot_sem_model(fit_after_P2)
+title(layout_title[2])</code></pre>
 <div class="figure" style="text-align: center">
 <img src="figure/analysisv2.Rmd/fig-med-after-1.png" alt="Mediator model for values after experiment" width="672" />
 <p class="caption">
@@ -1611,13 +1869,65 @@ Tina Lasisi
 </div>
 </div>
 </div>
-<div id="change" class="section level4">
-<h4>Change</h4>
-<pre class="r"><code>fit_change &lt;- run_mediation_model(df_saliva_lm, &#39;Change&#39;)
-
-
+<div id="change" class="section level5">
+<h5>Change</h5>
+<pre class="r"><code># Run the mediation model for Primer1
+fit_change_P1 &lt;- run_mediation_model_Primer1(df_saliva_lm, &#39;Change&#39;)
 # Summarize the results
-summary(fit_change)</code></pre>
+cat(&quot;Summary for Primer1 Model:\n&quot;)</code></pre>
+<pre><code>Summary for Primer1 Model:</code></pre>
+<pre class="r"><code>summary(fit_change_P1)</code></pre>
+<pre><code>lavaan 0.6.15 ended normally after 1 iteration
+
+  Estimator                                         ML
+  Optimization method                           NLMINB
+  Number of model parameters                         8
+
+  Number of observations                            68
+
+Model Test User Model:
+                                                      
+  Test statistic                                 1.302
+  Degrees of freedom                                 1
+  P-value (Chi-square)                           0.254
+
+Parameter Estimates:
+
+  Standard errors                             Standard
+  Information                                 Expected
+  Information saturated (h1) model          Structured
+
+Regressions:
+                   Estimate    Std.Err   z-value  P(&gt;|z|)
+  sAA_Change ~                                           
+    Prmr1_Dpld (c)     -5.739     1.397   -4.109    0.000
+  Flow_Rate_mean ~                                       
+    Prmr1_Dpld (a)      0.024     0.011    2.190    0.029
+  TP_Change ~                                            
+    Prmr1_Dpld (m)     13.622    13.870    0.982    0.326
+  sAA_Change ~                                           
+    Flow_Rt_mn (b)      7.993    15.092    0.530    0.596
+    TP_Change  (n)      0.035     0.012    2.966    0.003
+
+Variances:
+                   Estimate    Std.Err   z-value  P(&gt;|z|)
+   .sAA_Change       2365.395   405.662    5.831    0.000
+   .Flow_Rate_mean      0.153     0.026    5.831    0.000
+   .TP_Change      253012.389 43391.267    5.831    0.000
+
+Defined Parameters:
+                   Estimate    Std.Err   z-value  P(&gt;|z|)
+    indirect1           0.189     0.366    0.515    0.607
+    indirect2           0.474     0.508    0.932    0.351
+    total              -5.077     1.428   -3.555    0.000</code></pre>
+<pre class="r"><code># Run the mediation model for Primer2
+fit_change_P2 &lt;- run_mediation_model_Primer2(df_saliva_lm, &#39;Change&#39;)
+# Summarize the results
+cat(&quot;\n\nSummary for Primer2 Model:\n&quot;)</code></pre>
+<pre><code>
+
+Summary for Primer2 Model:</code></pre>
+<pre class="r"><code>summary(fit_change_P2)</code></pre>
 <pre><code>lavaan 0.6.15 ended normally after 1 iteration
 
   Estimator                                         ML
@@ -1661,7 +1971,18 @@ Defined Parameters:
     indirect1           0.101     0.428    0.235    0.814
     indirect2           0.894     0.686    1.303    0.192
     total              -4.683     1.826   -2.564    0.010</code></pre>
-<pre class="r"><code>plot_sem_model(fit_change)</code></pre>
+<pre class="r"><code># set up layout 
+layout(matrix(1:2, nrow = 1, byrow = TRUE))
+# Tags/labels for each plot
+layout_title &lt;- c(&quot;Primer 1&quot;, &quot;Primer 2&quot;)
+
+# Create the first plot
+plot_sem_model(fit_change_P1)
+title(layout_title[1])
+
+# Create the second plot
+plot_sem_model(fit_change_P2)
+title(layout_title[2])</code></pre>
 <div class="figure" style="text-align: center">
 <img src="figure/analysisv2.Rmd/fig-med-change-1.png" alt="Mediator model for values changed during experiment" width="672" />
 <p class="caption">
@@ -1707,6 +2028,392 @@ Tina Lasisi
 </div>
 </div>
 </div>
+<div id="cnv-to-saaflow-with-tp-mediator" class="section level4">
+<h4>CNV to sAA*flow with TP mediator</h4>
+<div id="before-1" class="section level5">
+<h5>Before</h5>
+<pre class="r"><code># Run the mediation model for Primer1
+fit_before_sAA_flow_Primer1 &lt;- run_mediation_model_Primer1_sAA_flow_TP_mediator(df_saliva_lm, &#39;Before&#39;)
+# Summarize the results
+cat(&quot;Summary for Primer1 Model:\n&quot;)</code></pre>
+<pre><code>Summary for Primer1 Model:</code></pre>
+<pre class="r"><code>summary(fit_before_sAA_flow_Primer1)</code></pre>
+<pre><code>lavaan 0.6.15 ended normally after 10 iterations
+
+  Estimator                                         ML
+  Optimization method                           NLMINB
+  Number of model parameters                         5
+
+  Number of observations                            68
+
+Model Test User Model:
+                                                      
+  Test statistic                                 0.000
+  Degrees of freedom                                 0
+
+Parameter Estimates:
+
+  Standard errors                             Standard
+  Information                                 Expected
+  Information saturated (h1) model          Structured
+
+Regressions:
+                    Estimate    Std.Err   z-value  P(&gt;|z|)
+  sAA_flow_Before ~                                       
+    Prmr1_Dpld (c)      13.386     2.587    5.174    0.000
+  TP_Before ~                                             
+    Prmr1_Dpld (a)       0.939    13.873    0.068    0.946
+  sAA_flow_Before ~                                       
+    TP_Before  (b)       0.037     0.023    1.616    0.106
+
+Variances:
+                   Estimate    Std.Err   z-value  P(&gt;|z|)
+   .sAA_flow_Befor   8801.515  1509.447    5.831    0.000
+   .TP_Before      253114.316 43408.747    5.831    0.000
+
+Defined Parameters:
+                   Estimate    Std.Err   z-value  P(&gt;|z|)
+    indirect1           0.034     0.507    0.068    0.946
+    total              13.420     2.636    5.091    0.000</code></pre>
+<pre class="r"><code># Run the mediation model for Primer2
+fit_before_sAA_flow_Primer2 &lt;- run_mediation_model_Primer2_sAA_flow_TP_mediator(df_saliva_lm, &#39;Before&#39;)
+# Summarize the results
+cat(&quot;\n\nSummary for Primer2 Model:\n&quot;)</code></pre>
+<pre><code>
+
+Summary for Primer2 Model:</code></pre>
+<pre class="r"><code>summary(fit_before_sAA_flow_Primer2)</code></pre>
+<pre><code>lavaan 0.6.15 ended normally after 1 iteration
+
+  Estimator                                         ML
+  Optimization method                           NLMINB
+  Number of model parameters                         5
+
+  Number of observations                            68
+
+Model Test User Model:
+                                                      
+  Test statistic                                 0.000
+  Degrees of freedom                                 0
+
+Parameter Estimates:
+
+  Standard errors                             Standard
+  Information                                 Expected
+  Information saturated (h1) model          Structured
+
+Regressions:
+                    Estimate    Std.Err   z-value  P(&gt;|z|)
+  sAA_flow_Before ~                                       
+    Prmr2_Dpld (c)      15.731     3.274    4.804    0.000
+  TP_Before ~                                             
+    Prmr2_Dpld (a)     -19.974    16.867   -1.184    0.236
+  sAA_flow_Before ~                                       
+    TP_Before  (b)       0.053     0.023    2.292    0.022
+
+Variances:
+                   Estimate    Std.Err   z-value  P(&gt;|z|)
+   .sAA_flow_Befor   9158.083  1570.598    5.831    0.000
+   .TP_Before      248016.549 42534.487    5.831    0.000
+
+Defined Parameters:
+                   Estimate    Std.Err   z-value  P(&gt;|z|)
+    indirect1          -1.067     1.014   -1.052    0.293
+    total              14.664     3.364    4.359    0.000</code></pre>
+<pre class="r"><code>layout(matrix(1:2, nrow = 1, byrow = TRUE))
+# Tags/labels for each plot
+layout_title &lt;- c(&quot;sAA Flow Primer 1 - Before&quot;, &quot;sAA Flow Primer 2 - Before&quot;)
+
+# Create the first plot
+plot_sem_model(fit_before_sAA_flow_Primer1)
+title(layout_title[1])
+
+# Create the second plot
+plot_sem_model(fit_before_sAA_flow_Primer2)
+title(layout_title[2])</code></pre>
+<p><img src="figure/analysisv2.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-1">
+Past versions of unnamed-chunk-2-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-2-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/170c8ef65fdd1fd4c40944e49aab0563198a7516/docs/figure/analysisv2.Rmd/unnamed-chunk-2-1.png" target="_blank">170c8ef</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-14
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/07ec9306556753cb5847b51e0594ab20e52e480d/docs/figure/analysisv2.Rmd/unnamed-chunk-2-1.png" target="_blank">07ec930</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="after-1" class="section level5">
+<h5>After</h5>
+<pre class="r"><code># Run the mediation model for Primer1
+fit_after_sAA_flow_Primer1 &lt;- run_mediation_model_Primer1_sAA_flow_TP_mediator(df_saliva_lm, &#39;After&#39;)
+# Summarize the results
+cat(&quot;Summary for Primer1 Model:\n&quot;)</code></pre>
+<pre><code>Summary for Primer1 Model:</code></pre>
+<pre class="r"><code>summary(fit_after_sAA_flow_Primer1)</code></pre>
+<pre><code>lavaan 0.6.15 ended normally after 1 iteration
+
+  Estimator                                         ML
+  Optimization method                           NLMINB
+  Number of model parameters                         5
+
+  Number of observations                            68
+
+Model Test User Model:
+                                                      
+  Test statistic                                 0.000
+  Degrees of freedom                                 0
+
+Parameter Estimates:
+
+  Standard errors                             Standard
+  Information                                 Expected
+  Information saturated (h1) model          Structured
+
+Regressions:
+                   Estimate    Std.Err   z-value  P(&gt;|z|)
+  sAA_flow_After ~                                       
+    Prmr1_Dpld (c)      8.724     1.659    5.260    0.000
+  TP_After ~                                             
+    Prmr1_Dpld (a)     14.561     9.854    1.478    0.139
+  sAA_flow_After ~                                       
+    TP_After   (b)     -0.033     0.020   -1.633    0.102
+
+Variances:
+                   Estimate    Std.Err   z-value  P(&gt;|z|)
+   .sAA_flow_After   3505.031   601.108    5.831    0.000
+   .TP_After       127687.632 21898.248    5.831    0.000
+
+Defined Parameters:
+                   Estimate    Std.Err   z-value  P(&gt;|z|)
+    indirect1          -0.478     0.436   -1.096    0.273
+    total               8.246     1.664    4.955    0.000</code></pre>
+<pre class="r"><code># Run the mediation model for Primer2
+fit_after_sAA_flow_Primer2 &lt;- run_mediation_model_Primer2_sAA_flow_TP_mediator(df_saliva_lm, &#39;After&#39;)
+# Summarize the results
+cat(&quot;\n\nSummary for Primer2 Model:\n&quot;)</code></pre>
+<pre><code>
+
+Summary for Primer2 Model:</code></pre>
+<pre class="r"><code>summary(fit_after_sAA_flow_Primer2)</code></pre>
+<pre><code>lavaan 0.6.15 ended normally after 10 iterations
+
+  Estimator                                         ML
+  Optimization method                           NLMINB
+  Number of model parameters                         5
+
+  Number of observations                            68
+
+Model Test User Model:
+                                                      
+  Test statistic                                 0.000
+  Degrees of freedom                                 0
+
+Parameter Estimates:
+
+  Standard errors                             Standard
+  Information                                 Expected
+  Information saturated (h1) model          Structured
+
+Regressions:
+                   Estimate    Std.Err   z-value  P(&gt;|z|)
+  sAA_flow_After ~                                       
+    Prmr2_Dpld (c)      9.777     2.064    4.736    0.000
+  TP_After ~                                             
+    Prmr2_Dpld (a)      4.573    12.283    0.372    0.710
+  sAA_flow_After ~                                       
+    TP_After   (b)     -0.019     0.020   -0.910    0.363
+
+Variances:
+                   Estimate    Std.Err   z-value  P(&gt;|z|)
+   .sAA_flow_After   3708.097   635.933    5.831    0.000
+   .TP_After       131520.028 22555.499    5.831    0.000
+
+Defined Parameters:
+                   Estimate    Std.Err   z-value  P(&gt;|z|)
+    indirect1          -0.085     0.246   -0.345    0.730
+    total               9.692     2.075    4.671    0.000</code></pre>
+</div>
+<div id="change-1" class="section level5">
+<h5>Change</h5>
+<pre class="r"><code># Run the mediation model for Primer1
+fit_change_sAA_flow_Primer1 &lt;- run_mediation_model_Primer1_sAA_flow_TP_mediator(df_saliva_lm, &#39;Change&#39;)
+# Summarize the results
+cat(&quot;Summary for Primer1 Model:\n&quot;)</code></pre>
+<pre><code>Summary for Primer1 Model:</code></pre>
+<pre class="r"><code>summary(fit_change_sAA_flow_Primer1)</code></pre>
+<pre><code>lavaan 0.6.15 ended normally after 1 iteration
+
+  Estimator                                         ML
+  Optimization method                           NLMINB
+  Number of model parameters                         5
+
+  Number of observations                            68
+
+Model Test User Model:
+                                                      
+  Test statistic                                 0.000
+  Degrees of freedom                                 0
+
+Parameter Estimates:
+
+  Standard errors                             Standard
+  Information                                 Expected
+  Information saturated (h1) model          Structured
+
+Regressions:
+                    Estimate    Std.Err   z-value  P(&gt;|z|)
+  sAA_flow_Change ~                                       
+    Prmr1_Dpld (c)      -5.578     1.545   -3.612    0.000
+  TP_Change ~                                             
+    Prmr1_Dpld (a)      13.622    13.870    0.982    0.326
+  sAA_flow_Change ~                                       
+    TP_Change  (b)       0.030     0.013    2.212    0.027
+
+Variances:
+                   Estimate    Std.Err   z-value  P(&gt;|z|)
+   .sAA_flow_Chang   3093.383   530.511    5.831    0.000
+   .TP_Change      253012.389 43391.267    5.831    0.000
+
+Defined Parameters:
+                   Estimate    Std.Err   z-value  P(&gt;|z|)
+    indirect1           0.404     0.450    0.898    0.369
+    total              -5.174     1.588   -3.258    0.001</code></pre>
+<pre class="r"><code># Run the mediation model for Primer2
+fit_change_sAA_flow_Primer2 &lt;- run_mediation_model_Primer2_sAA_flow_TP_mediator(df_saliva_lm, &#39;Change&#39;)
+# Summarize the results
+cat(&quot;\n\nSummary for Primer2 Model:\n&quot;)</code></pre>
+<pre><code>
+
+Summary for Primer2 Model:</code></pre>
+<pre class="r"><code>summary(fit_change_sAA_flow_Primer2)</code></pre>
+<pre><code>lavaan 0.6.15 ended normally after 1 iteration
+
+  Estimator                                         ML
+  Optimization method                           NLMINB
+  Number of model parameters                         5
+
+  Number of observations                            68
+
+Model Test User Model:
+                                                      
+  Test statistic                                 0.000
+  Degrees of freedom                                 0
+
+Parameter Estimates:
+
+  Standard errors                             Standard
+  Information                                 Expected
+  Information saturated (h1) model          Structured
+
+Regressions:
+                    Estimate    Std.Err   z-value  P(&gt;|z|)
+  sAA_flow_Change ~                                       
+    Prmr2_Dpld (c)      -5.732     1.969   -2.911    0.004
+  TP_Change ~                                             
+    Prmr2_Dpld (a)      24.547    16.896    1.453    0.146
+  sAA_flow_Change ~                                       
+    TP_Change  (b)       0.031     0.014    2.225    0.026
+
+Variances:
+                   Estimate    Std.Err   z-value  P(&gt;|z|)
+   .sAA_flow_Chang   3278.224   562.211    5.831    0.000
+   .TP_Change      248875.953 42681.874    5.831    0.000
+
+Defined Parameters:
+                   Estimate    Std.Err   z-value  P(&gt;|z|)
+    indirect1           0.760     0.625    1.216    0.224
+    total              -4.972     2.009   -2.475    0.013</code></pre>
+<pre class="r"><code>layout(matrix(1:2, nrow = 1, byrow = TRUE))
+# Tags/labels for each plot
+layout_title &lt;- c(&quot;sAA Flow Primer 1 - Change&quot;, &quot;sAA Flow Primer 2 - Change&quot;)
+
+# Create the first plot
+plot_sem_model(fit_change_sAA_flow_Primer1)
+title(layout_title[1])
+
+# Create the second plot
+plot_sem_model(fit_change_sAA_flow_Primer2)
+title(layout_title[2])</code></pre>
+<p><img src="figure/analysisv2.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
+Past versions of unnamed-chunk-5-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/6e019773d11bd25f82f5d91be75b101a2da374d8/docs/figure/analysisv2.Rmd/unnamed-chunk-5-1.png" target="_blank">6e01977</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-22
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="relationship-between-cnv-saa-and-citrus-perception"
 class="section level2">
@@ -1736,7 +2443,7 @@ run_citrus_model &lt;- function(df, timepoint_or_change) {
   # Return the model
   return(fit)
 }</code></pre>
-<div id="before-1" class="section level4">
+<div id="before-2" class="section level4">
 <h4>Before</h4>
 <pre class="r"><code>citrus_model_before &lt;- run_citrus_model(df_saliva_lm, &#39;Before&#39;)
 
@@ -1785,13 +2492,13 @@ Defined Parameters:
     indirect2        -0.489    0.429   -1.140    0.254
     total             0.678    1.459    0.465    0.642</code></pre>
 <pre class="r"><code>plot_sem_model(citrus_model_before)</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/analysisv2.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-1">
-Past versions of unnamed-chunk-3-1.png
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
+Past versions of unnamed-chunk-8-1.png
 </button>
 </p>
-<div id="fig-unnamed-chunk-3-1" class="collapse">
+<div id="fig-unnamed-chunk-8-1" class="collapse">
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
 <thead>
@@ -1810,7 +2517,7 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/170c8ef65fdd1fd4c40944e49aab0563198a7516/docs/figure/analysisv2.Rmd/unnamed-chunk-3-1.png" target="_blank">170c8ef</a>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/170c8ef65fdd1fd4c40944e49aab0563198a7516/docs/figure/analysisv2.Rmd/unnamed-chunk-8-1.png" target="_blank">170c8ef</a>
 </td>
 <td>
 Tina Lasisi
@@ -1821,7 +2528,7 @@ Tina Lasisi
 </tr>
 <tr>
 <td>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/07ec9306556753cb5847b51e0594ab20e52e480d/docs/figure/analysisv2.Rmd/unnamed-chunk-3-1.png" target="_blank">07ec930</a>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/07ec9306556753cb5847b51e0594ab20e52e480d/docs/figure/analysisv2.Rmd/unnamed-chunk-8-1.png" target="_blank">07ec930</a>
 </td>
 <td>
 Tina Lasisi
@@ -1835,7 +2542,7 @@ Tina Lasisi
 </div>
 </div>
 </div>
-<div id="after-1" class="section level4">
+<div id="after-2" class="section level4">
 <h4>After</h4>
 <pre class="r"><code>citrus_model_after &lt;- run_citrus_model(df_saliva_lm, &#39;After&#39;)
 
@@ -1884,9 +2591,9 @@ Defined Parameters:
     indirect2        -0.463    0.422   -1.097    0.273
     total             0.678    1.457    0.466    0.642</code></pre>
 <pre class="r"><code>plot_sem_model(citrus_model_after)</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/analysisv2.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
-<div id="change-1" class="section level4">
+<div id="change-2" class="section level4">
 <h4>Change</h4>
 <pre class="r"><code>citrus_model_change &lt;- run_citrus_model(df_saliva_lm, &#39;Change&#39;)
 
@@ -1935,13 +2642,13 @@ Defined Parameters:
     indirect2        -0.496    0.430   -1.154    0.248
     total             0.678    1.460    0.465    0.642</code></pre>
 <pre class="r"><code>plot_sem_model(citrus_model_change)</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/analysisv2.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
-Past versions of unnamed-chunk-7-1.png
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-1">
+Past versions of unnamed-chunk-12-1.png
 </button>
 </p>
-<div id="fig-unnamed-chunk-7-1" class="collapse">
+<div id="fig-unnamed-chunk-12-1" class="collapse">
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
 <thead>
@@ -1960,7 +2667,7 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/170c8ef65fdd1fd4c40944e49aab0563198a7516/docs/figure/analysisv2.Rmd/unnamed-chunk-7-1.png" target="_blank">170c8ef</a>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/170c8ef65fdd1fd4c40944e49aab0563198a7516/docs/figure/analysisv2.Rmd/unnamed-chunk-12-1.png" target="_blank">170c8ef</a>
 </td>
 <td>
 Tina Lasisi
@@ -1971,7 +2678,7 @@ Tina Lasisi
 </tr>
 <tr>
 <td>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/07ec9306556753cb5847b51e0594ab20e52e480d/docs/figure/analysisv2.Rmd/unnamed-chunk-7-1.png" target="_blank">07ec930</a>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/07ec9306556753cb5847b51e0594ab20e52e480d/docs/figure/analysisv2.Rmd/unnamed-chunk-12-1.png" target="_blank">07ec930</a>
 </td>
 <td>
 Tina Lasisi
@@ -2018,7 +2725,7 @@ ggplot(data_summary, aes(x = Time, y = mean_value, color = Attribute)) +
   facet_wrap(~ Sample_Name) +
   labs(x = &#39;Time&#39;, y = &#39;Proportion Perceiving Flavor&#39;, color = &#39;Attribute&#39;) +
   theme_classic()</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/analysisv2.Rmd/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code># Pivot data to calculate the difference
 data_diff &lt;- data_summary %&gt;%
   pivot_wider(names_from = Sample_Name, values_from = mean_value) %&gt;%
@@ -2035,6 +2742,43 @@ ggplot(data_diff, aes(x = Time, y = Difference, color = Attribute)) +
 Positive values indicate higher perception in Free Limonene and negative
 values indicate higher perception in Starch-Limonene IC
 </p>
+</div>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig-diff-starch-free-1">
+Past versions of fig-diff-starch-free-1.png
+</button>
+</p>
+<div id="fig-fig-diff-starch-free-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/6e019773d11bd25f82f5d91be75b101a2da374d8/docs/figure/analysisv2.Rmd/fig-diff-starch-free-1.png" target="_blank">6e01977</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-22
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <pre class="r"><code># Joining the data
 combined_data &lt;- data_long %&gt;%
@@ -2065,13 +2809,13 @@ ggplot(final_data, aes(x = Time, y = overall_prop, fill = CNV_group)) +
   geom_col(aes(fill = CNV_group, y = overall_prop * proportion_flavor), position = &quot;stack&quot;) +
   facet_grid(Attribute ~ Sample_Name) +
   labs(x = &#39;Time&#39;, y = &#39;Proportion Perceiving Flavor&#39;, fill = &#39;Copy Number Group&#39;)</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/analysisv2.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-13-1">
-Past versions of unnamed-chunk-13-1.png
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-18-1">
+Past versions of unnamed-chunk-18-1.png
 </button>
 </p>
-<div id="fig-unnamed-chunk-13-1" class="collapse">
+<div id="fig-unnamed-chunk-18-1" class="collapse">
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
 <thead>
@@ -2090,24 +2834,13 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/170c8ef65fdd1fd4c40944e49aab0563198a7516/docs/figure/analysisv2.Rmd/unnamed-chunk-13-1.png" target="_blank">170c8ef</a>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/6e019773d11bd25f82f5d91be75b101a2da374d8/docs/figure/analysisv2.Rmd/unnamed-chunk-18-1.png" target="_blank">6e01977</a>
 </td>
 <td>
 Tina Lasisi
 </td>
 <td>
-2023-07-14
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/07ec9306556753cb5847b51e0594ab20e52e480d/docs/figure/analysisv2.Rmd/unnamed-chunk-13-1.png" target="_blank">07ec930</a>
-</td>
-<td>
-Tina Lasisi
-</td>
-<td>
-2023-07-12
+2023-07-22
 </td>
 </tr>
 </tbody>
@@ -2155,9 +2888,7 @@ df_wide_diff</code></pre>
 #   `Starch-Limonene IC_Citrus` &lt;dbl&gt;, `Free Limonene_Stale` &lt;dbl&gt;,
 #   `Starch-Limonene IC_Stale` &lt;dbl&gt;, `Free Limonene_Cohesive` &lt;dbl&gt;,
 #   `Starch-Limonene IC_Cohesive` &lt;dbl&gt;, Difference_Sweet &lt;dbl&gt;, …</code></pre>
-<pre class="r"><code>k &lt;- 10
-
-df_saliva_filter &lt;- df_saliva %&gt;% 
+<pre class="r"><code>df_saliva_filter &lt;- df_saliva %&gt;% 
   mutate(Flow_Rate_mean = (Flow_Rate_1_g_min + Flow_Rate_2_g_min)/2) %&gt;% 
   select(c(Sample_ID, Primer1_Diploid, Primer2_Diploid, sAA_Before, sAA_After, sAA_Change, TP_Before, TP_After, TP_Change, Flow_Rate_mean, Citrus_Sum_120sec)) %&gt;% 
   na.omit()
@@ -2165,12 +2896,11 @@ df_saliva_filter &lt;- df_saliva %&gt;%
 combined_data_diff &lt;- df_wide_diff %&gt;%
   inner_join(df_saliva_filter, by = &quot;Sample_ID&quot;) %&gt;% 
   na.omit(Primer2_Diploid) %&gt;% 
-  mutate(CNV_group = cut(Primer2_Diploid, breaks = 2, labels = c(&quot;Low&quot;, &quot;High&quot;)),
-         sAA_After_group = cut(sAA_After, breaks = 2, labels = c(&quot;Low&quot;, &quot;High&quot;)),
-         sAA_Change_group = cut(sAA_Change, breaks = 2, labels = c(&quot;Low&quot;, &quot;High&quot;)),
-         sAA_flowrate = sAA_After*Flow_Rate_mean,
-         sAA_flow_group = cut(sAA_flowrate, breaks = 2, labels = c(&quot;Low&quot;, &quot;High&quot;)))
-# mutate(CNV_group = if_else(Primer2_Diploid &gt; k, &quot;High&quot;, &quot;Low&quot;))</code></pre>
+  mutate(CNV_group = if_else(Primer2_Diploid &gt; quantile(Primer2_Diploid, probs = .75), &quot;High&quot;, &quot;Low&quot;),
+         sAA_After_group = if_else(sAA_After &gt; quantile(sAA_After, probs = .75), &quot;High&quot;, &quot;Low&quot;),
+         sAA_Change_group = if_else(sAA_Change &gt; quantile(sAA_Change, probs = .75), &quot;High&quot;, &quot;Low&quot;),
+         sAA_flow_Afterrate = sAA_After*Flow_Rate_mean,
+         sAA_flow_After_group = if_else(sAA_flow_Afterrate &gt; quantile(sAA_flow_Afterrate, probs = .75), &quot;High&quot;, &quot;Low&quot;))</code></pre>
 <pre class="r"><code>plot_perception &lt;- function(data, group_col, group_labels, color_vector = c(&quot;blue&quot;, &quot;red&quot;, &quot;green&quot;)) {
   
   # Ensure group column is a factor
@@ -2202,118 +2932,22 @@ combined_data_diff &lt;- df_wide_diff %&gt;%
          color = group_col_name, 
          linetype = &quot;Change Type&quot;) +
     theme_minimal() +
-    facet_wrap(~ Attribute, nrow = 3) + 
+    facet_grid(Attribute ~ Change) + 
     ggtitle(&quot;Positive, Negative, and No Change in Flavor Perception Over Time&quot;)
   
 }</code></pre>
 <pre class="r"><code># Use function
 plot_perception(combined_data_diff, &quot;CNV_group&quot;, c(&quot;Low&quot;, &quot;High&quot;))</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/analysisv2.Rmd/unnamed-chunk-23-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code># Use function
 plot_perception(combined_data_diff, &quot;sAA_After_group&quot;, c(&quot;Low&quot;, &quot;High&quot;))</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/analysisv2.Rmd/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code># Use function
 plot_perception(combined_data_diff, &quot;sAA_Change_group&quot;, c(&quot;Low&quot;, &quot;High&quot;))</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-20-1">
-Past versions of unnamed-chunk-20-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-20-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/170c8ef65fdd1fd4c40944e49aab0563198a7516/docs/figure/analysisv2.Rmd/unnamed-chunk-20-1.png" target="_blank">170c8ef</a>
-</td>
-<td>
-Tina Lasisi
-</td>
-<td>
-2023-07-14
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/07ec9306556753cb5847b51e0594ab20e52e480d/docs/figure/analysisv2.Rmd/unnamed-chunk-20-1.png" target="_blank">07ec930</a>
-</td>
-<td>
-Tina Lasisi
-</td>
-<td>
-2023-07-12
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/analysisv2.Rmd/unnamed-chunk-25-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code># Use function
-plot_perception(combined_data_diff, &quot;sAA_flow_group&quot;, c(&quot;Low&quot;, &quot;High&quot;))</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-21-1">
-Past versions of unnamed-chunk-21-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-21-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/170c8ef65fdd1fd4c40944e49aab0563198a7516/docs/figure/analysisv2.Rmd/unnamed-chunk-21-1.png" target="_blank">170c8ef</a>
-</td>
-<td>
-Tina Lasisi
-</td>
-<td>
-2023-07-14
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/07ec9306556753cb5847b51e0594ab20e52e480d/docs/figure/analysisv2.Rmd/unnamed-chunk-21-1.png" target="_blank">07ec930</a>
-</td>
-<td>
-Tina Lasisi
-</td>
-<td>
-2023-07-12
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+plot_perception(combined_data_diff, &quot;sAA_flow_After_group&quot;, c(&quot;Low&quot;, &quot;High&quot;))</code></pre>
+<p><img src="figure/analysisv2.Rmd/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
