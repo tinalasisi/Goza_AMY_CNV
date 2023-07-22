@@ -157,13 +157,8 @@ fviz_pca_var(pca, col.var="contrib",
 ```
 
 ### Reduced variable PCA
-In both cases, it appears as though it would be sufficient to take the following variables as they are highly correlated in the same directions (or a summary value representing both:
-- TP_Before
-- TP_After
-- Primer2_Diploid
-- TP_Change
-- sAA_Change
-- Flow_Rate_1_g_mean
+In both cases, it appears as though it would be sufficient to take the following variables as they are highly correlated in the same directions (or a summary value representing both)
+And we will add two combined flowrate sAA values based on the sAA after and before, and change.
 
 ```{r df-saliva-final}
 
@@ -176,8 +171,11 @@ starch_freq <- df_saliva$Starch_Frequency
 citrus_length <- df_saliva$Citrus_Sum_120sec
 
 df_saliva_final <- df_saliva %>% 
-  mutate(Flow_Rate_mean = (Flow_Rate_1_g_min + Flow_Rate_2_g_min)/2) %>% 
-  select(TP_Before, TP_After, Primer2_Diploid, TP_Change, sAA_Change, sAA_Before, sAA_After, Flow_Rate_mean, Starch_Frequency, Citrus_Sum_120sec)
+  mutate(Flow_Rate_mean = (Flow_Rate_1_g_min + Flow_Rate_2_g_min)/2,
+         sAA_flow_After = sAA_After*Flow_Rate_mean,
+         sAA_flow_Before = sAA_Before*Flow_Rate_mean,
+         sAA_flow_Change = sAA_Change*Flow_Rate_mean) %>% 
+  select(TP_Before, TP_After, Primer1_Diploid, Primer2_Diploid, TP_Change, sAA_Change, sAA_Before, sAA_After, Flow_Rate_mean, sAA_flow_Before, sAA_flow_After, sAA_flow_Change, Starch_Frequency, Citrus_Sum_120sec)
 
 ```
 
@@ -211,6 +209,13 @@ df_final <- data.frame(pca_results$x, Starch_Frequency = starch_freq[match(row_o
 
 ```
 
+```{r contrib-na-mean-final}
+# Plot the variable factors 
+fviz_pca_var(pca_results, col.var="contrib", 
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+             repel = TRUE)
+
+```
 #### Starch Frequency PCA
 
 ```{r df-final-contrib-starch}
@@ -279,8 +284,11 @@ ggpairs(df_numeric, upper = list(continuous = wrap("cor", method = "spearman")))
 
 ```{r df-med}
 df_saliva_lm <- df_saliva %>% 
-  mutate(Flow_Rate_mean = (Flow_Rate_1_g_min + Flow_Rate_2_g_min)/2) %>% 
-  select(c(Primer1_Diploid, Primer2_Diploid, sAA_Before, sAA_After, sAA_Change, TP_Before, TP_After, TP_Change, Flow_Rate_mean, Citrus_Sum_120sec)) %>% 
+  mutate(Flow_Rate_mean = (Flow_Rate_1_g_min + Flow_Rate_2_g_min)/2,
+         sAA_flow_After = sAA_After*Flow_Rate_mean,
+         sAA_flow_Before = sAA_Before*Flow_Rate_mean,
+         sAA_flow_Change = sAA_Change*Flow_Rate_mean) %>% 
+  select(TP_Before, TP_After, Primer1_Diploid, Primer2_Diploid, TP_Change, sAA_Change, sAA_Before, sAA_After, Flow_Rate_mean, sAA_flow_Before, sAA_flow_After, sAA_flow_Change, Starch_Frequency, Citrus_Sum_120sec) %>% 
   na.omit()
   
 ```
@@ -289,7 +297,7 @@ df_saliva_lm <- df_saliva %>%
 
 ```{r func-med-model}
 # Generalized function to toggle different timepoints or changes
-run_mediation_model <- function(df, timepoint_or_change) {
+run_mediation_model_Primer2 <- function(df, timepoint_or_change) {
     mediation_model <- paste("
         # direct effect
         sAA_", timepoint_or_change, " ~ c*Primer2_Diploid
@@ -311,6 +319,70 @@ run_mediation_model <- function(df, timepoint_or_change) {
     return(fit)
 }
 
+run_mediation_model_Primer1 <- function(df, timepoint_or_change) {
+    mediation_model <- paste("
+        # direct effect
+        sAA_", timepoint_or_change, " ~ c*Primer1_Diploid
+        # mediator
+        Flow_Rate_mean ~ a*Primer1_Diploid
+        TP_", timepoint_or_change, " ~ m*Primer1_Diploid
+        sAA_", timepoint_or_change, " ~ b*Flow_Rate_mean + n*TP_", timepoint_or_change, "
+        # indirect effect (a*b and m*n)
+        indirect1 := a*b
+        indirect2 := m*n
+        # total effect
+        total := c + (a*b) + (m*n)
+     ", sep="")
+
+    # Fit the model
+    fit <- sem(mediation_model, data=df)
+
+    # Return the model
+    return(fit)
+}
+
+run_mediation_model_Primer1_sAA_flow_TP_mediator <- function(df, timepoint_or_change) {
+    mediation_model <- paste("
+        # direct effect
+        sAA_flow_", timepoint_or_change, " ~ c*Primer1_Diploid
+        # mediator
+        TP_", timepoint_or_change, " ~ a*Primer1_Diploid
+        sAA_flow_", timepoint_or_change, " ~ b*TP_", timepoint_or_change, "
+        # indirect effect (a*b)
+        indirect1 := a*b
+        # total effect
+        total := c + (a*b)
+     ", sep="")
+
+    # Fit the model
+    fit <- sem(mediation_model, data=df)
+
+    # Return the model
+    return(fit)
+}
+
+run_mediation_model_Primer2_sAA_flow_TP_mediator <- function(df, timepoint_or_change) {
+    mediation_model <- paste("
+        # direct effect
+        sAA_flow_", timepoint_or_change, " ~ c*Primer2_Diploid
+        # mediator
+        TP_", timepoint_or_change, " ~ a*Primer2_Diploid
+        sAA_flow_", timepoint_or_change, " ~ b*TP_", timepoint_or_change, "
+        # indirect effect (a*b)
+        indirect1 := a*b
+        # total effect
+        total := c + (a*b)
+     ", sep="")
+
+    # Fit the model
+    fit <- sem(mediation_model, data=df)
+
+    # Return the model
+    return(fit)
+}
+
+
+
 library(semPlot)
 
 plot_sem_model <- function(model) {
@@ -325,58 +397,217 @@ plot_sem_model <- function(model) {
 
 ```
 
+#### CNV to sAA with mediator TP and Flow rate
 
-#### Before
+##### Before
 
 ```{r med-model-before}
 
-fit_before <- run_mediation_model(df_saliva_lm, 'Before')
-
+# Run the mediation model for Primer1
+fit_before_P1 <- run_mediation_model_Primer1(df_saliva_lm, 'Before')
 # Summarize the results
-summary(fit_before)
+cat("Summary for Primer1 Model:\n")
+summary(fit_before_P1)
+
+# Run the mediation model for Primer2
+fit_before_P2 <- run_mediation_model_Primer2(df_saliva_lm, 'Before')
+# Summarize the results
+cat("\n\nSummary for Primer2 Model:\n")
+summary(fit_before_P2)
 
 ```
 
 
-```{r fig-med-before, fig.cap="Mediator model for values before experiment}
+```{r fig-med-before, fig.cap="Mediator models for values before experiment"}
 
-plot_sem_model(fit_before)
+layout(matrix(1:2, nrow = 1, byrow = TRUE))
+# Tags/labels for each plot
+layout_title <- c("Primer 1", "Primer 2")
+
+# Create the first plot
+plot_sem_model(fit_before_P1)
+title(layout_title[1])
+
+# Create the second plot
+plot_sem_model(fit_before_P2)
+title(layout_title[2])
 
 ```
 
-#### After
+
+##### After
 ```{r med-model-after}
 
-fit_after <- run_mediation_model(df_saliva_lm, 'After')
 
+# Run the mediation model for Primer1
+fit_after_P1 <- run_mediation_model_Primer1(df_saliva_lm, 'After')
 # Summarize the results
-summary(fit_after)
+cat("Summary for Primer1 Model:\n")
+summary(fit_after_P1)
+
+# Run the mediation model for Primer2
+fit_after_P2 <- run_mediation_model_Primer2(df_saliva_lm, 'After')
+# Summarize the results
+cat("\n\nSummary for Primer2 Model:\n")
+summary(fit_after_P2)
+
+
 
 ```
 
 
 ```{r fig-med-after, fig.cap="Mediator model for values after experiment"}
 
-plot_sem_model(fit_after)
+
+# Set up layout
+layout(matrix(1:2, nrow = 1, byrow = TRUE))
+# Tags/labels for each plot
+layout_title <- c("Primer 1", "Primer 2")
+
+# Create the first plot
+plot_sem_model(fit_after_P1)
+title(layout_title[1])
+
+# Create the second plot
+plot_sem_model(fit_after_P2)
+title(layout_title[2])
+
 
 ```
 
-#### Change
+##### Change
 ```{r med-model-change}
 
-fit_change <- run_mediation_model(df_saliva_lm, 'Change')
 
-
+# Run the mediation model for Primer1
+fit_change_P1 <- run_mediation_model_Primer1(df_saliva_lm, 'Change')
 # Summarize the results
-summary(fit_change)
+cat("Summary for Primer1 Model:\n")
+summary(fit_change_P1)
+
+# Run the mediation model for Primer2
+fit_change_P2 <- run_mediation_model_Primer2(df_saliva_lm, 'Change')
+# Summarize the results
+cat("\n\nSummary for Primer2 Model:\n")
+summary(fit_change_P2)
+
 
 ```
 
 
 ```{r fig-med-change, fig.cap="Mediator model for values changed during experiment"}
 
-plot_sem_model(fit_change)
+
+# set up layout 
+layout(matrix(1:2, nrow = 1, byrow = TRUE))
+# Tags/labels for each plot
+layout_title <- c("Primer 1", "Primer 2")
+
+# Create the first plot
+plot_sem_model(fit_change_P1)
+title(layout_title[1])
+
+# Create the second plot
+plot_sem_model(fit_change_P2)
+title(layout_title[2])
+
+
 ```
+
+#### CNV to sAA*flow with TP mediator
+
+##### Before
+```{r}
+
+# Run the mediation model for Primer1
+fit_before_sAA_flow_Primer1 <- run_mediation_model_Primer1_sAA_flow_TP_mediator(df_saliva_lm, 'Before')
+# Summarize the results
+cat("Summary for Primer1 Model:\n")
+summary(fit_before_sAA_flow_Primer1)
+
+# Run the mediation model for Primer2
+fit_before_sAA_flow_Primer2 <- run_mediation_model_Primer2_sAA_flow_TP_mediator(df_saliva_lm, 'Before')
+# Summarize the results
+cat("\n\nSummary for Primer2 Model:\n")
+summary(fit_before_sAA_flow_Primer2)
+
+
+```
+
+```{r}
+
+layout(matrix(1:2, nrow = 1, byrow = TRUE))
+# Tags/labels for each plot
+layout_title <- c("sAA Flow Primer 1 - Before", "sAA Flow Primer 2 - Before")
+
+# Create the first plot
+plot_sem_model(fit_before_sAA_flow_Primer1)
+title(layout_title[1])
+
+# Create the second plot
+plot_sem_model(fit_before_sAA_flow_Primer2)
+title(layout_title[2])
+
+
+```
+
+
+##### After
+
+```{r}
+
+# Run the mediation model for Primer1
+fit_after_sAA_flow_Primer1 <- run_mediation_model_Primer1_sAA_flow_TP_mediator(df_saliva_lm, 'After')
+# Summarize the results
+cat("Summary for Primer1 Model:\n")
+summary(fit_after_sAA_flow_Primer1)
+
+# Run the mediation model for Primer2
+fit_after_sAA_flow_Primer2 <- run_mediation_model_Primer2_sAA_flow_TP_mediator(df_saliva_lm, 'After')
+# Summarize the results
+cat("\n\nSummary for Primer2 Model:\n")
+summary(fit_after_sAA_flow_Primer2)
+
+
+```
+
+
+##### Change
+
+```{r}
+
+# Run the mediation model for Primer1
+fit_change_sAA_flow_Primer1 <- run_mediation_model_Primer1_sAA_flow_TP_mediator(df_saliva_lm, 'Change')
+# Summarize the results
+cat("Summary for Primer1 Model:\n")
+summary(fit_change_sAA_flow_Primer1)
+
+# Run the mediation model for Primer2
+fit_change_sAA_flow_Primer2 <- run_mediation_model_Primer2_sAA_flow_TP_mediator(df_saliva_lm, 'Change')
+# Summarize the results
+cat("\n\nSummary for Primer2 Model:\n")
+summary(fit_change_sAA_flow_Primer2)
+
+
+```
+
+```{r}
+
+layout(matrix(1:2, nrow = 1, byrow = TRUE))
+# Tags/labels for each plot
+layout_title <- c("sAA Flow Primer 1 - Change", "sAA Flow Primer 2 - Change")
+
+# Create the first plot
+plot_sem_model(fit_change_sAA_flow_Primer1)
+title(layout_title[1])
+
+# Create the second plot
+plot_sem_model(fit_change_sAA_flow_Primer2)
+title(layout_title[2])
+
+
+```
+
 
 ## Relationship between CNV, sAA, and citrus perception
 
@@ -579,7 +810,6 @@ df_wide_diff
 
 ```{r}
 
-k <- 10
 
 df_saliva_filter <- df_saliva %>% 
   mutate(Flow_Rate_mean = (Flow_Rate_1_g_min + Flow_Rate_2_g_min)/2) %>% 
@@ -589,14 +819,11 @@ df_saliva_filter <- df_saliva %>%
 combined_data_diff <- df_wide_diff %>%
   inner_join(df_saliva_filter, by = "Sample_ID") %>% 
   na.omit(Primer2_Diploid) %>% 
-  mutate(CNV_group = cut(Primer2_Diploid, breaks = 2, labels = c("Low", "High")),
-         sAA_After_group = cut(sAA_After, breaks = 2, labels = c("Low", "High")),
-         sAA_Change_group = cut(sAA_Change, breaks = 2, labels = c("Low", "High")),
-         sAA_flowrate = sAA_After*Flow_Rate_mean,
-         sAA_flow_group = cut(sAA_flowrate, breaks = 2, labels = c("Low", "High")))
-# mutate(CNV_group = if_else(Primer2_Diploid > k, "High", "Low"))
-
-
+  mutate(CNV_group = if_else(Primer2_Diploid > quantile(Primer2_Diploid, probs = .75), "High", "Low"),
+         sAA_After_group = if_else(sAA_After > quantile(sAA_After, probs = .75), "High", "Low"),
+         sAA_Change_group = if_else(sAA_Change > quantile(sAA_Change, probs = .75), "High", "Low"),
+         sAA_flow_Afterrate = sAA_After*Flow_Rate_mean,
+         sAA_flow_After_group = if_else(sAA_flow_Afterrate > quantile(sAA_flow_Afterrate, probs = .75), "High", "Low"))
 
 
 ```
@@ -634,7 +861,7 @@ plot_perception <- function(data, group_col, group_labels, color_vector = c("blu
          color = group_col_name, 
          linetype = "Change Type") +
     theme_minimal() +
-    facet_wrap(~ Attribute, nrow = 3) + 
+    facet_grid(Attribute ~ Change) + 
     ggtitle("Positive, Negative, and No Change in Flavor Perception Over Time")
   
 }
@@ -643,30 +870,30 @@ plot_perception <- function(data, group_col, group_labels, color_vector = c("blu
 ```
 
 
-```{r}
+```{r fig.height=10}
 # Use function
 plot_perception(combined_data_diff, "CNV_group", c("Low", "High"))
 
 ```
 
 
-```{r}
+```{r fig.height=10}
 # Use function
 plot_perception(combined_data_diff, "sAA_After_group", c("Low", "High"))
 
 
 ```
 
-```{r}
+```{r fig.height=10}
 # Use function
 plot_perception(combined_data_diff, "sAA_Change_group", c("Low", "High"))
 
 
 ```
 
-```{r}
+```{r fig.height=10}
 # Use function
-plot_perception(combined_data_diff, "sAA_flow_group", c("Low", "High"))
+plot_perception(combined_data_diff, "sAA_flow_After_group", c("Low", "High"))
 
 
 ```
