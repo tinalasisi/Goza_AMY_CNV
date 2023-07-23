@@ -366,7 +366,7 @@ div.tocify {
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-ok text-success"
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -377,8 +377,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
-</a>
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -391,9 +391,9 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 0
+aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>Goza_AMY_CNV/</code> <span
@@ -416,18 +416,21 @@ versions</em> tab lists the development history.
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
-</a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
+changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate"
+<div id="strongRMarkdownfilestronguncommittedchanges"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git
-repository, you know the exact version of the code that produced these
-results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of
+the R Markdown file created these results, you’ll want to first commit
+it to the Git repo. If you’re still working on the analysis, you can
+ignore this warning. When you’re finished, you can run
+<code>wflow_publish</code> to commit the R Markdown file and build the
+HTML.</p>
 </div>
 </div>
 </div>
@@ -518,15 +521,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtinalasisiGozaAMYCNVtree6e019773d11bd25f82f5d91be75b101a2da374d8targetblank6e01977a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtinalasisiGozaAMYCNVtreeeb2e32f709faaf9e78b11c8e22c1e29ade2d49bctargetblankeb2e32fa">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/tree/6e019773d11bd25f82f5d91be75b101a2da374d8" target="_blank">6e01977</a>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/tree/eb2e32f709faaf9e78b11c8e22c1e29ade2d49bc" target="_blank">eb2e32f</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomtinalasisiGozaAMYCNVtree6e019773d11bd25f82f5d91be75b101a2da374d8targetblank6e01977a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomtinalasisiGozaAMYCNVtreeeb2e32f709faaf9e78b11c8e22c1e29ade2d49bctargetblankeb2e32fa"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -536,7 +539,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/tree/6e019773d11bd25f82f5d91be75b101a2da374d8" target="_blank">6e01977</a>.
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/tree/eb2e32f709faaf9e78b11c8e22c1e29ade2d49bc" target="_blank">eb2e32f</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -556,6 +559,9 @@ Ignored files:
     Ignored:    .Rproj.user/
     Ignored:    data/.DS_Store
     Ignored:    data/AMY_CNV_data/
+
+Unstaged changes:
+    Modified:   analysis/analysisv2.Rmd
 
 </code></pre>
 <p>
@@ -601,6 +607,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/tinalasisi/Goza_AMY_CNV/eb2e32f709faaf9e78b11c8e22c1e29ade2d49bc/docs/analysisv2.html" target="_blank">eb2e32f</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-22
+</td>
+<td>
+Update analysis v2
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -710,8 +733,8 @@ Publish repo
 </div>
 </div>
 </div>
-<div id="clusters" class="section level2">
-<h2>Clusters</h2>
+<div id="clusters" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Clusters</h1>
 <pre class="r"><code>df_saliva &lt;- read_csv(&quot;data/df_saliva.csv&quot;) %&gt;% 
   rename(TP_Before_1 = Total_Protein_Before_1_ug_mL,
          TP_Before_2 = Total_Protein_Before_2_ug_mL,
@@ -724,8 +747,9 @@ Publish repo
 <p>First, we will do a PCA using genetic and protein variables to see if
 there are any clusters in our dataset.</p>
 <pre class="r"><code>vars_include &lt;- c(&quot;Primer1_Diploid&quot;, &quot;Primer2_Diploid&quot;, &quot;TP_Before_1&quot;, &quot;TP_Before_2&quot;, &quot;TP_After_1&quot;, &quot;TP_After_2&quot;, &quot;TP_Change&quot;, &quot;sAA_Before&quot;, &quot;sAA_After&quot;, &quot;sAA_Change&quot;, &quot;Weight_Saliva_g_1&quot;, &quot;Weight_Saliva_g_2&quot;, &quot;Flow_Rate_1_g_min&quot;, &quot;Flow_Rate_2_g_min&quot;, &quot;Sample_ID&quot;)</code></pre>
-<div id="na-values-omitted" class="section level3">
-<h3>NA values omitted</h3>
+<div id="na-values-omitted" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> NA values
+omitted</h2>
 <p>We will do the analysis first by omitting na values.</p>
 <pre class="r"><code># Scale the Data
 df_saliva_scaled &lt;- df_saliva %&gt;%
@@ -760,11 +784,11 @@ Standard deviation     1.819e-16
 Proportion of Variance 0.000e+00
 Cumulative Proportion  1.000e+00</code></pre>
 <pre class="r"><code># Compute a correlation matrix
-cor.matrix &lt;- cor(df_saliva_scaled)
+cor.matrix &lt;- cor(df_saliva_scaled, use = &quot;pairwise.complete.obs&quot;)
 
-# Create a correlation heatmap 
-corrplot(cor.matrix, method = &quot;color&quot;, type = &quot;upper&quot;, tl.cex = .7, insig = &quot;blank&quot;)</code></pre>
-<p><img src="figure/analysisv2.Rmd/cor-matrix-na-omit-1.png" width="672" style="display: block; margin: auto;" /></p>
+corrplot(cor.matrix, type = &quot;upper&quot;, order = &quot;hclust&quot;, addCoef.col =&#39;black&#39;, number.cex = 0.8,
+         tl.col = &quot;black&quot;, tl.srt = 45, tl.cex = .7, insig = &quot;blank&quot;)</code></pre>
+<p><img src="figure/analysisv2.Rmd/cor-matrix-na-omit-1.png" width="1056" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cor-matrix-na-omit-1">
 Past versions of cor-matrix-na-omit-1.png
@@ -790,46 +814,6 @@ Date
 <tr>
 <td>
 <a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/170c8ef65fdd1fd4c40944e49aab0563198a7516/docs/figure/analysisv2.Rmd/cor-matrix-na-omit-1.png" target="_blank">170c8ef</a>
-</td>
-<td>
-Tina Lasisi
-</td>
-<td>
-2023-07-14
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>corrplot(cor.matrix, type = &quot;upper&quot;, order = &quot;hclust&quot;, 
-         tl.col = &quot;black&quot;, tl.srt = 45, tl.cex = .7, insig = &quot;blank&quot;)</code></pre>
-<p><img src="figure/analysisv2.Rmd/cor-matrix-na-omit-2.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cor-matrix-na-omit-2">
-Past versions of cor-matrix-na-omit-2.png
-</button>
-</p>
-<div id="fig-cor-matrix-na-omit-2" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/170c8ef65fdd1fd4c40944e49aab0563198a7516/docs/figure/analysisv2.Rmd/cor-matrix-na-omit-2.png" target="_blank">170c8ef</a>
 </td>
 <td>
 Tina Lasisi
@@ -925,8 +909,9 @@ Tina Lasisi
 </div>
 </div>
 </div>
-<div id="na-replaced-with-mean" class="section level3">
-<h3>NA replaced with mean</h3>
+<div id="na-replaced-with-mean" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> NA replaced with
+mean</h2>
 <p>We repeat the analysis with means replacing missing values.</p>
 <pre class="r"><code># Scale the Data
 df_saliva_scaled &lt;- df_saliva %&gt;%
@@ -957,11 +942,11 @@ Standard deviation     2.037e-16
 Proportion of Variance 0.000e+00
 Cumulative Proportion  1.000e+00</code></pre>
 <pre class="r"><code># Compute a correlation matrix
-cor.matrix &lt;- cor(df_saliva_scaled)
+cor.matrix &lt;- cor(df_saliva_scaled, use = &quot;pairwise.complete.obs&quot;)
 
-# Create a correlation heatmap 
-corrplot(cor.matrix, method = &quot;color&quot;, type = &quot;upper&quot;, tl.cex = .7, insig = &quot;blank&quot;)</code></pre>
-<p><img src="figure/analysisv2.Rmd/cor-matrix-na-mean-1.png" width="672" style="display: block; margin: auto;" /></p>
+corrplot(cor.matrix, type = &quot;upper&quot;, order = &quot;hclust&quot;, addCoef.col =&#39;black&#39;, number.cex = 0.8,
+         tl.col = &quot;black&quot;, tl.srt = 45, tl.cex = .7, insig = &quot;blank&quot;)</code></pre>
+<p><img src="figure/analysisv2.Rmd/cor-matrix-na-mean-1.png" width="1056" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cor-matrix-na-mean-1">
 Past versions of cor-matrix-na-mean-1.png
@@ -987,46 +972,6 @@ Date
 <tr>
 <td>
 <a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/170c8ef65fdd1fd4c40944e49aab0563198a7516/docs/figure/analysisv2.Rmd/cor-matrix-na-mean-1.png" target="_blank">170c8ef</a>
-</td>
-<td>
-Tina Lasisi
-</td>
-<td>
-2023-07-14
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>corrplot(cor.matrix, type = &quot;upper&quot;, order = &quot;hclust&quot;, 
-         tl.col = &quot;black&quot;, tl.srt = 45, tl.cex = .7, insig = &quot;blank&quot;)</code></pre>
-<p><img src="figure/analysisv2.Rmd/cor-matrix-na-mean-2.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cor-matrix-na-mean-2">
-Past versions of cor-matrix-na-mean-2.png
-</button>
-</p>
-<div id="fig-cor-matrix-na-mean-2" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/170c8ef65fdd1fd4c40944e49aab0563198a7516/docs/figure/analysisv2.Rmd/cor-matrix-na-mean-2.png" target="_blank">170c8ef</a>
 </td>
 <td>
 Tina Lasisi
@@ -1122,8 +1067,9 @@ Tina Lasisi
 </div>
 </div>
 </div>
-<div id="reduced-variable-pca" class="section level3">
-<h3>Reduced variable PCA</h3>
+<div id="reduced-variable-pca" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Reduced variable
+PCA</h2>
 <p>In both cases, it appears as though it would be sufficient to take
 the following variables as they are highly correlated in the same
 directions (or a summary value representing both) And we will add two
@@ -1179,15 +1125,66 @@ df_final &lt;- data.frame(pca_results$x, Starch_Frequency = starch_freq[match(ro
 fviz_pca_var(pca_results, col.var=&quot;contrib&quot;, 
              gradient.cols = c(&quot;#00AFBB&quot;, &quot;#E7B800&quot;, &quot;#FC4E07&quot;),
              repel = TRUE)</code></pre>
-<p><img src="figure/analysisv2.Rmd/contrib-na-mean-final-1.png" width="672" style="display: block; margin: auto;" />
-#### Starch Frequency PCA</p>
+<div class="figure" style="text-align: center">
+<img src="figure/analysisv2.Rmd/contrib-na-mean-final-1.png" alt="The largest contributions seem to be coming from the sAA_Before/After and the combination of sAA and flow rate" width="672" />
+<p class="caption">
+The largest contributions seem to be coming from the sAA_Before/After
+and the combination of sAA and flow rate
+</p>
+</div>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-contrib-na-mean-final-1">
+Past versions of contrib-na-mean-final-1.png
+</button>
+</p>
+<div id="fig-contrib-na-mean-final-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/eb2e32f709faaf9e78b11c8e22c1e29ade2d49bc/docs/figure/analysisv2.Rmd/contrib-na-mean-final-1.png" target="_blank">eb2e32f</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-22
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="starch-frequency-pca" class="section level3" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> Starch Frequency
+PCA</h3>
 <pre class="r"><code>fviz_pca_ind(pca_results, 
              label = &quot;none&quot;, 
              habillage = df_final$Starch_Frequency, 
              addEllipses = TRUE,
              palette = &quot;jco&quot;,
              legend.title = &quot;Starch Frequency&quot;)</code></pre>
-<p><img src="figure/analysisv2.Rmd/df-final-contrib-starch-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center">
+<img src="figure/analysisv2.Rmd/df-final-contrib-starch-1.png" alt="There is no appreciable pattern in the PCA relating to the frequencyof starch consumption among participants." width="672" />
+<p class="caption">
+There is no appreciable pattern in the PCA relating to the frequencyof
+starch consumption among participants.
+</p>
+</div>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-df-final-contrib-starch-1">
 Past versions of df-final-contrib-starch-1.png
@@ -1212,6 +1209,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/eb2e32f709faaf9e78b11c8e22c1e29ade2d49bc/docs/figure/analysisv2.Rmd/df-final-contrib-starch-1.png" target="_blank">eb2e32f</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-22
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/170c8ef65fdd1fd4c40944e49aab0563198a7516/docs/figure/analysisv2.Rmd/df-final-contrib-starch-1.png" target="_blank">170c8ef</a>
 </td>
 <td>
@@ -1225,8 +1233,10 @@ Tina Lasisi
 </table>
 </div>
 </div>
-<div id="cnv-gradient-pca" class="section level4">
-<h4>CNV gradient PCA</h4>
+</div>
+<div id="cnv-gradient-pca" class="section level3" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> CNV gradient
+PCA</h3>
 <pre class="r"><code># Before adding `Primer2_Diploid` variable to our new dataframe, ensure it&#39;s numeric
 df_final$Primer2_Diploid &lt;- as.numeric(df_saliva$Primer2_Diploid[match(row_order, df_label)])
 
@@ -1236,7 +1246,13 @@ ggplot(df_final, aes(x = PC1, y = PC2)) +
   scale_color_gradient(low = &quot;blue&quot;, high = &quot;green&quot;) +
   theme_minimal() +
   labs(color = &quot;Primer2_Diploid levels&quot;)</code></pre>
-<p><img src="figure/analysisv2.Rmd/fig-final-pca-gradient-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center">
+<img src="figure/analysisv2.Rmd/fig-final-pca-gradient-1.png" alt="CNV (as captured by Primer 2, does not seem to follow any gradient in the first two PCs" width="672" />
+<p class="caption">
+CNV (as captured by Primer 2, does not seem to follow any gradient in
+the first two PCs
+</p>
+</div>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig-final-pca-gradient-1">
 Past versions of fig-final-pca-gradient-1.png
@@ -1261,6 +1277,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/eb2e32f709faaf9e78b11c8e22c1e29ade2d49bc/docs/figure/analysisv2.Rmd/fig-final-pca-gradient-1.png" target="_blank">eb2e32f</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-22
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/170c8ef65fdd1fd4c40944e49aab0563198a7516/docs/figure/analysisv2.Rmd/fig-final-pca-gradient-1.png" target="_blank">170c8ef</a>
 </td>
 <td>
@@ -1275,8 +1302,9 @@ Tina Lasisi
 </div>
 </div>
 </div>
-<div id="citrus-gradient-pca" class="section level4">
-<h4>Citrus gradient PCA</h4>
+<div id="citrus-gradient-pca" class="section level3" number="1.3.3">
+<h3><span class="header-section-number">1.3.3</span> Citrus gradient
+PCA</h3>
 <pre class="r"><code># Before adding `Citrus_Sum_120sec` variable to our new dataframe, ensure it&#39;s numeric
 df_final$Citrus_Sum_120sec &lt;- as.numeric(df_saliva$Citrus_Sum_120sec[match(row_order, df_label)])
 
@@ -1286,7 +1314,13 @@ ggplot(df_final, aes(x = PC1, y = PC2)) +
   scale_color_gradient(low = &quot;blue&quot;, high = &quot;green&quot;) +
   theme_minimal() +
   labs(color = &quot;Citrus Length&quot;)</code></pre>
-<p><img src="figure/analysisv2.Rmd/fig-final-pca-gradient-citrus-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center">
+<img src="figure/analysisv2.Rmd/fig-final-pca-gradient-citrus-1.png" alt="Similarly, citrus perception (by time) does not appear to be shaped by the first two PCSs" width="672" />
+<p class="caption">
+Similarly, citrus perception (by time) does not appear to be shaped by
+the first two PCSs
+</p>
+</div>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig-final-pca-gradient-citrus-1">
 Past versions of fig-final-pca-gradient-citrus-1.png
@@ -1311,6 +1345,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/eb2e32f709faaf9e78b11c8e22c1e29ade2d49bc/docs/figure/analysisv2.Rmd/fig-final-pca-gradient-citrus-1.png" target="_blank">eb2e32f</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-22
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/170c8ef65fdd1fd4c40944e49aab0563198a7516/docs/figure/analysisv2.Rmd/fig-final-pca-gradient-citrus-1.png" target="_blank">170c8ef</a>
 </td>
 <td>
@@ -1324,13 +1369,20 @@ Tina Lasisi
 </table>
 </div>
 </div>
+</div>
+</div>
+</div>
+<div id="correlations" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Correlations</h1>
+<p>Below is a general set of scatterplots looking at correlations
+between different variables.</p>
 <pre class="r"><code># Select only numeric columns
 df_numeric &lt;- df_saliva_final[, sapply(df_saliva_final, is.numeric)]
 
 # Create the scatter plot matrix
 ggpairs(df_numeric)</code></pre>
 <div class="figure" style="text-align: center">
-<img src="figure/analysisv2.Rmd/fig-scatter-matrix-pearson-1.png" alt="Pearson's correlation" width="960" />
+<img src="figure/analysisv2.Rmd/fig-scatter-matrix-pearson-1.png" alt="Pearson's correlation" width="1440" />
 <p class="caption">
 Pearson’s correlation
 </p>
@@ -1359,6 +1411,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/eb2e32f709faaf9e78b11c8e22c1e29ade2d49bc/docs/figure/analysisv2.Rmd/fig-scatter-matrix-pearson-1.png" target="_blank">eb2e32f</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-22
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/6e019773d11bd25f82f5d91be75b101a2da374d8/docs/figure/analysisv2.Rmd/fig-scatter-matrix-pearson-1.png" target="_blank">6e01977</a>
 </td>
 <td>
@@ -1383,10 +1446,21 @@ Tina Lasisi
 </table>
 </div>
 </div>
+<pre class="r"><code># Compute a correlation matrix
+cor.matrix &lt;- cor(df_numeric, use = &quot;pairwise.complete.obs&quot;)
+
+corrplot(cor.matrix, type = &quot;upper&quot;, order = &quot;hclust&quot;, addCoef.col =&#39;black&#39;, number.cex = 0.8,
+         tl.col = &quot;black&quot;, tl.srt = 45, tl.cex = .7, insig = &quot;blank&quot;)</code></pre>
+<div class="figure" style="text-align: center">
+<img src="figure/analysisv2.Rmd/cor-matrix-final-pearson-1.png" alt="Pearson's correlation" width="1056" />
+<p class="caption">
+Pearson’s correlation
+</p>
+</div>
 <pre class="r"><code># Create the scatter plot matrix using spearman correlation
 ggpairs(df_numeric, upper = list(continuous = wrap(&quot;cor&quot;, method = &quot;spearman&quot;)))</code></pre>
 <div class="figure" style="text-align: center">
-<img src="figure/analysisv2.Rmd/fig-scatter-matrix-spearman-1.png" alt="Spearman's rank correlation" width="960" />
+<img src="figure/analysisv2.Rmd/fig-scatter-matrix-spearman-1.png" alt="Spearman's rank correlation" width="1440" />
 <p class="caption">
 Spearman’s rank correlation
 </p>
@@ -1415,6 +1489,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/eb2e32f709faaf9e78b11c8e22c1e29ade2d49bc/docs/figure/analysisv2.Rmd/fig-scatter-matrix-spearman-1.png" target="_blank">eb2e32f</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-22
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/6e019773d11bd25f82f5d91be75b101a2da374d8/docs/figure/analysisv2.Rmd/fig-scatter-matrix-spearman-1.png" target="_blank">6e01977</a>
 </td>
 <td>
@@ -1439,12 +1524,21 @@ Tina Lasisi
 </table>
 </div>
 </div>
-</div>
-</div>
+<pre class="r"><code># Compute a correlation matrix
+cor.matrix &lt;- cor(df_numeric, use = &quot;pairwise.complete.obs&quot;, method = &quot;spearman&quot;)
+
+corrplot(cor.matrix, type = &quot;upper&quot;, order = &quot;hclust&quot;, addCoef.col =&#39;black&#39;, number.cex = 0.8,
+         tl.col = &quot;black&quot;, tl.srt = 45, tl.cex = .7, insig = &quot;blank&quot;)</code></pre>
+<div class="figure" style="text-align: center">
+<img src="figure/analysisv2.Rmd/cor-matrix-final-spearman-1.png" alt="Spearman's rank correlation with different visualization of correlations" width="1056" />
+<p class="caption">
+Spearman’s rank correlation with different visualization of correlations
+</p>
 </div>
 <div id="relationship-between-cnv-protein-and-saa"
-class="section level2">
-<h2>Relationship between CNV, protein and sAA</h2>
+class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Relationship between
+CNV, protein and sAA</h2>
 <pre class="r"><code>df_saliva_lm &lt;- df_saliva %&gt;% 
   mutate(Flow_Rate_mean = (Flow_Rate_1_g_min + Flow_Rate_2_g_min)/2,
          sAA_flow_After = sAA_After*Flow_Rate_mean,
@@ -1452,8 +1546,6 @@ class="section level2">
          sAA_flow_Change = sAA_Change*Flow_Rate_mean) %&gt;% 
   select(TP_Before, TP_After, Primer1_Diploid, Primer2_Diploid, TP_Change, sAA_Change, sAA_Before, sAA_After, Flow_Rate_mean, sAA_flow_Before, sAA_flow_After, sAA_flow_Change, Starch_Frequency, Citrus_Sum_120sec) %&gt;% 
   na.omit()</code></pre>
-<div id="mediator-models" class="section level3">
-<h3>Mediator models</h3>
 <pre class="r"><code># Generalized function to toggle different timepoints or changes
 run_mediation_model_Primer2 &lt;- function(df, timepoint_or_change) {
     mediation_model &lt;- paste(&quot;
@@ -1552,10 +1644,11 @@ plot_sem_model &lt;- function(model) {
            style = &quot;lisrel&quot;) # style of the plot
 }</code></pre>
 <div id="cnv-to-saa-with-mediator-tp-and-flow-rate"
-class="section level4">
-<h4>CNV to sAA with mediator TP and Flow rate</h4>
-<div id="before" class="section level5">
-<h5>Before</h5>
+class="section level3" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> CNV to sAA with
+mediator TP and Flow rate</h3>
+<div id="before" class="section level4" number="2.1.1.1">
+<h4><span class="header-section-number">2.1.1.1</span> Before</h4>
 <pre class="r"><code># Run the mediation model for Primer1
 fit_before_P1 &lt;- run_mediation_model_Primer1(df_saliva_lm, &#39;Before&#39;)
 # Summarize the results
@@ -1605,6 +1698,52 @@ Defined Parameters:
     indirect1           0.538     0.576    0.935    0.350
     indirect2           0.083     1.232    0.068    0.946
     total              11.069     2.328    4.755    0.000</code></pre>
+<p>Summary of path analysis:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Model Fit</strong>: The chi-square test of model fit is
+significant (Chi-square = 17.280, df = 1, p = 0.000). This means that
+the specified model does not fit the data well.</p></li>
+<li><p><strong>Path Coefficients</strong>:</p>
+<ul>
+<li><strong><code>Prmr1_Dpld</code></strong> to
+<strong><code>sAA_Before</code></strong> (path c): The coefficient is
+positive and significant (Est.= 10.448, p = 0.000). This indicates that
+<code>Prmr1_Dpld</code> has a positive direct effect on
+<code>sAA_Before</code>.</li>
+<li><strong><code>Prmr1_Dpld</code></strong> to
+<strong><code>Flow_Rate_mean</code></strong> (path a): The coefficient
+is positive and significant (Est.= 0.024, p = 0.029), indicating that
+<code>Prmr1_Dpld</code> positively influences
+<code>Flow_Rate_mean</code>.</li>
+<li><strong><code>TP_Before</code></strong> to
+<strong><code>sAA_Before</code></strong> (path n): This path is also
+significant (Est.= 0.089, p = 0.000), suggesting that
+<code>TP_Before</code> has a positive and significant effect on
+<code>sAA_Before</code>.</li>
+<li>other paths (m, b) are not statistically significant.</li>
+</ul></li>
+<li><p><strong>Variances</strong>: All the residual variances of the
+endogenous variables (<code>.sAA_Before</code>,
+<code>.Flow_Rate_mean</code>, <code>.TP_Before</code>) are significantly
+different from zero.</p></li>
+<li><p><strong>Mediation Analysis</strong>: Both indirect effects
+through <code>Flow_Rate_mean</code> (indirect1) and
+<code>TP_Before</code> (indirect2) were not statistically significant
+(p-values = 0.350 and 0.946 respectively). This suggests that there is
+no significant mediating effect of <code>Flow_Rate_mean</code> and
+<code>TP_Before</code> in the relationship between
+<code>Prmr1_Dpld</code> and <code>sAA_Before</code>.</p></li>
+<li><p><strong>Total effect</strong>: The total effect of
+<code>Prmr1_Dpld</code> on <code>sAA_Before</code> is significant and
+positive (Est.= 11.069, p = 0.000), suggesting <code>Prmr1_Dpld</code>
+has a significant direct impact on <code>sAA_Before</code>.</p></li>
+</ol>
+<p>In conclusion, <code>Prmr1_Dpld</code> has a significant direct
+influence on <code>sAA_Before</code> and <code>Flow_Rate_mean</code>.
+Additionally, <code>TP_Before</code> significantly affects
+<code>sAA_Before</code>. However, neither <code>Flow_Rate_mean</code>
+nor <code>TP_Before</code> significantly mediates the effect of
+<code>Prmr1_Dpld</code> on <code>sAA_Before</code>.</p>
 <pre class="r"><code># Run the mediation model for Primer2
 fit_before_P2 &lt;- run_mediation_model_Primer2(df_saliva_lm, &#39;Before&#39;)
 # Summarize the results
@@ -1656,6 +1795,40 @@ Defined Parameters:
     indirect1           0.979     0.770    1.271    0.204
     indirect2          -2.134     1.836   -1.163    0.245
     total              11.121     3.066    3.627    0.000</code></pre>
+<p>Here’s a summary of the notable results:</p>
+<ul>
+<li><p><strong>Direct Effect</strong>: A significant direct effect
+exists between <strong><code>Prmr2_Dpld</code></strong> and
+<strong><code>sAA_Before</code></strong>. This means that when adjusting
+for other variables, any increase in <code>Prmr2_Dpld</code> will
+typically result in an increase in <code>sAA_Before</code>.</p></li>
+<li><p><strong>Other Significant Path</strong>: A significant connection
+also exists between <strong><code>Prmr2_Dpld</code></strong> and
+<strong><code>Flow_Rate_mean</code></strong>. Furthermore,
+<strong><code>TP_Before</code></strong> also exhibits a definite
+influence on <strong><code>sAA_Before</code></strong>.</p></li>
+<li><p><strong>Total Effect</strong>: The total impact of
+<strong><code>Prmr2_Dpld</code></strong> on
+<strong><code>sAA_Before</code></strong> is positive and significant,
+establishing that <code>Prmr2_Dpld</code> has a dominating influence on
+<code>sAA_Before</code>.</p></li>
+<li><p><strong>Mediating Effect</strong>: Despite the numerous
+significant paths and a total effect, there is <strong>no evidence of a
+significant mediating effect</strong>. Neither
+<code>Flow_Rate_mean</code> nor <code>TP_Before</code> effectively
+mediate the connection between <code>Prmr2_Dpld</code> and
+<code>sAA_Before</code>. This means that the influence exerted by
+<code>Prmr2_Dpld</code> on <code>sAA_Before</code> is not significantly
+conveyed through these two variables.</p></li>
+</ul>
+<p>In conclusion, the <strong>best model</strong> from these results
+underscores direct paths between <code>Prmr2_Dpld</code> and
+<code>sAA_Before</code> and between <code>Prmr2_Dpld</code> and
+<code>Flow_Rate_mean</code>, as well as between <code>TP_Before</code>
+and <code>sAA_Before</code>. While <code>Flow_Rate_mean</code> and
+<code>TP_Before</code> may be interesting to explore, they do not play
+significant roles as mediators in this model, and thus might not greatly
+enhance our ability to predict <code>sAA_Before</code>.</p>
 <pre class="r"><code>layout(matrix(1:2, nrow = 1, byrow = TRUE))
 # Tags/labels for each plot
 layout_title &lt;- c(&quot;Primer 1&quot;, &quot;Primer 2&quot;)
@@ -1697,6 +1870,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/eb2e32f709faaf9e78b11c8e22c1e29ade2d49bc/docs/figure/analysisv2.Rmd/fig-med-before-1.png" target="_blank">eb2e32f</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-22
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/170c8ef65fdd1fd4c40944e49aab0563198a7516/docs/figure/analysisv2.Rmd/fig-med-before-1.png" target="_blank">170c8ef</a>
 </td>
 <td>
@@ -1711,8 +1895,8 @@ Tina Lasisi
 </div>
 </div>
 </div>
-<div id="after" class="section level5">
-<h5>After</h5>
+<div id="after" class="section level4" number="2.1.1.2">
+<h4><span class="header-section-number">2.1.1.2</span> After</h4>
 <pre class="r"><code># Run the mediation model for Primer1
 fit_after_P1 &lt;- run_mediation_model_Primer1(df_saliva_lm, &#39;After&#39;)
 # Summarize the results
@@ -1762,6 +1946,36 @@ Defined Parameters:
     indirect1          -0.393     0.367   -1.071    0.284
     indirect2           0.018     0.217    0.083    0.934
     total               5.993     1.220    4.911    0.000</code></pre>
+<p>Here is a summary of the results for Primer 1:</p>
+<ul>
+<li><p><strong>Direct Effect</strong>: A significant direct effect
+exists between <strong><code>Prmr1_Dpld</code></strong> and
+<strong><code>sAA_After</code></strong>. This suggests that an increase
+in <code>Prmr1_Dpld</code> is associated with an increase in
+<code>sAA_After</code> while controlling for other factors.</p></li>
+<li><p><strong>Other Significant Relationships</strong>: The only other
+significant effect is between <strong><code>Prmr1_Dpld</code></strong>
+and <strong><code>Flow_Rate_mean</code></strong>.</p></li>
+<li><p><strong>Total Effect</strong>: The total impact of
+<strong><code>Prmr1_Dpld</code></strong> on
+<strong><code>sAA_After</code></strong> is positive and significant,
+meaning that <code>Prmr1_Dpld</code> substantially influences
+<code>sAA_After</code>.</p></li>
+<li><p><strong>Mediating Effect</strong>: Neither
+<strong><code>Flow_Rate_mean</code></strong> nor
+<strong><code>TP_After</code></strong> show a significant mediating
+effect in the relationship between <code>Prmr1_Dpld</code> and
+<code>sAA_After</code>. This means that the influence of
+<code>Prmr1_Dpld</code> on <code>sAA_After</code> is not significantly
+transferred through these two variables.</p></li>
+</ul>
+<p>Thus, the <strong>best model</strong> from these results includes
+direct paths between <code>Prmr1_Dpld</code> and <code>sAA_After</code>,
+and between <code>Prmr1_Dpld</code> and <code>Flow_Rate_mean</code>.
+Similar to previous models, <code>Flow_Rate_mean</code> and
+<code>TP_After</code> may be interesting to explore but they do not make
+significant contributions as mediators in the model, and thus may not
+improve our predictive capability for <code>sAA_After</code>.</p>
 <pre class="r"><code># Run the mediation model for Primer2
 fit_after_P2 &lt;- run_mediation_model_Primer2(df_saliva_lm, &#39;After&#39;)
 # Summarize the results
@@ -1813,6 +2027,38 @@ Defined Parameters:
     indirect1          -0.202     0.394   -0.514    0.607
     indirect2           0.073     0.209    0.351    0.725
     total               6.438     1.555    4.140    0.000</code></pre>
+<p>Here’s a summary of the findings from the model for Primer 2:</p>
+<ul>
+<li><p><strong>Direct Effect</strong>: There’s a significant direct
+effect between <strong><code>Prmr2_Dpld</code></strong> and
+<strong><code>sAA_After</code></strong>. Hence, in principle, increasing
+<code>Prmr2_Dpld</code> results in an increase in <code>sAA_After</code>
+when we adjust for other factors.</p></li>
+<li><p><strong>Other Significant Relationships</strong>: The only
+additional significant relationship in this model is between
+<strong><code>Prmr2_Dpld</code></strong> and
+<strong><code>Flow_Rate_mean</code></strong>.</p></li>
+<li><p><strong>Total Effect</strong>: The total influence of
+<strong><code>Prmr2_Dpld</code></strong> on
+<strong><code>sAA_After</code></strong> is positive and significant,
+showing that <code>Prmr2_Dpld</code> has a significant overall influence
+on <code>sAA_After</code>.</p></li>
+<li><p><strong>Mediating Effect</strong>: Neither
+<strong><code>Flow_Rate_mean</code></strong> nor
+<strong><code>TP_After</code></strong> demonstrates a significant
+mediation of the relationship between <code>Prmr2_Dpld</code> and
+<code>sAA_After</code>. Therefore, the effect of <code>Prmr2_Dpld</code>
+on <code>sAA_After</code> is not significantly transmitted through these
+two potential mediators.</p></li>
+</ul>
+<p>As a result, the <strong>best model</strong> developed from these
+results includes direct paths between <code>Prmr2_Dpld</code> and
+<code>sAA_After</code>, as well as between <code>Prmr2_Dpld</code> and
+<code>Flow_Rate_mean</code>. Again, while <code>Flow_Rate_mean</code>
+and <code>TP_After</code> might be intriguing to explore, they do not
+make significant contributions to the model as mediators and thus might
+not improve our predictive abilities concerning
+<code>sAA_After</code>.</p>
 <pre class="r"><code># Set up layout
 layout(matrix(1:2, nrow = 1, byrow = TRUE))
 # Tags/labels for each plot
@@ -1855,6 +2101,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/eb2e32f709faaf9e78b11c8e22c1e29ade2d49bc/docs/figure/analysisv2.Rmd/fig-med-after-1.png" target="_blank">eb2e32f</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-22
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/170c8ef65fdd1fd4c40944e49aab0563198a7516/docs/figure/analysisv2.Rmd/fig-med-after-1.png" target="_blank">170c8ef</a>
 </td>
 <td>
@@ -1869,8 +2126,8 @@ Tina Lasisi
 </div>
 </div>
 </div>
-<div id="change" class="section level5">
-<h5>Change</h5>
+<div id="change" class="section level4" number="2.1.1.3">
+<h4><span class="header-section-number">2.1.1.3</span> Change</h4>
 <pre class="r"><code># Run the mediation model for Primer1
 fit_change_P1 &lt;- run_mediation_model_Primer1(df_saliva_lm, &#39;Change&#39;)
 # Summarize the results
@@ -1920,6 +2177,35 @@ Defined Parameters:
     indirect1           0.189     0.366    0.515    0.607
     indirect2           0.474     0.508    0.932    0.351
     total              -5.077     1.428   -3.555    0.000</code></pre>
+<p>The model provides a good fit to the data (Chi-square = 1.302, p =
+0.254).</p>
+<ul>
+<li>There is a significant negative direct effect of
+<strong><code>Prmr1_Dpld</code></strong> on
+<strong><code>sAA_Change</code></strong> (Est = -5.739, p = 0.000).</li>
+<li>Furthermore, <strong><code>Prmr1_Dpld</code></strong> also has a
+positive and significant effect on
+<strong><code>Flow_Rate_mean</code></strong> (Est = 0.024, p =
+0.029).</li>
+<li>Lastly, <strong><code>TP_Change</code></strong> significantly
+influences <strong><code>sAA_Change</code></strong> (Est = 0.035, p =
+0.003).</li>
+</ul>
+<p>However, there’s no evidence of any significant mediating effects:
+neither <strong><code>Flow_Rate_mean</code></strong> (Est = 0.189, p =
+0.607) nor <strong><code>TP_Change</code></strong> (Est = 0.474, p =
+0.351) mediates the relationship between <code>Prmr1_Dpld</code> and
+<code>sAA_Change</code>.</p>
+<p>The overall effect of <code>Prmr1_Dpld</code> on
+<code>sAA_Change</code> is significant and negative (Est = -5.077, p =
+0.000).</p>
+<p>In conclusion, the <strong>best model</strong> includes direct paths
+from <code>Prmr1_Dpld</code> to <code>sAA_Change</code>,
+<code>Prmr1_Dpld</code> to <code>Flow_Rate_mean</code>, and
+<code>TP_Change</code> to <code>sAA_Change</code>.
+<code>Flow_Rate_mean</code> and <code>TP_Change</code> do not
+significantly mediate the effect of <code>Prmr1_Dpld</code> on
+<code>sAA_Change</code>.</p>
 <pre class="r"><code># Run the mediation model for Primer2
 fit_change_P2 &lt;- run_mediation_model_Primer2(df_saliva_lm, &#39;Change&#39;)
 # Summarize the results
@@ -1971,6 +2257,32 @@ Defined Parameters:
     indirect1           0.101     0.428    0.235    0.814
     indirect2           0.894     0.686    1.303    0.192
     total              -4.683     1.826   -2.564    0.010</code></pre>
+<p>The model fits the data well (Chi-square = 1.095, p = 0.295).</p>
+<ul>
+<li>There is a significant negative direct effect of
+<strong><code>Prmr2_Dpld</code></strong> on
+<strong><code>sAA_Change</code></strong> (Est = -5.677, p = 0.002).</li>
+<li>Moreover, <strong><code>Prmr2_Dpld</code></strong> has a positive
+significant effect on <strong><code>Flow_Rate_mean</code></strong> (Est
+= 0.027, p = 0.041).</li>
+<li><strong><code>TP_Change</code></strong> also significantly
+influences <strong><code>sAA_Change</code></strong> (Est = 0.036, p =
+0.003).</li>
+</ul>
+<p>However, neither <strong><code>Flow_Rate_mean</code></strong> (Est =
+0.101, p = 0.814) nor <strong><code>TP_Change</code></strong> (Est =
+0.894, p = 0.192) provides a significant mediating effect between
+<code>Prmr2_Dpld</code> and <code>sAA_Change</code>.</p>
+<p>The total effect of <code>Prmr2_Dpld</code> on
+<code>sAA_Change</code> is significant and negative (Est = -4.683, p =
+0.010).</p>
+<p>In conclusion, the <strong>best model</strong> includes direct paths
+from <code>Prmr2_Dpld</code> to <code>sAA_Change</code>,
+<code>Prmr2_Dpld</code> to <code>Flow_Rate_mean</code>, and
+<code>TP_Change</code> to <code>sAA_Change</code>. While
+<code>Flow_Rate_mean</code> and <code>TP_Change</code> are included in
+the model, there is no significant evidence to suggest that they mediate
+the effect of <code>Prmr2_Dpld</code> on <code>sAA_Change</code>.</p>
 <pre class="r"><code># set up layout 
 layout(matrix(1:2, nrow = 1, byrow = TRUE))
 # Tags/labels for each plot
@@ -2013,6 +2325,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/eb2e32f709faaf9e78b11c8e22c1e29ade2d49bc/docs/figure/analysisv2.Rmd/fig-med-change-1.png" target="_blank">eb2e32f</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-22
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/170c8ef65fdd1fd4c40944e49aab0563198a7516/docs/figure/analysisv2.Rmd/fig-med-change-1.png" target="_blank">170c8ef</a>
 </td>
 <td>
@@ -2028,10 +2351,12 @@ Tina Lasisi
 </div>
 </div>
 </div>
-<div id="cnv-to-saaflow-with-tp-mediator" class="section level4">
-<h4>CNV to sAA*flow with TP mediator</h4>
-<div id="before-1" class="section level5">
-<h5>Before</h5>
+<div id="cnv-to-saaflow-with-tp-mediator" class="section level3"
+number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> CNV to sAA*flow
+with TP mediator</h3>
+<div id="before-1" class="section level4" number="2.1.2.1">
+<h4><span class="header-section-number">2.1.2.1</span> Before</h4>
 <pre class="r"><code># Run the mediation model for Primer1
 fit_before_sAA_flow_Primer1 &lt;- run_mediation_model_Primer1_sAA_flow_TP_mediator(df_saliva_lm, &#39;Before&#39;)
 # Summarize the results
@@ -2075,6 +2400,31 @@ Defined Parameters:
                    Estimate    Std.Err   z-value  P(&gt;|z|)
     indirect1           0.034     0.507    0.068    0.946
     total              13.420     2.636    5.091    0.000</code></pre>
+<p>The model fits the data perfectly when considering the provided
+indicators (Chi-square = 0.000, degrees of freedom = 0).</p>
+<ul>
+<li><p>There is a significant positive direct effect of
+<strong><code>Prmr1_Dpld</code></strong> on
+<strong><code>sAA_flow_Before</code></strong> (Est = 13.386, p =
+0.000).</p></li>
+<li><p><strong><code>Prmr1_Dpld</code></strong> does not significantly
+affect <strong><code>TP_Before</code></strong> (Est = 0.939, p = 0.946),
+and the effect of <strong><code>TP_Before</code></strong> on
+<strong><code>sAA_flow_Before</code></strong> is also not significant
+(Est = 0.037, p = 0.106).</p></li>
+<li><p>There is no significant indirect effect via
+<strong><code>TP_Before</code></strong> (indirect1) (Est = 0.034, p =
+0.946) between <code>Prmr1_Dpld</code> and
+<code>sAA_flow_Before</code>.</p></li>
+<li><p>The total effect of <code>Prmr1_Dpld</code> on
+<code>sAA_flow_Before</code> is significant and positive (Est = 13.420,
+p = 0.000).</p></li>
+</ul>
+<p>In conclusion, the <strong>best model</strong> includes a direct path
+from <code>Prmr1_Dpld</code> to <code>sAA_flow_Before</code>. However,
+the model shows no significant evidence that <code>TP_Before</code>
+mediates the effect of <code>Prmr1_Dpld</code> on
+<code>sAA_flow_Before</code>.</p>
 <pre class="r"><code># Run the mediation model for Primer2
 fit_before_sAA_flow_Primer2 &lt;- run_mediation_model_Primer2_sAA_flow_TP_mediator(df_saliva_lm, &#39;Before&#39;)
 # Summarize the results
@@ -2120,6 +2470,53 @@ Defined Parameters:
                    Estimate    Std.Err   z-value  P(&gt;|z|)
     indirect1          -1.067     1.014   -1.052    0.293
     total              14.664     3.364    4.359    0.000</code></pre>
+<ul>
+<li><strong>Path ‘c’: Prmr2_Dpld –&gt; sAA_flow_Before</strong>
+<ul>
+<li>Estimate: 15.731</li>
+<li>P-value: &lt; 0.001</li>
+<li><strong>Interpretation</strong>: There is a significant direct
+effect. As “Prmr2_Dpld” increases, “sAA_flow_Before” also significantly
+increases.</li>
+</ul></li>
+<li><strong>Path ‘a’: Prmr2_Dpld –&gt; TP_Before</strong>
+<ul>
+<li>Estimate: -19.974</li>
+<li>P-value: 0.236</li>
+<li><strong>Interpretation</strong>: This effect is not statistically
+significant. “Prmr2_Dpld” does not significantly influence
+“TP_Before”.</li>
+</ul></li>
+<li><strong>Path ‘b’: TP_Before –&gt; sAA_flow_Before</strong>
+<ul>
+<li>Estimate: 0.053</li>
+<li>P-value: 0.022</li>
+<li><strong>Interpretation</strong>: There is a significant direct
+effect. As “TP_Before” increases, “sAA_flow_Before” also significantly
+increases.</li>
+</ul></li>
+<li><strong>Indirect effect: Prmr2_Dpld –&gt; TP_Before –&gt;
+sAA_flow_Before</strong>
+<ul>
+<li>Estimate: -1.067</li>
+<li>P-value: 0.293</li>
+<li><strong>Interpretation</strong>: There is no significant indirect
+(mediated) effect. “TP_Before” does not mediate the relationship between
+“Prmr2_Dpld” and “sAA_flow_Before”.</li>
+</ul></li>
+<li><strong>Total effect: Prmr2_Dpld –&gt; sAA_flow_Before</strong>
+<ul>
+<li>Estimate: 14.664</li>
+<li>P-value: &lt; 0.001</li>
+<li><strong>Interpretation</strong>: There is a significant overall
+effect of “Prmr2_Dpld” on “sAA_flow_Before”.</li>
+</ul></li>
+<li><strong>Variances</strong>: There’s significant variability in both
+“sAA_flow_Before” and “TP_Before” (p &lt; 0.001).</li>
+</ul>
+<p><strong>Conclusion</strong>: The best model would suggest that
+“TP_Before” does not play a mediatory role in the relationship between
+“Prmr2_Dpld” and “sAA_flow_Before”.</p>
 <pre class="r"><code>layout(matrix(1:2, nrow = 1, byrow = TRUE))
 # Tags/labels for each plot
 layout_title &lt;- c(&quot;sAA Flow Primer 1 - Before&quot;, &quot;sAA Flow Primer 2 - Before&quot;)
@@ -2131,13 +2528,13 @@ title(layout_title[1])
 # Create the second plot
 plot_sem_model(fit_before_sAA_flow_Primer2)
 title(layout_title[2])</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/analysisv2.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-1">
-Past versions of unnamed-chunk-2-1.png
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-1">
+Past versions of unnamed-chunk-3-1.png
 </button>
 </p>
-<div id="fig-unnamed-chunk-2-1" class="collapse">
+<div id="fig-unnamed-chunk-3-1" class="collapse">
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
 <thead>
@@ -2156,7 +2553,18 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/170c8ef65fdd1fd4c40944e49aab0563198a7516/docs/figure/analysisv2.Rmd/unnamed-chunk-2-1.png" target="_blank">170c8ef</a>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/6e019773d11bd25f82f5d91be75b101a2da374d8/docs/figure/analysisv2.Rmd/unnamed-chunk-3-1.png" target="_blank">6e01977</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-22
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/170c8ef65fdd1fd4c40944e49aab0563198a7516/docs/figure/analysisv2.Rmd/unnamed-chunk-3-1.png" target="_blank">170c8ef</a>
 </td>
 <td>
 Tina Lasisi
@@ -2167,7 +2575,7 @@ Tina Lasisi
 </tr>
 <tr>
 <td>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/07ec9306556753cb5847b51e0594ab20e52e480d/docs/figure/analysisv2.Rmd/unnamed-chunk-2-1.png" target="_blank">07ec930</a>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/07ec9306556753cb5847b51e0594ab20e52e480d/docs/figure/analysisv2.Rmd/unnamed-chunk-3-1.png" target="_blank">07ec930</a>
 </td>
 <td>
 Tina Lasisi
@@ -2181,8 +2589,8 @@ Tina Lasisi
 </div>
 </div>
 </div>
-<div id="after-1" class="section level5">
-<h5>After</h5>
+<div id="after-1" class="section level4" number="2.1.2.2">
+<h4><span class="header-section-number">2.1.2.2</span> After</h4>
 <pre class="r"><code># Run the mediation model for Primer1
 fit_after_sAA_flow_Primer1 &lt;- run_mediation_model_Primer1_sAA_flow_TP_mediator(df_saliva_lm, &#39;After&#39;)
 # Summarize the results
@@ -2226,6 +2634,53 @@ Defined Parameters:
                    Estimate    Std.Err   z-value  P(&gt;|z|)
     indirect1          -0.478     0.436   -1.096    0.273
     total               8.246     1.664    4.955    0.000</code></pre>
+<ul>
+<li><strong>Path ‘c’: Prmr1_Dpld –&gt; sAA_flow_After</strong>
+<ul>
+<li>Estimate: 8.724</li>
+<li>P-value: &lt; 0.001</li>
+<li><strong>Interpretation</strong>: There’s a significant direct
+effect. As “Prmr1_Dpld” increases, “sAA_flow_After” also significantly
+increases.</li>
+</ul></li>
+<li><strong>Path ‘a’: Prmr1_Dpld –&gt; TP_After</strong>
+<ul>
+<li>Estimate: 14.561</li>
+<li>P-value: 0.139</li>
+<li><strong>Interpretation</strong>: The effect is not statistically
+significant. This means “Prmr1_Dpld” doesn’t significantly influence
+“TP_After”.</li>
+</ul></li>
+<li><strong>Path ‘b’: TP_After –&gt; sAA_flow_After</strong>
+<ul>
+<li>Estimate: -0.033</li>
+<li>P-value: 0.102</li>
+<li><strong>Interpretation</strong>: The effect is not statistically
+significant. As such, “TP_After” doesn’t significantly influence
+“sAA_flow_After”.</li>
+</ul></li>
+<li><strong>Indirect effect: Prmr1_Dpld –&gt; TP_After –&gt;
+sAA_flow_After</strong>
+<ul>
+<li>Estimate: -0.478</li>
+<li>P-value: 0.273</li>
+<li><strong>Interpretation</strong>: There is no significant indirect
+(mediated) effect. As such, “TP_After” doesn’t mediate the relationship
+between “Prmr1_Dpld” and “sAA_flow_After”.</li>
+</ul></li>
+<li><strong>Total effect: Prmr1_Dpld –&gt; sAA_flow_After</strong>
+<ul>
+<li>Estimate: 8.246</li>
+<li>P-value: &lt; 0.001</li>
+<li><strong>Interpretation</strong>: There is a significant overall
+effect of “Prmr1_Dpld” on “sAA_flow_After”.</li>
+</ul></li>
+<li><strong>Variances</strong>: Both “sAA_flow_After” and “TP_After”
+show significant variability (p &lt; 0.001).</li>
+</ul>
+<p><strong>Conclusion</strong>: The best model suggests “TP_After”
+doesn’t play a mediatory role in the relationship between “Prmr1_Dpld”
+and “sAA_flow_After”.</p>
 <pre class="r"><code># Run the mediation model for Primer2
 fit_after_sAA_flow_Primer2 &lt;- run_mediation_model_Primer2_sAA_flow_TP_mediator(df_saliva_lm, &#39;After&#39;)
 # Summarize the results
@@ -2271,9 +2726,57 @@ Defined Parameters:
                    Estimate    Std.Err   z-value  P(&gt;|z|)
     indirect1          -0.085     0.246   -0.345    0.730
     total               9.692     2.075    4.671    0.000</code></pre>
+<p>Here’s the interpretation for the analysis:</p>
+<ul>
+<li><strong>Path ‘c’: Prmr2_Dpld –&gt; sAA_flow_After</strong>
+<ul>
+<li>Estimate: 9.777</li>
+<li>P-value: &lt; 0.001</li>
+<li><strong>Interpretation</strong>: There’s a significant direct
+effect. As “Prmr2_Dpld” increases, “sAA_flow_After” also significantly
+increases.</li>
+</ul></li>
+<li><strong>Path ‘a’: Prmr2_Dpld –&gt; TP_After</strong>
+<ul>
+<li>Estimate: 4.573</li>
+<li>P-value: 0.710</li>
+<li><strong>Interpretation</strong>: This effect is not statistically
+significant, implying “Prmr2_Dpld” does not significantly influence
+“TP_After”.</li>
+</ul></li>
+<li><strong>Path ‘b’: TP_After –&gt; sAA_flow_After</strong>
+<ul>
+<li>Estimate: -0.019</li>
+<li>P-value: 0.363</li>
+<li><strong>Interpretation</strong>: The effect is not statistically
+significant. As such, “TP_After” doesn’t significantly influence
+“sAA_flow_After”.</li>
+</ul></li>
+<li><strong>Indirect effect: Prmr2_Dpld –&gt; TP_After –&gt;
+sAA_flow_After</strong>
+<ul>
+<li>Estimate: -0.085</li>
+<li>P-value: 0.730</li>
+<li><strong>Interpretation</strong>: There’s no significant indirect
+(mediated) effect. “TP_After” doesn’t mediate the relationship between
+“Prmr2_Dpld” and “sAA_flow_After”.</li>
+</ul></li>
+<li><strong>Total effect: Prmr2_Dpld –&gt; sAA_flow_After</strong>
+<ul>
+<li>Estimate: 9.692</li>
+<li>P-value: &lt; 0.001</li>
+<li><strong>Interpretation</strong>: There is a significant overall
+effect of “Prmr2_Dpld” on “sAA_flow_After”.</li>
+</ul></li>
+<li><strong>Variances</strong>: There’s significant variability in both
+“sAA_flow_After” and “TP_After” (p &lt; 0.001).</li>
+</ul>
+<p><strong>Conclusion</strong>: The model indicates “TP_After” doesn’t
+play a mediatory role in the relationship between “Prmr2_Dpld” and
+“sAA_flow_After”.</p>
 </div>
-<div id="change-1" class="section level5">
-<h5>Change</h5>
+<div id="change-1" class="section level4" number="2.1.2.3">
+<h4><span class="header-section-number">2.1.2.3</span> Change</h4>
 <pre class="r"><code># Run the mediation model for Primer1
 fit_change_sAA_flow_Primer1 &lt;- run_mediation_model_Primer1_sAA_flow_TP_mediator(df_saliva_lm, &#39;Change&#39;)
 # Summarize the results
@@ -2317,6 +2820,53 @@ Defined Parameters:
                    Estimate    Std.Err   z-value  P(&gt;|z|)
     indirect1           0.404     0.450    0.898    0.369
     total              -5.174     1.588   -3.258    0.001</code></pre>
+<ul>
+<li><strong>Path ‘c’: Prmr1_Dpld –&gt; sAA_flow_Change</strong>
+<ul>
+<li>Estimate: -5.578</li>
+<li>P-value: &lt; 0.001</li>
+<li><strong>Interpretation</strong>: There’s a significant direct
+effect. As “Prmr1_Dpld” increases, “sAA_flow_Change” significantly
+decreases.</li>
+</ul></li>
+<li><strong>Path ‘a’: Prmr1_Dpld –&gt; TP_Change</strong>
+<ul>
+<li>Estimate: 13.622</li>
+<li>P-value: 0.326</li>
+<li><strong>Interpretation</strong>: This effect is not statistically
+significant. This implies “Prmr1_Dpld” does not significantly influence
+“TP_Change”.</li>
+</ul></li>
+<li><strong>Path ‘b’: TP_Change –&gt; sAA_flow_Change</strong>
+<ul>
+<li>Estimate: 0.030</li>
+<li>P-value: 0.027</li>
+<li><strong>Interpretation</strong>: There’s a significant direct
+effect. As “TP_Change” increases, “sAA_flow_Change” also significantly
+increases.</li>
+</ul></li>
+<li><strong>Indirect effect: Prmr1_Dpld –&gt; TP_Change –&gt;
+sAA_flow_Change</strong>
+<ul>
+<li>Estimate: 0.404</li>
+<li>P-value: 0.369</li>
+<li><strong>Interpretation</strong>: There’s no significant indirect
+(mediated) effect. “TP_Change” doesn’t mediate the relationship between
+“Prmr1_Dpld” and “sAA_flow_Change”.</li>
+</ul></li>
+<li><strong>Total effect: Prmr1_Dpld –&gt; sAA_flow_Change</strong>
+<ul>
+<li>Estimate: -5.174</li>
+<li>P-value: 0.001</li>
+<li><strong>Interpretation</strong>: There is a significant overall
+effect of “Prmr1_Dpld” on “sAA_flow_Change”.</li>
+</ul></li>
+<li><strong>Variances</strong>: Both “sAA_flow_Change” and “TP_Change”
+show significant variability (p &lt; 0.001).</li>
+</ul>
+<p><strong>Conclusion</strong>: The best model suggests that “TP_Change”
+does not mediate the relationship between “Prmr1_Dpld” and
+“sAA_flow_Change”.</p>
 <pre class="r"><code># Run the mediation model for Primer2
 fit_change_sAA_flow_Primer2 &lt;- run_mediation_model_Primer2_sAA_flow_TP_mediator(df_saliva_lm, &#39;Change&#39;)
 # Summarize the results
@@ -2362,6 +2912,53 @@ Defined Parameters:
                    Estimate    Std.Err   z-value  P(&gt;|z|)
     indirect1           0.760     0.625    1.216    0.224
     total              -4.972     2.009   -2.475    0.013</code></pre>
+<ul>
+<li><strong>Path ‘c’: Prmr2_Dpld –&gt; sAA_flow_Change</strong>
+<ul>
+<li>Estimate: -5.732</li>
+<li>P-value: 0.004</li>
+<li><strong>Interpretation</strong>: There’s a significant direct
+effect. As “Prmr2_Dpld” increases, “sAA_flow_Change” significantly
+decreases.</li>
+</ul></li>
+<li><strong>Path ‘a’: Prmr2_Dpld –&gt; TP_Change</strong>
+<ul>
+<li>Estimate: 24.547</li>
+<li>P-value: 0.146</li>
+<li><strong>Interpretation</strong>: The effect is not statistically
+significant. This means “Prmr2_Dpld” does not significantly influence
+“TP_Change”.</li>
+</ul></li>
+<li><strong>Path ‘b’: TP_Change –&gt; sAA_flow_Change</strong>
+<ul>
+<li>Estimate: 0.031</li>
+<li>P-value: 0.026</li>
+<li><strong>Interpretation</strong>: There’s a significant direct
+effect. As “TP_Change” increases, “sAA_flow_Change” also significantly
+increases.</li>
+</ul></li>
+<li><strong>Indirect effect: Prmr2_Dpld –&gt; TP_Change –&gt;
+sAA_flow_Change</strong>
+<ul>
+<li>Estimate: 0.760</li>
+<li>P-value: 0.224</li>
+<li><strong>Interpretation</strong>: There is no significant indirect
+(mediated) effect, meaning “TP_Change” doesn’t mediate the relationship
+between “Prmr2_Dpld” and “sAA_flow_Change”.</li>
+</ul></li>
+<li><strong>Total effect: Prmr2_Dpld –&gt; sAA_flow_Change</strong>
+<ul>
+<li>Estimate: -4.972</li>
+<li>P-value: 0.013</li>
+<li><strong>Interpretation</strong>: There is a significant overall
+effect of “Prmr2_Dpld” on “sAA_flow_Change”.</li>
+</ul></li>
+<li><strong>Variances</strong>: Both “sAA_flow_Change” and “TP_Change”
+show significant variability (p &lt; 0.001).</li>
+</ul>
+<p><strong>Conclusion</strong>: The best model suggests that “TP_Change”
+does not mediate the relationship between “Prmr2_Dpld” and
+“sAA_flow_Change”.</p>
 <pre class="r"><code>layout(matrix(1:2, nrow = 1, byrow = TRUE))
 # Tags/labels for each plot
 layout_title &lt;- c(&quot;sAA Flow Primer 1 - Change&quot;, &quot;sAA Flow Primer 2 - Change&quot;)
@@ -2373,13 +2970,13 @@ title(layout_title[1])
 # Create the second plot
 plot_sem_model(fit_change_sAA_flow_Primer2)
 title(layout_title[2])</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/analysisv2.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
-Past versions of unnamed-chunk-5-1.png
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
+Past versions of unnamed-chunk-8-1.png
 </button>
 </p>
-<div id="fig-unnamed-chunk-5-1" class="collapse">
+<div id="fig-unnamed-chunk-8-1" class="collapse">
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
 <thead>
@@ -2398,13 +2995,35 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/6e019773d11bd25f82f5d91be75b101a2da374d8/docs/figure/analysisv2.Rmd/unnamed-chunk-5-1.png" target="_blank">6e01977</a>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/eb2e32f709faaf9e78b11c8e22c1e29ade2d49bc/docs/figure/analysisv2.Rmd/unnamed-chunk-8-1.png" target="_blank">eb2e32f</a>
 </td>
 <td>
 Tina Lasisi
 </td>
 <td>
 2023-07-22
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/170c8ef65fdd1fd4c40944e49aab0563198a7516/docs/figure/analysisv2.Rmd/unnamed-chunk-8-1.png" target="_blank">170c8ef</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-14
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/07ec9306556753cb5847b51e0594ab20e52e480d/docs/figure/analysisv2.Rmd/unnamed-chunk-8-1.png" target="_blank">07ec930</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-12
 </td>
 </tr>
 </tbody>
@@ -2414,12 +3033,10 @@ Tina Lasisi
 </div>
 </div>
 </div>
-</div>
 <div id="relationship-between-cnv-saa-and-citrus-perception"
-class="section level2">
-<h2>Relationship between CNV, sAA, and citrus perception</h2>
-<div id="mediator-models-1" class="section level3">
-<h3>Mediator models</h3>
+class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Relationship between
+CNV, sAA, and citrus perception</h2>
 <pre class="r"><code># Generalized function for mediation model including Flow_Rate_mean
 run_citrus_model &lt;- function(df, timepoint_or_change) {
   mediation_model &lt;- paste(&quot;
@@ -2443,8 +3060,8 @@ run_citrus_model &lt;- function(df, timepoint_or_change) {
   # Return the model
   return(fit)
 }</code></pre>
-<div id="before-2" class="section level4">
-<h4>Before</h4>
+<div id="before-2" class="section level3" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Before</h3>
 <pre class="r"><code>citrus_model_before &lt;- run_citrus_model(df_saliva_lm, &#39;Before&#39;)
 
 summary(citrus_model_before)</code></pre>
@@ -2492,13 +3109,13 @@ Defined Parameters:
     indirect2        -0.489    0.429   -1.140    0.254
     total             0.678    1.459    0.465    0.642</code></pre>
 <pre class="r"><code>plot_sem_model(citrus_model_before)</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/analysisv2.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
-Past versions of unnamed-chunk-8-1.png
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-1">
+Past versions of unnamed-chunk-11-1.png
 </button>
 </p>
-<div id="fig-unnamed-chunk-8-1" class="collapse">
+<div id="fig-unnamed-chunk-11-1" class="collapse">
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
 <thead>
@@ -2517,33 +3134,99 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/170c8ef65fdd1fd4c40944e49aab0563198a7516/docs/figure/analysisv2.Rmd/unnamed-chunk-8-1.png" target="_blank">170c8ef</a>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/6e019773d11bd25f82f5d91be75b101a2da374d8/docs/figure/analysisv2.Rmd/unnamed-chunk-11-1.png" target="_blank">6e01977</a>
 </td>
 <td>
 Tina Lasisi
 </td>
 <td>
-2023-07-14
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/07ec9306556753cb5847b51e0594ab20e52e480d/docs/figure/analysisv2.Rmd/unnamed-chunk-8-1.png" target="_blank">07ec930</a>
-</td>
-<td>
-Tina Lasisi
-</td>
-<td>
-2023-07-12
+2023-07-22
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
+<ul>
+<li><strong>Path ‘c’: Prmr2_Dpld –&gt; Citrus_Sum_120sec</strong>
+<ul>
+<li>Estimate: 1.397</li>
+<li>P-value: 0.389</li>
+<li><strong>Interpretation</strong>: The effect is not statistically
+significant, suggesting that the increase in “Prmr2_Dpld” does not
+significantly impact “Citrus_Sum_120sec”.</li>
+</ul></li>
+<li><strong>Path ‘a’: Prmr2_Dpld –&gt; sAA_Before</strong>
+<ul>
+<li>Estimate: 11.121</li>
+<li>P-value: &lt;0.001</li>
+<li><strong>Interpretation</strong>: There’s a statistically significant
+effect, implying that as “Prmr2_Dpld” increases, “sAA_Before” also
+significantly increases.</li>
+</ul></li>
+<li><strong>Path ‘m’: Prmr2_Dpld –&gt; Flow_Rate_mean</strong>
+<ul>
+<li>Estimate: 0.027</li>
+<li>P-value: 0.041</li>
+<li><strong>Interpretation</strong>: There’s a significant effect
+suggesting that an increase in “Prmr2_Dpld” leads to a significant
+increase in “Flow_Rate_mean”.</li>
+</ul></li>
+<li><strong>Path ‘b’: sAA_Before –&gt; Citrus_Sum_120sec</strong>
+<ul>
+<li>Estimate: -0.021</li>
+<li>P-value: 0.728</li>
+<li><strong>Interpretation</strong>: This effect isn’t statistically
+significant. “sAA_Before” does not significantly influence
+“Citrus_Sum_120sec”.</li>
+</ul></li>
+<li><strong>Path ‘n’: Flow_Rt_mn –&gt; Citrus_Sum_120sec</strong>
+<ul>
+<li>Estimate: -18.025</li>
+<li>P-value: 0.169</li>
+<li><strong>Interpretation</strong>: The effect is not statistically
+significant, suggesting “Flow_Rt_mn” doesn’t significantly influence
+“Citrus_Sum_120sec”.</li>
+</ul></li>
+<li><strong>Indirect Paths:</strong>
+<ul>
+<li><strong>First indirect effect: Prmr2_Dpld –&gt; sAA_Before –&gt;
+Citrus_Sum_120sec</strong>
+<ul>
+<li>Estimate: -0.230</li>
+<li>P-value: 0.729</li>
+<li><strong>Interpretation</strong>: There is no significant indirect
+effect, meaning “sAA_Before” doesn’t mediate the relationship between
+“Prmr2_Dpld” and “Citrus_Sum_120sec”.</li>
+</ul></li>
+<li><strong>Second indirect effect: Prmr2_Dpld –&gt; Flow_Rate_mean
+–&gt; Citrus_Sum_120sec</strong>
+<ul>
+<li>Estimate: -0.489</li>
+<li>P-value: 0.254</li>
+<li><strong>Interpretation</strong>: No significant indirect effect is
+found here either, suggesting “Flow_Rate_mean” doesn’t mediate the
+relationship between “Prmr2_Dpld” and “Citrus_Sum_120sec”.</li>
+</ul></li>
+</ul></li>
+<li><strong>Total effect: Prmr2_Dpld –&gt; Citrus_Sum_120sec</strong>
+<ul>
+<li>Estimate: 0.678</li>
+<li>P-value: 0.642</li>
+<li><strong>Interpretation</strong>: The total effect isn’t
+statistically significant, hinting “Prmr2_Dpld” does not significantly
+influence “Citrus_Sum_120sec”.</li>
+</ul></li>
+<li><strong>Variances</strong>: The variance of each of the variables
+“Citrs_Sm_120sc”, “sAA_Before”, and “Flow_Rate_mean” is significant
+suggesting there’s considerable variation in these variables.</li>
+</ul>
+<p><strong>Conclusion</strong>: Both “sAA_Before” and “Flow_Rate_mean”
+do not appear to play significant mediating roles in the relationship
+between “Prmr2_Dpld” and “Citrus_Sum_120sec”.</p>
 </div>
-<div id="after-2" class="section level4">
-<h4>After</h4>
+<div id="after-2" class="section level3" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> After</h3>
 <pre class="r"><code>citrus_model_after &lt;- run_citrus_model(df_saliva_lm, &#39;After&#39;)
 
 summary(citrus_model_after)</code></pre>
@@ -2591,10 +3274,145 @@ Defined Parameters:
     indirect2        -0.463    0.422   -1.097    0.273
     total             0.678    1.457    0.466    0.642</code></pre>
 <pre class="r"><code>plot_sem_model(citrus_model_after)</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/analysisv2.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-13-1">
+Past versions of unnamed-chunk-13-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-13-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/6e019773d11bd25f82f5d91be75b101a2da374d8/docs/figure/analysisv2.Rmd/unnamed-chunk-13-1.png" target="_blank">6e01977</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-22
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/170c8ef65fdd1fd4c40944e49aab0563198a7516/docs/figure/analysisv2.Rmd/unnamed-chunk-13-1.png" target="_blank">170c8ef</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-14
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/07ec9306556753cb5847b51e0594ab20e52e480d/docs/figure/analysisv2.Rmd/unnamed-chunk-13-1.png" target="_blank">07ec930</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-12
+</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="change-2" class="section level4">
-<h4>Change</h4>
+</div>
+<ul>
+<li><strong>Path ‘c’: Prmr2_Dpld –&gt; Citrus_Sum_120sec</strong>
+<ul>
+<li>Estimate: 0.916</li>
+<li>P-value: 0.578</li>
+<li><strong>Interpretation</strong>: The effect is not statistically
+significant, suggesting “Prmr2_Dpld” does not significantly impact
+“Citrus_Sum_120sec”.</li>
+</ul></li>
+<li><strong>Path ‘a’: Prmr2_Dpld –&gt; sAA_After</strong>
+<ul>
+<li>Estimate: 6.438</li>
+<li>P-value: &lt;0.001</li>
+<li><strong>Interpretation</strong>: There’s a statistically significant
+effect, suggesting that as “Prmr2_Dpld” increases, “sAA_After” also
+significantly increases.</li>
+</ul></li>
+<li><strong>Path ‘m’: Prmr2_Dpld –&gt; Flow_Rate_mean</strong>
+<ul>
+<li>Estimate: 0.027</li>
+<li>P-value: 0.041</li>
+<li><strong>Interpretation</strong>: There’s a significant effect,
+suggesting an increase in “Prmr2_Dpld” leads to a significant increase
+in “Flow_Rate_mean”.</li>
+</ul></li>
+<li><strong>Path ‘b’: sAA_After –&gt; Citrus_Sum_120sec</strong>
+<ul>
+<li>Estimate: 0.035</li>
+<li>P-value: 0.755</li>
+<li><strong>Interpretation</strong>: This effect isn’t statistically
+significant, implying “sAA_After” doesn’t significantly influence
+“Citrus_Sum_120sec”.</li>
+</ul></li>
+<li><strong>Path ‘n’: Flow_Rt_mn –&gt; Citrus_Sum_120sec</strong>
+<ul>
+<li>Estimate: -17.060</li>
+<li>P-value: 0.194</li>
+<li><strong>Interpretation</strong>: The effect is not statistically
+significant, suggesting “Flow_Rt_mn” does not significantly influence
+“Citrus_Sum_120sec”.</li>
+</ul></li>
+<li><strong>Indirect Paths:</strong>
+<ul>
+<li><strong>First indirect effect: Prmr2_Dpld –&gt; sAA_After –&gt;
+Citrus_Sum_120sec</strong>
+<ul>
+<li>Estimate: 0.225</li>
+<li>P-value: 0.755</li>
+<li><strong>Interpretation</strong>: There is no significant indirect
+effect, implying “sAA_After” doesn’t mediate the relationship between
+“Prmr2_Dpld” and “Citrus_Sum_120sec”.</li>
+</ul></li>
+<li><strong>Second indirect effect: Prmr2_Dpld –&gt; Flow_Rate_mean
+–&gt; Citrus_Sum_120sec</strong>
+<ul>
+<li>Estimate: -0.463</li>
+<li>P-value: 0.273</li>
+<li><strong>Interpretation</strong>: No significant indirect effect is
+found here either, suggesting “Flow_Rate_mean” doesn’t mediate the
+relationship between “Prmr2_Dpld” and “Citrus_Sum_120sec”.</li>
+</ul></li>
+</ul></li>
+<li><strong>Total effect: Prmr2_Dpld –&gt; Citrus_Sum_120sec</strong>
+<ul>
+<li>Estimate: 0.678</li>
+<li>P-value: 0.642</li>
+<li><strong>Interpretation</strong>: The total effect is not
+statistically significant, suggesting “Prmr2_Dpld” does not
+significantly influence “Citrus_Sum_120sec”.</li>
+</ul></li>
+<li><strong>Variances</strong>: Both “Citrs_Sm_120sc”, “sAA_After”, and
+“Flow_Rate_mean” show significant variability (p &lt; 0.001).</li>
+</ul>
+<p><strong>Conclusion</strong>: Both “sAA_After” and “Flow_Rate_mean” do
+not act as significant mediators in the relationship between
+“Prmr2_Dpld” and “Citrus_Sum_120sec”.</p>
+</div>
+<div id="change-2" class="section level3" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> Change</h3>
 <pre class="r"><code>citrus_model_change &lt;- run_citrus_model(df_saliva_lm, &#39;Change&#39;)
 
 summary(citrus_model_change)</code></pre>
@@ -2642,13 +3460,13 @@ Defined Parameters:
     indirect2        -0.496    0.430   -1.154    0.248
     total             0.678    1.460    0.465    0.642</code></pre>
 <pre class="r"><code>plot_sem_model(citrus_model_change)</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/analysisv2.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-1">
-Past versions of unnamed-chunk-12-1.png
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-15-1">
+Past versions of unnamed-chunk-15-1.png
 </button>
 </p>
-<div id="fig-unnamed-chunk-12-1" class="collapse">
+<div id="fig-unnamed-chunk-15-1" class="collapse">
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
 <thead>
@@ -2667,7 +3485,7 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/170c8ef65fdd1fd4c40944e49aab0563198a7516/docs/figure/analysisv2.Rmd/unnamed-chunk-12-1.png" target="_blank">170c8ef</a>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/170c8ef65fdd1fd4c40944e49aab0563198a7516/docs/figure/analysisv2.Rmd/unnamed-chunk-15-1.png" target="_blank">170c8ef</a>
 </td>
 <td>
 Tina Lasisi
@@ -2678,7 +3496,7 @@ Tina Lasisi
 </tr>
 <tr>
 <td>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/07ec9306556753cb5847b51e0594ab20e52e480d/docs/figure/analysisv2.Rmd/unnamed-chunk-12-1.png" target="_blank">07ec930</a>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/07ec9306556753cb5847b51e0594ab20e52e480d/docs/figure/analysisv2.Rmd/unnamed-chunk-15-1.png" target="_blank">07ec930</a>
 </td>
 <td>
 Tina Lasisi
@@ -2691,11 +3509,88 @@ Tina Lasisi
 </table>
 </div>
 </div>
+<p>The interpretations of your results are as follows:</p>
+<ul>
+<li><strong>Path ‘c’: Prmr2_Dpld –&gt; Citrus_Sum_120sec</strong>
+<ul>
+<li>Estimate: 1.541</li>
+<li>P-value: 0.317</li>
+<li><strong>Interpretation</strong>: The effect is not statistically
+significant, suggesting that “Prmr2_Dpld” does not significantly impact
+“Citrus_Sum_120sec”.</li>
+</ul></li>
+<li><strong>Path ‘a’: Prmr2_Dpld –&gt; sAA_Change</strong>
+<ul>
+<li>Estimate: -4.683</li>
+<li>P-value: 0.010</li>
+<li><strong>Interpretation</strong>: There’s a statistically significant
+effect, suggesting that as “Prmr2_Dpld” increases, “sAA_Change”
+significantly decreases.</li>
+</ul></li>
+<li><strong>Path ‘m’: Prmr2_Dpld –&gt; Flow_Rate_mean</strong>
+<ul>
+<li>Estimate: 0.027</li>
+<li>P-value: 0.041</li>
+<li><strong>Interpretation</strong>: There’s a significant effect,
+suggesting an increase in “Prmr2_Dpld” leads to a significant increase
+in “Flow_Rate_mean”.</li>
+</ul></li>
+<li><strong>Path ‘b’: sAA_Change –&gt; Citrus_Sum_120sec</strong>
+<ul>
+<li>Estimate: 0.078</li>
+<li>P-value: 0.410</li>
+<li><strong>Interpretation</strong>: The effect is not statistically
+significant, implying “sAA_Change” doesn’t significantly influence
+“Citrus_Sum_120sec”.</li>
+</ul></li>
+<li><strong>Path ‘n’: Flow_Rt_mn –&gt; Citrus_Sum_120sec</strong>
+<ul>
+<li>Estimate: -18.291</li>
+<li>P-value: 0.162</li>
+<li><strong>Interpretation</strong>: The effect is not statistically
+significant, suggesting “Flow_Rt_mn” does not significantly influence
+“Citrus_Sum_120sec”.</li>
+</ul></li>
+<li><strong>Indirect Paths:</strong>
+<ul>
+<li><strong>First indirect effect: Prmr2_Dpld –&gt; sAA_Change –&gt;
+Citrus_Sum_120sec</strong>
+<ul>
+<li>Estimate: -0.367</li>
+<li>P-value: 0.433</li>
+<li><strong>Interpretation</strong>: There is no significant indirect
+effect, suggesting “sAA_Change” doesn’t mediate the relationship between
+“Prmr2_Dpld” and “Citrus_Sum_120sec”.</li>
+</ul></li>
+<li><strong>Second indirect effect: Prmr2_Dpld –&gt; Flow_Rate_mean
+–&gt; Citrus_Sum_120sec</strong>
+<ul>
+<li>Estimate: -0.496</li>
+<li>P-value: 0.248</li>
+<li><strong>Interpretation</strong>: No significant indirect effect is
+found, implying “Flow_Rate_mean” doesn’t mediate the relationship
+between “Prmr2_Dpld” and “Citrus_Sum_120sec”.</li>
+</ul></li>
+</ul></li>
+<li><strong>Total effect: Prmr2_Dpld –&gt; Citrus_Sum_120sec</strong>
+<ul>
+<li>Estimate: 0.678</li>
+<li>P-value: 0.642</li>
+<li><strong>Interpretation</strong>: The total effect is not
+statistically significant, suggesting “Prmr2_Dpld” does not
+significantly influence “Citrus_Sum_120sec”.</li>
+</ul></li>
+<li><strong>Variances</strong>: Both “Citrs_Sm_120sc”, “sAA_Change”, and
+“Flow_Rate_mean” show significant variability (p &lt; 0.001).</li>
+</ul>
+<p><strong>Conclusion</strong>: Both “sAA_Change” and “Flow_Rate_mean”
+do not act as significant mediators in the relationship between
+“Prmr2_Dpld” and “Citrus_Sum_120sec”.</p>
 </div>
 </div>
 </div>
-<div id="flavor-perception" class="section level2">
-<h2>Flavor perception</h2>
+<div id="flavor-perception" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Flavor perception</h1>
 <pre class="r"><code>df_flavor &lt;- read_csv(&quot;data/df_flavor.csv&quot;)</code></pre>
 <pre class="r"><code>data_long &lt;- df_flavor %&gt;%
   select(-c(Blinding_Code, Sample_Position)) %&gt;%
@@ -2725,7 +3620,44 @@ ggplot(data_summary, aes(x = Time, y = mean_value, color = Attribute)) +
   facet_wrap(~ Sample_Name) +
   labs(x = &#39;Time&#39;, y = &#39;Proportion Perceiving Flavor&#39;, color = &#39;Attribute&#39;) +
   theme_classic()</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/analysisv2.Rmd/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-19-1">
+Past versions of unnamed-chunk-19-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-19-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/6e019773d11bd25f82f5d91be75b101a2da374d8/docs/figure/analysisv2.Rmd/unnamed-chunk-19-1.png" target="_blank">6e01977</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-22
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Pivot data to calculate the difference
 data_diff &lt;- data_summary %&gt;%
   pivot_wider(names_from = Sample_Name, values_from = mean_value) %&gt;%
@@ -2809,13 +3741,13 @@ ggplot(final_data, aes(x = Time, y = overall_prop, fill = CNV_group)) +
   geom_col(aes(fill = CNV_group, y = overall_prop * proportion_flavor), position = &quot;stack&quot;) +
   facet_grid(Attribute ~ Sample_Name) +
   labs(x = &#39;Time&#39;, y = &#39;Proportion Perceiving Flavor&#39;, fill = &#39;Copy Number Group&#39;)</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/analysisv2.Rmd/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-18-1">
-Past versions of unnamed-chunk-18-1.png
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-21-1">
+Past versions of unnamed-chunk-21-1.png
 </button>
 </p>
-<div id="fig-unnamed-chunk-18-1" class="collapse">
+<div id="fig-unnamed-chunk-21-1" class="collapse">
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
 <thead>
@@ -2834,13 +3766,35 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/6e019773d11bd25f82f5d91be75b101a2da374d8/docs/figure/analysisv2.Rmd/unnamed-chunk-18-1.png" target="_blank">6e01977</a>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/6e019773d11bd25f82f5d91be75b101a2da374d8/docs/figure/analysisv2.Rmd/unnamed-chunk-21-1.png" target="_blank">6e01977</a>
 </td>
 <td>
 Tina Lasisi
 </td>
 <td>
 2023-07-22
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/170c8ef65fdd1fd4c40944e49aab0563198a7516/docs/figure/analysisv2.Rmd/unnamed-chunk-21-1.png" target="_blank">170c8ef</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-14
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/07ec9306556753cb5847b51e0594ab20e52e480d/docs/figure/analysisv2.Rmd/unnamed-chunk-21-1.png" target="_blank">07ec930</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-12
 </td>
 </tr>
 </tbody>
@@ -2938,16 +3892,53 @@ combined_data_diff &lt;- df_wide_diff %&gt;%
 }</code></pre>
 <pre class="r"><code># Use function
 plot_perception(combined_data_diff, &quot;CNV_group&quot;, c(&quot;Low&quot;, &quot;High&quot;))</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-23-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/analysisv2.Rmd/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-26-1">
+Past versions of unnamed-chunk-26-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-26-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/eb2e32f709faaf9e78b11c8e22c1e29ade2d49bc/docs/figure/analysisv2.Rmd/unnamed-chunk-26-1.png" target="_blank">eb2e32f</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-22
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Use function
 plot_perception(combined_data_diff, &quot;sAA_After_group&quot;, c(&quot;Low&quot;, &quot;High&quot;))</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/analysisv2.Rmd/unnamed-chunk-27-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code># Use function
 plot_perception(combined_data_diff, &quot;sAA_Change_group&quot;, c(&quot;Low&quot;, &quot;High&quot;))</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-25-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/analysisv2.Rmd/unnamed-chunk-28-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code># Use function
 plot_perception(combined_data_diff, &quot;sAA_flow_After_group&quot;, c(&quot;Low&quot;, &quot;High&quot;))</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/analysisv2.Rmd/unnamed-chunk-29-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">

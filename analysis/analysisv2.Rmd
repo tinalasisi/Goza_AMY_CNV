@@ -2,7 +2,11 @@
 title: "Analysis v2"
 author: "Tina Lasisi"
 date: "`r format(Sys.Date(), '%d %B, %Y')`"
-output: workflowr::wflow_html
+output:
+  workflowr::wflow_html:
+    toc: true
+    toc_float: true
+    number_sections: true
 editor_options:
   chunk_output_type: console
 ---
@@ -32,7 +36,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Clusters
+# Clusters
 
 
 ```{r import-data}
@@ -57,7 +61,7 @@ vars_include <- c("Primer1_Diploid", "Primer2_Diploid", "TP_Before_1", "TP_Befor
 ```
 
 
-### NA values omitted
+## NA values omitted
 We will do the analysis first by omitting na values.
 ```{r df-pca-na-omit}
 
@@ -84,14 +88,11 @@ summary(pca)
 
 ```
 
-```{r cor-matrix-na-omit}
+```{r cor-matrix-na-omit, fig.height=10, fig.width=11}
 # Compute a correlation matrix
-cor.matrix <- cor(df_saliva_scaled)
+cor.matrix <- cor(df_saliva_scaled, use = "pairwise.complete.obs")
 
-# Create a correlation heatmap 
-corrplot(cor.matrix, method = "color", type = "upper", tl.cex = .7, insig = "blank")
-
-corrplot(cor.matrix, type = "upper", order = "hclust", 
+corrplot(cor.matrix, type = "upper", order = "hclust", addCoef.col ='black', number.cex = 0.8,
          tl.col = "black", tl.srt = 45, tl.cex = .7, insig = "blank")
 ```
 
@@ -109,7 +110,7 @@ fviz_pca_var(pca, col.var="contrib",
 
 ```
 
-### NA replaced with mean
+## NA replaced with mean
 We repeat the analysis with means replacing missing values.
 ```{r df-pca-na-mean}
 
@@ -131,14 +132,11 @@ summary(pca)
 ```
 
 
-```{r cor-matrix-na-mean}
+```{r cor-matrix-na-mean, fig.height=10, fig.width=11}
 # Compute a correlation matrix
-cor.matrix <- cor(df_saliva_scaled)
+cor.matrix <- cor(df_saliva_scaled, use = "pairwise.complete.obs")
 
-# Create a correlation heatmap 
-corrplot(cor.matrix, method = "color", type = "upper", tl.cex = .7, insig = "blank")
-
-corrplot(cor.matrix, type = "upper", order = "hclust", 
+corrplot(cor.matrix, type = "upper", order = "hclust", addCoef.col ='black', number.cex = 0.8,
          tl.col = "black", tl.srt = 45, tl.cex = .7, insig = "blank")
 ```
 
@@ -156,7 +154,7 @@ fviz_pca_var(pca, col.var="contrib",
 
 ```
 
-### Reduced variable PCA
+## Reduced variable PCA
 In both cases, it appears as though it would be sufficient to take the following variables as they are highly correlated in the same directions (or a summary value representing both)
 And we will add two combined flowrate sAA values based on the sAA after and before, and change.
 
@@ -209,16 +207,17 @@ df_final <- data.frame(pca_results$x, Starch_Frequency = starch_freq[match(row_o
 
 ```
 
-```{r contrib-na-mean-final}
+```{r contrib-na-mean-final, fig.cap="The largest contributions seem to be coming from the sAA_Before/After and the combination of sAA and flow rate"}
 # Plot the variable factors 
 fviz_pca_var(pca_results, col.var="contrib", 
              gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
              repel = TRUE)
 
 ```
-#### Starch Frequency PCA
 
-```{r df-final-contrib-starch}
+### Starch Frequency PCA
+
+```{r df-final-contrib-starch, fig.cap="There is no appreciable pattern in the PCA relating to the frequencyof starch consumption among participants."}
 fviz_pca_ind(pca_results, 
              label = "none", 
              habillage = df_final$Starch_Frequency, 
@@ -228,8 +227,8 @@ fviz_pca_ind(pca_results,
 ```
 
 
-#### CNV gradient PCA
-```{r fig-final-pca-gradient}
+### CNV gradient PCA
+```{r fig-final-pca-gradient, fig.cap="CNV (as captured by Primer 2, does not seem to follow any gradient in the first two PCs"}
 # Before adding `Primer2_Diploid` variable to our new dataframe, ensure it's numeric
 df_final$Primer2_Diploid <- as.numeric(df_saliva$Primer2_Diploid[match(row_order, df_label)])
 
@@ -247,8 +246,8 @@ ggplot(df_final, aes(x = PC1, y = PC2)) +
 ```
 
 
-#### Citrus gradient PCA
-```{r fig-final-pca-gradient-citrus}
+### Citrus gradient PCA
+```{r fig-final-pca-gradient-citrus, fig.cap="Similarly, citrus perception (by time) does not appear to be shaped by the first two PCSs"}
 # Before adding `Citrus_Sum_120sec` variable to our new dataframe, ensure it's numeric
 df_final$Citrus_Sum_120sec <- as.numeric(df_saliva$Citrus_Sum_120sec[match(row_order, df_label)])
 
@@ -264,7 +263,11 @@ ggplot(df_final, aes(x = PC1, y = PC2)) +
 ```
 
 
-```{r fig-scatter-matrix-pearson, fig.cap="Pearson's correlation", fig.width=10, fig.height=10}
+# Correlations
+
+Below is a general set of scatterplots looking at correlations between different variables.
+
+```{r fig-scatter-matrix-pearson, fig.cap="Pearson's correlation", fig.width=15, fig.height=15}
 
 # Select only numeric columns
 df_numeric <- df_saliva_final[, sapply(df_saliva_final, is.numeric)]
@@ -274,14 +277,29 @@ ggpairs(df_numeric)
 
 ```
 
-```{r fig-scatter-matrix-spearman, fig.cap="Spearman's rank correlation", fig.width=10, fig.height=10}
+```{r cor-matrix-final-pearson, fig.cap="Pearson's correlation", fig.height=10, fig.width=11}
+# Compute a correlation matrix
+cor.matrix <- cor(df_numeric, use = "pairwise.complete.obs")
+
+corrplot(cor.matrix, type = "upper", order = "hclust", addCoef.col ='black', number.cex = 0.8,
+         tl.col = "black", tl.srt = 45, tl.cex = .7, insig = "blank")
+```
+
+```{r fig-scatter-matrix-spearman, fig.cap="Spearman's rank correlation", fig.width=15, fig.height=15}
 # Create the scatter plot matrix using spearman correlation
 ggpairs(df_numeric, upper = list(continuous = wrap("cor", method = "spearman")))
 
 ```
 
-## Relationship between CNV, protein and sAA
+```{r cor-matrix-final-spearman, fig.cap="Spearman's rank correlation with different visualization of correlations", fig.height=10, fig.width=11}
+# Compute a correlation matrix
+cor.matrix <- cor(df_numeric, use = "pairwise.complete.obs", method = "spearman")
 
+corrplot(cor.matrix, type = "upper", order = "hclust", addCoef.col ='black', number.cex = 0.8,
+         tl.col = "black", tl.srt = 45, tl.cex = .7, insig = "blank")
+```
+
+## Relationship between CNV, protein and sAA
 ```{r df-med}
 df_saliva_lm <- df_saliva %>% 
   mutate(Flow_Rate_mean = (Flow_Rate_1_g_min + Flow_Rate_2_g_min)/2,
@@ -292,8 +310,6 @@ df_saliva_lm <- df_saliva %>%
   na.omit()
   
 ```
-
-### Mediator models
 
 ```{r func-med-model}
 # Generalized function to toggle different timepoints or changes
@@ -397,18 +413,39 @@ plot_sem_model <- function(model) {
 
 ```
 
-#### CNV to sAA with mediator TP and Flow rate
+### CNV to sAA with mediator TP and Flow rate
 
-##### Before
+#### Before
 
-```{r med-model-before}
-
+```{r med-model-before-p1}
 # Run the mediation model for Primer1
 fit_before_P1 <- run_mediation_model_Primer1(df_saliva_lm, 'Before')
 # Summarize the results
 cat("Summary for Primer1 Model:\n")
 summary(fit_before_P1)
+```
 
+Summary of path analysis:
+
+1. **Model Fit**: The chi-square test of model fit is significant (Chi-square = 17.280, df = 1, p = 0.000). This means that the specified model does not fit the data well.
+
+2. **Path Coefficients**: 
+   - **`Prmr1_Dpld`** to **`sAA_Before`** (path c): The coefficient is positive and significant (Est.= 10.448, p = 0.000). This indicates that `Prmr1_Dpld` has a positive direct effect on `sAA_Before`.
+   - **`Prmr1_Dpld`** to **`Flow_Rate_mean`** (path a): The coefficient is positive and significant (Est.= 0.024, p = 0.029), indicating that `Prmr1_Dpld` positively influences `Flow_Rate_mean`.
+   - **`TP_Before`** to **`sAA_Before`** (path n): This path is also significant (Est.= 0.089, p = 0.000), suggesting that `TP_Before` has a positive and significant effect on `sAA_Before`.
+   - other paths (m, b) are not statistically significant.
+
+3. **Variances**: All the residual variances of the endogenous variables (`.sAA_Before`, `.Flow_Rate_mean`, `.TP_Before`) are significantly different from zero.
+
+4. **Mediation Analysis**: 
+   Both indirect effects through `Flow_Rate_mean` (indirect1) and `TP_Before` (indirect2) were not statistically significant (p-values = 0.350 and 0.946 respectively). This suggests that there is no significant mediating effect of `Flow_Rate_mean` and `TP_Before` in the relationship between `Prmr1_Dpld` and `sAA_Before`.
+
+5. **Total effect**: The total effect of `Prmr1_Dpld` on `sAA_Before` is significant and positive (Est.= 11.069, p = 0.000), suggesting `Prmr1_Dpld` has a significant direct impact on `sAA_Before`.
+
+In conclusion, `Prmr1_Dpld` has a significant direct influence on `sAA_Before` and `Flow_Rate_mean`. Additionally, `TP_Before` significantly affects `sAA_Before`. However, neither `Flow_Rate_mean` nor `TP_Before` significantly mediates the effect of `Prmr1_Dpld` on `sAA_Before`.
+
+
+```{r med-model-before-p2}
 # Run the mediation model for Primer2
 fit_before_P2 <- run_mediation_model_Primer2(df_saliva_lm, 'Before')
 # Summarize the results
@@ -416,6 +453,18 @@ cat("\n\nSummary for Primer2 Model:\n")
 summary(fit_before_P2)
 
 ```
+
+Here's a summary of the notable results:
+
+- **Direct Effect**: A significant direct effect exists between **`Prmr2_Dpld`** and **`sAA_Before`**. This means that when adjusting for other variables, any increase in `Prmr2_Dpld` will typically result in an increase in `sAA_Before`.
+
+- **Other Significant Path**: A significant connection also exists between **`Prmr2_Dpld`** and **`Flow_Rate_mean`**. Furthermore, **`TP_Before`** also exhibits a definite influence on **`sAA_Before`**.
+
+- **Total Effect**: The total impact of **`Prmr2_Dpld`** on **`sAA_Before`** is positive and significant, establishing that `Prmr2_Dpld` has a dominating influence on `sAA_Before`.
+
+- **Mediating Effect**: Despite the numerous significant paths and a total effect, there is **no evidence of a significant mediating effect**. Neither `Flow_Rate_mean` nor `TP_Before` effectively mediate the connection between `Prmr2_Dpld` and `sAA_Before`. This means that the influence exerted by `Prmr2_Dpld` on `sAA_Before` is not significantly conveyed through these two variables.
+
+In conclusion, the **best model** from these results underscores direct paths between `Prmr2_Dpld` and `sAA_Before` and between `Prmr2_Dpld` and `Flow_Rate_mean`, as well as between `TP_Before` and `sAA_Before`. While `Flow_Rate_mean` and `TP_Before` may be interesting to explore, they do not play significant roles as mediators in this model, and thus might not greatly enhance our ability to predict `sAA_Before`.
 
 
 ```{r fig-med-before, fig.cap="Mediator models for values before experiment"}
@@ -435,25 +484,48 @@ title(layout_title[2])
 ```
 
 
-##### After
-```{r med-model-after}
-
-
+#### After
+```{r med-model-after-p1}
 # Run the mediation model for Primer1
 fit_after_P1 <- run_mediation_model_Primer1(df_saliva_lm, 'After')
 # Summarize the results
 cat("Summary for Primer1 Model:\n")
 summary(fit_after_P1)
+```
 
+Here is a summary of the results for Primer 1:
+
+- **Direct Effect**: A significant direct effect exists between **`Prmr1_Dpld`** and **`sAA_After`**. This suggests that an increase in `Prmr1_Dpld` is associated with an increase in `sAA_After` while controlling for other factors.
+
+- **Other Significant Relationships**: The only other significant effect is between **`Prmr1_Dpld`** and **`Flow_Rate_mean`**.
+
+- **Total Effect**: The total impact of **`Prmr1_Dpld`** on **`sAA_After`** is positive and significant, meaning that `Prmr1_Dpld` substantially influences `sAA_After`.
+
+- **Mediating Effect**: Neither **`Flow_Rate_mean`** nor **`TP_After`** show a significant mediating effect in the relationship between `Prmr1_Dpld` and `sAA_After`. This means that the influence of `Prmr1_Dpld` on `sAA_After` is not significantly transferred through these two variables.
+
+Thus, the **best model** from these results includes direct paths between `Prmr1_Dpld` and `sAA_After`, and between `Prmr1_Dpld` and `Flow_Rate_mean`. Similar to previous models, `Flow_Rate_mean` and `TP_After` may be interesting to explore but they do not make significant contributions as mediators in the model, and thus may not improve our predictive capability for `sAA_After`.
+
+```{r med-model-after-p2}
 # Run the mediation model for Primer2
 fit_after_P2 <- run_mediation_model_Primer2(df_saliva_lm, 'After')
 # Summarize the results
 cat("\n\nSummary for Primer2 Model:\n")
 summary(fit_after_P2)
 
-
-
 ```
+
+
+Here's a summary of the findings from the model for Primer 2:
+
+- **Direct Effect**: There's a significant direct effect between **`Prmr2_Dpld`** and **`sAA_After`**. Hence, in principle, increasing `Prmr2_Dpld` results in an increase in `sAA_After` when we adjust for other factors.
+
+- **Other Significant Relationships**: The only additional significant relationship in this model is between **`Prmr2_Dpld`** and **`Flow_Rate_mean`**.
+
+- **Total Effect**: The total influence of **`Prmr2_Dpld`** on **`sAA_After`** is positive and significant, showing that `Prmr2_Dpld` has a significant overall influence on `sAA_After`.
+
+- **Mediating Effect**: Neither **`Flow_Rate_mean`** nor **`TP_After`** demonstrates a significant mediation of the relationship between `Prmr2_Dpld` and `sAA_After`. Therefore, the effect of `Prmr2_Dpld` on `sAA_After` is not significantly transmitted through these two potential mediators.
+
+As a result, the **best model** developed from these results includes direct paths between `Prmr2_Dpld` and `sAA_After`, as well as between `Prmr2_Dpld` and `Flow_Rate_mean`. Again, while `Flow_Rate_mean` and `TP_After` might be intriguing to explore, they do not make significant contributions to the model as mediators and thus might not improve our predictive abilities concerning `sAA_After`.
 
 
 ```{r fig-med-after, fig.cap="Mediator model for values after experiment"}
@@ -475,16 +547,28 @@ title(layout_title[2])
 
 ```
 
-##### Change
-```{r med-model-change}
-
-
+#### Change
+```{r med-model-change-p1}
 # Run the mediation model for Primer1
 fit_change_P1 <- run_mediation_model_Primer1(df_saliva_lm, 'Change')
 # Summarize the results
 cat("Summary for Primer1 Model:\n")
 summary(fit_change_P1)
+```
 
+The model provides a good fit to the data (Chi-square = 1.302, p = 0.254). 
+
+- There is a significant negative direct effect of **`Prmr1_Dpld`** on **`sAA_Change`** (Est = -5.739, p = 0.000). 
+- Furthermore, **`Prmr1_Dpld`** also has a positive and significant effect on **`Flow_Rate_mean`** (Est = 0.024, p = 0.029).
+- Lastly, **`TP_Change`** significantly influences **`sAA_Change`** (Est = 0.035, p = 0.003).
+
+However, there's no evidence of any significant mediating effects: neither **`Flow_Rate_mean`** (Est = 0.189, p = 0.607) nor **`TP_Change`** (Est = 0.474, p = 0.351) mediates the relationship between `Prmr1_Dpld` and `sAA_Change`.
+
+The overall effect of `Prmr1_Dpld` on `sAA_Change` is significant and negative (Est = -5.077, p = 0.000).
+
+In conclusion, the **best model** includes direct paths from `Prmr1_Dpld` to `sAA_Change`, `Prmr1_Dpld` to `Flow_Rate_mean`, and `TP_Change` to `sAA_Change`. `Flow_Rate_mean` and `TP_Change` do not significantly mediate the effect of `Prmr1_Dpld` on `sAA_Change`.
+
+```{r med-model-change-p2}
 # Run the mediation model for Primer2
 fit_change_P2 <- run_mediation_model_Primer2(df_saliva_lm, 'Change')
 # Summarize the results
@@ -494,6 +578,17 @@ summary(fit_change_P2)
 
 ```
 
+The model fits the data well (Chi-square = 1.095, p = 0.295).
+
+- There is a significant negative direct effect of **`Prmr2_Dpld`** on **`sAA_Change`** (Est = -5.677, p = 0.002). 
+- Moreover, **`Prmr2_Dpld`** has a positive significant effect on **`Flow_Rate_mean`** (Est = 0.027, p = 0.041).
+- **`TP_Change`** also significantly influences **`sAA_Change`** (Est = 0.036, p = 0.003).
+
+However, neither **`Flow_Rate_mean`** (Est = 0.101, p = 0.814) nor **`TP_Change`** (Est = 0.894, p = 0.192) provides a significant mediating effect between `Prmr2_Dpld` and `sAA_Change`.
+
+The total effect of `Prmr2_Dpld` on `sAA_Change` is significant and negative (Est = -4.683, p = 0.010).
+
+In conclusion, the **best model** includes direct paths from `Prmr2_Dpld` to `sAA_Change`, `Prmr2_Dpld` to `Flow_Rate_mean`, and `TP_Change` to `sAA_Change`. While `Flow_Rate_mean` and `TP_Change` are included in the model, there is no significant evidence to suggest that they mediate the effect of `Prmr2_Dpld` on `sAA_Change`.
 
 ```{r fig-med-change, fig.cap="Mediator model for values changed during experiment"}
 
@@ -514,17 +609,31 @@ title(layout_title[2])
 
 ```
 
-#### CNV to sAA*flow with TP mediator
+### CNV to sAA*flow with TP mediator
 
-##### Before
+#### Before
 ```{r}
-
 # Run the mediation model for Primer1
 fit_before_sAA_flow_Primer1 <- run_mediation_model_Primer1_sAA_flow_TP_mediator(df_saliva_lm, 'Before')
 # Summarize the results
 cat("Summary for Primer1 Model:\n")
 summary(fit_before_sAA_flow_Primer1)
+```
 
+The model fits the data perfectly when considering the provided indicators (Chi-square = 0.000, degrees of freedom = 0).
+
+- There is a significant positive direct effect of **`Prmr1_Dpld`** on **`sAA_flow_Before`** (Est = 13.386, p = 0.000). 
+
+- **`Prmr1_Dpld`** does not significantly affect **`TP_Before`** (Est = 0.939, p = 0.946), and the effect of **`TP_Before`** on **`sAA_flow_Before`** is also not significant (Est = 0.037, p = 0.106).
+
+- There is no significant indirect effect via **`TP_Before`** (indirect1) (Est = 0.034, p = 0.946) between `Prmr1_Dpld` and `sAA_flow_Before`.
+
+- The total effect of `Prmr1_Dpld` on `sAA_flow_Before` is significant and positive (Est = 13.420, p = 0.000).
+
+In conclusion, the **best model** includes a direct path from `Prmr1_Dpld` to `sAA_flow_Before`. However, the model shows no significant evidence that `TP_Before` mediates the effect of `Prmr1_Dpld` on `sAA_flow_Before`.
+
+
+```{r}
 # Run the mediation model for Primer2
 fit_before_sAA_flow_Primer2 <- run_mediation_model_Primer2_sAA_flow_TP_mediator(df_saliva_lm, 'Before')
 # Summarize the results
@@ -533,6 +642,36 @@ summary(fit_before_sAA_flow_Primer2)
 
 
 ```
+
+
+- **Path 'c': Prmr2_Dpld --> sAA_flow_Before**
+  - Estimate: 15.731
+  - P-value: < 0.001
+  - **Interpretation**: There is a significant direct effect. As "Prmr2_Dpld" increases, "sAA_flow_Before" also significantly increases.
+  
+- **Path 'a': Prmr2_Dpld --> TP_Before**
+  - Estimate: -19.974
+  - P-value: 0.236
+  - **Interpretation**: This effect is not statistically significant. "Prmr2_Dpld" does not significantly influence "TP_Before".
+  
+- **Path 'b': TP_Before --> sAA_flow_Before**
+  - Estimate: 0.053
+  - P-value: 0.022
+  - **Interpretation**: There is a significant direct effect. As "TP_Before" increases, "sAA_flow_Before" also significantly increases.
+
+- **Indirect effect: Prmr2_Dpld --> TP_Before --> sAA_flow_Before**
+  - Estimate: -1.067
+  - P-value: 0.293
+  - **Interpretation**: There is no significant indirect (mediated) effect. "TP_Before" does not mediate the relationship between "Prmr2_Dpld" and "sAA_flow_Before".
+
+- **Total effect: Prmr2_Dpld --> sAA_flow_Before**
+  - Estimate: 14.664
+  - P-value: < 0.001
+  - **Interpretation**: There is a significant overall effect of "Prmr2_Dpld" on "sAA_flow_Before".
+
+- **Variances**: There's significant variability in both "sAA_flow_Before" and "TP_Before" (p < 0.001).
+
+**Conclusion**: The best model would suggest that "TP_Before" does not play a mediatory role in the relationship between "Prmr2_Dpld" and "sAA_flow_Before".
 
 ```{r}
 
@@ -552,16 +691,47 @@ title(layout_title[2])
 ```
 
 
-##### After
+#### After
 
 ```{r}
-
 # Run the mediation model for Primer1
 fit_after_sAA_flow_Primer1 <- run_mediation_model_Primer1_sAA_flow_TP_mediator(df_saliva_lm, 'After')
 # Summarize the results
 cat("Summary for Primer1 Model:\n")
 summary(fit_after_sAA_flow_Primer1)
+```
 
+- **Path 'c': Prmr1_Dpld --> sAA_flow_After**
+  - Estimate: 8.724
+  - P-value: < 0.001
+  - **Interpretation**: There's a significant direct effect. As "Prmr1_Dpld" increases, "sAA_flow_After" also significantly increases.
+  
+- **Path 'a': Prmr1_Dpld --> TP_After**
+  - Estimate: 14.561
+  - P-value: 0.139
+  - **Interpretation**: The effect is not statistically significant. This means "Prmr1_Dpld" doesn't significantly influence "TP_After".
+  
+- **Path 'b': TP_After --> sAA_flow_After**
+  - Estimate: -0.033
+  - P-value: 0.102
+  - **Interpretation**: The effect is not statistically significant. As such, "TP_After" doesn't significantly influence "sAA_flow_After".
+
+- **Indirect effect: Prmr1_Dpld --> TP_After --> sAA_flow_After**
+  - Estimate: -0.478
+  - P-value: 0.273
+  - **Interpretation**: There is no significant indirect (mediated) effect. As such, "TP_After" doesn't mediate the relationship between "Prmr1_Dpld" and "sAA_flow_After".
+
+- **Total effect: Prmr1_Dpld --> sAA_flow_After**
+  - Estimate: 8.246
+  - P-value: < 0.001
+  - **Interpretation**: There is a significant overall effect of "Prmr1_Dpld" on "sAA_flow_After".
+
+- **Variances**: Both "sAA_flow_After" and "TP_After" show significant variability (p < 0.001).
+
+**Conclusion**: The best model suggests "TP_After" doesn't play a mediatory role in the relationship between "Prmr1_Dpld" and "sAA_flow_After".
+
+
+```{r}
 # Run the mediation model for Primer2
 fit_after_sAA_flow_Primer2 <- run_mediation_model_Primer2_sAA_flow_TP_mediator(df_saliva_lm, 'After')
 # Summarize the results
@@ -571,25 +741,114 @@ summary(fit_after_sAA_flow_Primer2)
 
 ```
 
+Here's the interpretation for the analysis:
 
-##### Change
+- **Path 'c': Prmr2_Dpld --> sAA_flow_After**
+  - Estimate: 9.777
+  - P-value: < 0.001
+  - **Interpretation**: There's a significant direct effect. As "Prmr2_Dpld" increases, "sAA_flow_After" also significantly increases.
+  
+- **Path 'a': Prmr2_Dpld --> TP_After**
+  - Estimate: 4.573
+  - P-value: 0.710
+  - **Interpretation**: This effect is not statistically significant, implying "Prmr2_Dpld" does not significantly influence "TP_After".
+  
+- **Path 'b': TP_After --> sAA_flow_After**
+  - Estimate: -0.019
+  - P-value: 0.363
+  - **Interpretation**: The effect is not statistically significant. As such, "TP_After" doesn't significantly influence "sAA_flow_After".
+
+- **Indirect effect: Prmr2_Dpld --> TP_After --> sAA_flow_After**
+  - Estimate: -0.085
+  - P-value: 0.730
+  - **Interpretation**: There's no significant indirect (mediated) effect. "TP_After" doesn't mediate the relationship between "Prmr2_Dpld" and "sAA_flow_After".
+
+- **Total effect: Prmr2_Dpld --> sAA_flow_After**
+  - Estimate: 9.692
+  - P-value: < 0.001
+  - **Interpretation**: There is a significant overall effect of "Prmr2_Dpld" on "sAA_flow_After".
+
+- **Variances**: There's significant variability in both "sAA_flow_After" and "TP_After" (p < 0.001).
+
+**Conclusion**: The model indicates "TP_After" doesn't play a mediatory role in the relationship between "Prmr2_Dpld" and "sAA_flow_After".
+
+#### Change
 
 ```{r}
-
 # Run the mediation model for Primer1
 fit_change_sAA_flow_Primer1 <- run_mediation_model_Primer1_sAA_flow_TP_mediator(df_saliva_lm, 'Change')
 # Summarize the results
 cat("Summary for Primer1 Model:\n")
 summary(fit_change_sAA_flow_Primer1)
+```
 
+
+- **Path 'c': Prmr1_Dpld --> sAA_flow_Change**
+  - Estimate: -5.578
+  - P-value: < 0.001
+  - **Interpretation**: There's a significant direct effect. As "Prmr1_Dpld" increases, "sAA_flow_Change" significantly decreases.
+  
+- **Path 'a': Prmr1_Dpld --> TP_Change**
+  - Estimate: 13.622
+  - P-value: 0.326
+  - **Interpretation**: This effect is not statistically significant. This implies "Prmr1_Dpld" does not significantly influence "TP_Change".
+  
+- **Path 'b': TP_Change --> sAA_flow_Change**
+  - Estimate: 0.030
+  - P-value: 0.027
+  - **Interpretation**: There's a significant direct effect. As "TP_Change" increases, "sAA_flow_Change" also significantly increases.
+
+- **Indirect effect: Prmr1_Dpld --> TP_Change --> sAA_flow_Change**
+  - Estimate: 0.404
+  - P-value: 0.369
+  - **Interpretation**: There's no significant indirect (mediated) effect. "TP_Change" doesn't mediate the relationship between "Prmr1_Dpld" and "sAA_flow_Change".
+
+- **Total effect: Prmr1_Dpld --> sAA_flow_Change**
+  - Estimate: -5.174
+  - P-value: 0.001
+  - **Interpretation**: There is a significant overall effect of "Prmr1_Dpld" on "sAA_flow_Change".
+
+- **Variances**: Both "sAA_flow_Change" and "TP_Change" show significant variability (p < 0.001).
+
+**Conclusion**: The best model suggests that "TP_Change" does not mediate the relationship between "Prmr1_Dpld" and "sAA_flow_Change".
+
+```{r}
 # Run the mediation model for Primer2
 fit_change_sAA_flow_Primer2 <- run_mediation_model_Primer2_sAA_flow_TP_mediator(df_saliva_lm, 'Change')
 # Summarize the results
 cat("\n\nSummary for Primer2 Model:\n")
 summary(fit_change_sAA_flow_Primer2)
 
-
 ```
+
+- **Path 'c': Prmr2_Dpld --> sAA_flow_Change**
+  - Estimate: -5.732
+  - P-value: 0.004
+  - **Interpretation**: There's a significant direct effect. As "Prmr2_Dpld" increases, "sAA_flow_Change" significantly decreases.
+  
+- **Path 'a': Prmr2_Dpld --> TP_Change**
+  - Estimate: 24.547
+  - P-value: 0.146
+  - **Interpretation**: The effect is not statistically significant. This means "Prmr2_Dpld" does not significantly influence "TP_Change".
+  
+- **Path 'b': TP_Change --> sAA_flow_Change**
+  - Estimate: 0.031
+  - P-value: 0.026
+  - **Interpretation**: There's a significant direct effect. As "TP_Change" increases, "sAA_flow_Change" also significantly increases.
+
+- **Indirect effect: Prmr2_Dpld --> TP_Change --> sAA_flow_Change**
+  - Estimate: 0.760
+  - P-value: 0.224
+  - **Interpretation**: There is no significant indirect (mediated) effect, meaning "TP_Change" doesn't mediate the relationship between "Prmr2_Dpld" and "sAA_flow_Change".
+
+- **Total effect: Prmr2_Dpld --> sAA_flow_Change**
+  - Estimate: -4.972
+  - P-value: 0.013
+  - **Interpretation**: There is a significant overall effect of "Prmr2_Dpld" on "sAA_flow_Change".
+
+- **Variances**: Both "sAA_flow_Change" and "TP_Change" show significant variability (p < 0.001).
+
+**Conclusion**: The best model suggests that "TP_Change" does not mediate the relationship between "Prmr2_Dpld" and "sAA_flow_Change".
 
 ```{r}
 
@@ -610,8 +869,6 @@ title(layout_title[2])
 
 
 ## Relationship between CNV, sAA, and citrus perception
-
-### Mediator models
 
 ```{r}
 # Generalized function for mediation model including Flow_Rate_mean
@@ -641,7 +898,7 @@ run_citrus_model <- function(df, timepoint_or_change) {
 ```
 
 
-#### Before
+### Before
 
 ```{r}
 citrus_model_before <- run_citrus_model(df_saliva_lm, 'Before')
@@ -653,8 +910,51 @@ summary(citrus_model_before)
 plot_sem_model(citrus_model_before)
 ```
 
+- **Path 'c': Prmr2_Dpld --> Citrus_Sum_120sec**
+  - Estimate: 1.397
+  - P-value: 0.389
+  - **Interpretation**: The effect is not statistically significant, suggesting that the increase in "Prmr2_Dpld" does not significantly impact "Citrus_Sum_120sec".
 
-#### After
+- **Path 'a': Prmr2_Dpld --> sAA_Before**
+  - Estimate: 11.121
+  - P-value: <0.001
+  - **Interpretation**: There's a statistically significant effect, implying that as "Prmr2_Dpld" increases, "sAA_Before" also significantly increases.
+  
+- **Path 'm': Prmr2_Dpld --> Flow_Rate_mean**
+  - Estimate: 0.027
+  - P-value: 0.041
+  - **Interpretation**: There's a significant effect suggesting that an increase in "Prmr2_Dpld" leads to a significant increase in "Flow_Rate_mean".
+  
+- **Path 'b': sAA_Before --> Citrus_Sum_120sec**
+  - Estimate: -0.021
+  - P-value: 0.728
+  - **Interpretation**: This effect isn't statistically significant. "sAA_Before" does not significantly influence "Citrus_Sum_120sec".
+  
+- **Path 'n': Flow_Rt_mn --> Citrus_Sum_120sec**
+  - Estimate: -18.025
+  - P-value: 0.169
+  - **Interpretation**: The effect is not statistically significant, suggesting "Flow_Rt_mn" doesn't significantly influence "Citrus_Sum_120sec".
+
+- **Indirect Paths:**
+  - **First indirect effect: Prmr2_Dpld --> sAA_Before --> Citrus_Sum_120sec**
+    - Estimate: -0.230
+    - P-value: 0.729
+    - **Interpretation**: There is no significant indirect effect, meaning "sAA_Before" doesn't mediate the relationship between "Prmr2_Dpld" and "Citrus_Sum_120sec".
+  - **Second indirect effect: Prmr2_Dpld --> Flow_Rate_mean --> Citrus_Sum_120sec**
+    - Estimate: -0.489
+    - P-value: 0.254
+    - **Interpretation**: No significant indirect effect is found here either, suggesting "Flow_Rate_mean" doesn't mediate the relationship between "Prmr2_Dpld" and "Citrus_Sum_120sec".
+   
+- **Total effect: Prmr2_Dpld --> Citrus_Sum_120sec**
+  - Estimate: 0.678
+  - P-value: 0.642
+  - **Interpretation**: The total effect isn't statistically significant, hinting "Prmr2_Dpld" does not significantly influence "Citrus_Sum_120sec".
+
+- **Variances**: The variance of each of the variables "Citrs_Sm_120sc", "sAA_Before", and "Flow_Rate_mean" is significant suggesting there's considerable variation in these variables.
+
+**Conclusion**: Both "sAA_Before" and "Flow_Rate_mean" do not appear to play significant mediating roles in the relationship between "Prmr2_Dpld" and "Citrus_Sum_120sec".
+
+### After
 ```{r}
 citrus_model_after <- run_citrus_model(df_saliva_lm, 'After')
 
@@ -665,8 +965,51 @@ summary(citrus_model_after)
 plot_sem_model(citrus_model_after)
 ```
 
+- **Path 'c': Prmr2_Dpld --> Citrus_Sum_120sec**
+  - Estimate: 0.916
+  - P-value: 0.578
+  - **Interpretation**: The effect is not statistically significant, suggesting "Prmr2_Dpld" does not significantly impact "Citrus_Sum_120sec".
 
-#### Change
+- **Path 'a': Prmr2_Dpld --> sAA_After**
+  - Estimate: 6.438
+  - P-value: <0.001
+  - **Interpretation**: There's a statistically significant effect, suggesting that as "Prmr2_Dpld" increases, "sAA_After" also significantly increases.
+
+- **Path 'm': Prmr2_Dpld --> Flow_Rate_mean**
+  - Estimate: 0.027
+  - P-value: 0.041
+  - **Interpretation**: There's a significant effect, suggesting an increase in "Prmr2_Dpld" leads to a significant increase in "Flow_Rate_mean".
+
+- **Path 'b': sAA_After --> Citrus_Sum_120sec**
+  - Estimate: 0.035
+  - P-value: 0.755
+  - **Interpretation**: This effect isn't statistically significant, implying "sAA_After" doesn't significantly influence "Citrus_Sum_120sec".
+  
+- **Path 'n': Flow_Rt_mn --> Citrus_Sum_120sec**
+  - Estimate: -17.060
+  - P-value: 0.194
+  - **Interpretation**: The effect is not statistically significant, suggesting "Flow_Rt_mn" does not significantly influence "Citrus_Sum_120sec".
+
+- **Indirect Paths:**
+  - **First indirect effect: Prmr2_Dpld --> sAA_After --> Citrus_Sum_120sec**
+    - Estimate: 0.225
+    - P-value: 0.755
+    - **Interpretation**: There is no significant indirect effect, implying "sAA_After" doesn't mediate the relationship between "Prmr2_Dpld" and "Citrus_Sum_120sec".
+  - **Second indirect effect: Prmr2_Dpld --> Flow_Rate_mean --> Citrus_Sum_120sec**
+    - Estimate: -0.463
+    - P-value: 0.273
+    - **Interpretation**: No significant indirect effect is found here either, suggesting "Flow_Rate_mean" doesn't mediate the relationship between "Prmr2_Dpld" and "Citrus_Sum_120sec".
+
+- **Total effect: Prmr2_Dpld --> Citrus_Sum_120sec**
+  - Estimate: 0.678
+  - P-value: 0.642
+  - **Interpretation**: The total effect is not statistically significant, suggesting "Prmr2_Dpld" does not significantly influence "Citrus_Sum_120sec".
+
+- **Variances**: Both "Citrs_Sm_120sc", "sAA_After", and "Flow_Rate_mean" show significant variability (p < 0.001).
+
+**Conclusion**: Both "sAA_After" and "Flow_Rate_mean" do not act as significant mediators in the relationship between "Prmr2_Dpld" and "Citrus_Sum_120sec".
+
+### Change
 ```{r}
 citrus_model_change <- run_citrus_model(df_saliva_lm, 'Change')
 
@@ -677,8 +1020,53 @@ summary(citrus_model_change)
 plot_sem_model(citrus_model_change)
 ```
 
+The interpretations of your results are as follows:
 
-## Flavor perception
+- **Path 'c': Prmr2_Dpld --> Citrus_Sum_120sec**
+  - Estimate: 1.541
+  - P-value: 0.317
+  - **Interpretation**: The effect is not statistically significant, suggesting that "Prmr2_Dpld" does not significantly impact "Citrus_Sum_120sec".
+
+- **Path 'a': Prmr2_Dpld --> sAA_Change**
+  - Estimate: -4.683
+  - P-value: 0.010
+  - **Interpretation**: There's a statistically significant effect, suggesting that as "Prmr2_Dpld" increases, "sAA_Change" significantly decreases.
+
+- **Path 'm': Prmr2_Dpld --> Flow_Rate_mean**
+  - Estimate: 0.027
+  - P-value: 0.041
+  - **Interpretation**: There's a significant effect, suggesting an increase in "Prmr2_Dpld" leads to a significant increase in "Flow_Rate_mean".
+
+- **Path 'b': sAA_Change --> Citrus_Sum_120sec**
+  - Estimate: 0.078
+  - P-value: 0.410
+  - **Interpretation**: The effect is not statistically significant, implying "sAA_Change" doesn't significantly influence "Citrus_Sum_120sec".
+  
+- **Path 'n': Flow_Rt_mn --> Citrus_Sum_120sec**
+  - Estimate: -18.291
+  - P-value: 0.162
+  - **Interpretation**: The effect is not statistically significant, suggesting "Flow_Rt_mn" does not significantly influence "Citrus_Sum_120sec".
+
+- **Indirect Paths:**
+  - **First indirect effect: Prmr2_Dpld --> sAA_Change --> Citrus_Sum_120sec**
+    - Estimate: -0.367
+    - P-value: 0.433
+    - **Interpretation**: There is no significant indirect effect, suggesting "sAA_Change" doesn't mediate the relationship between "Prmr2_Dpld" and "Citrus_Sum_120sec".
+  - **Second indirect effect: Prmr2_Dpld --> Flow_Rate_mean --> Citrus_Sum_120sec**
+    - Estimate: -0.496
+    - P-value: 0.248
+    - **Interpretation**: No significant indirect effect is found, implying "Flow_Rate_mean" doesn't mediate the relationship between "Prmr2_Dpld" and "Citrus_Sum_120sec".
+
+- **Total effect: Prmr2_Dpld --> Citrus_Sum_120sec**
+  - Estimate: 0.678
+  - P-value: 0.642
+  - **Interpretation**: The total effect is not statistically significant, suggesting "Prmr2_Dpld" does not significantly influence "Citrus_Sum_120sec".
+
+- **Variances**: Both "Citrs_Sm_120sc", "sAA_Change", and "Flow_Rate_mean" show significant variability (p < 0.001).
+
+**Conclusion**: Both "sAA_Change" and "Flow_Rate_mean" do not act as significant mediators in the relationship between "Prmr2_Dpld" and "Citrus_Sum_120sec".
+
+# Flavor perception
 ```{r}
 df_flavor <- read_csv("data/df_flavor.csv")
 ```
