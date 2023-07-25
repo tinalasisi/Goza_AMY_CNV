@@ -1258,28 +1258,28 @@ plot_perception <- function(data, group_col, group_labels, color_vector = c("blu
 ```
 
 
-```{r fig.height=10}
+```{r fig.height=10, fig.width=12}
 # Use function
 plot_perception(combined_data_diff, "CNV_group", c("Low", "High"))
 
 ```
 
 
-```{r fig.height=10}
+```{r fig.height=10, fig.width=12}
 # Use function
 plot_perception(combined_data_diff, "sAA_After_group", c("Low", "High"))
 
 
 ```
 
-```{r fig.height=10}
+```{r fig.height=10, fig.width=12}
 # Use function
 plot_perception(combined_data_diff, "sAA_Change_group", c("Low", "High"))
 
 
 ```
 
-```{r fig.height=10}
+```{r fig.height=10, fig.width=12}
 # Use function
 plot_perception(combined_data_diff, "sAA_flow_After_group", c("Low", "High"))
 
