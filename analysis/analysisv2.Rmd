@@ -36,7 +36,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Clusters
+# Clusters - CNV-sAA-flavor
 
 
 ```{r import-data}
@@ -263,7 +263,7 @@ ggplot(df_final, aes(x = PC1, y = PC2)) +
 ```
 
 
-# Correlations
+# Correlations - CNV-sAA-flavor
 
 Below is a general set of scatterplots looking at correlations between different variables.
 
@@ -1114,7 +1114,7 @@ ggplot(data_summary, aes(x = Time, y = mean_value, color = Attribute)) +
 
 ```
 
-```{r fig-diff-starch-free, fig.cap="Positive values indicate higher perception in Free Limonene and negative values indicate higher perception in Starch-Limonene IC"}
+```{r fig-diff-starch-free, fig.width=12}
 # Pivot data to calculate the difference
 data_diff <- data_summary %>%
   pivot_wider(names_from = Sample_Name, values_from = mean_value) %>%
@@ -1156,7 +1156,10 @@ flavor_prop_CNV <- combined_data_CNV %>%
 
 # Merge both data frames
 final_data <- merge(flavor_prop_all, flavor_prop_CNV, by = c("Time", "Attribute", "Sample_Name"))
+```
 
+
+```{r fig-prop-percept, fig.width=12}
 # plot
 ggplot(final_data, aes(x = Time, y = overall_prop, fill = CNV_group)) +
   geom_col(aes(fill = CNV_group, y = overall_prop * proportion_flavor), position = "stack") +
@@ -1217,7 +1220,7 @@ combined_data_diff <- df_wide_diff %>%
 ```
 
 
-```{r}
+```{r func-percept}
 plot_perception <- function(data, group_col, group_labels, color_vector = c("blue", "red", "green")) {
   
   # Ensure group column is a factor
@@ -1258,31 +1261,164 @@ plot_perception <- function(data, group_col, group_labels, color_vector = c("blu
 ```
 
 
-```{r fig.height=10, fig.width=12}
+```{r plt-cnv, fig.height=10, fig.width=12}
 # Use function
 plot_perception(combined_data_diff, "CNV_group", c("Low", "High"))
 
 ```
 
 
-```{r fig.height=10, fig.width=12}
+```{r plt-sAA-after, fig.height=10, fig.width=12}
 # Use function
 plot_perception(combined_data_diff, "sAA_After_group", c("Low", "High"))
 
 
 ```
 
-```{r fig.height=10, fig.width=12}
+```{r plt-sAA-change, fig.height=10, fig.width=12}
 # Use function
 plot_perception(combined_data_diff, "sAA_Change_group", c("Low", "High"))
 
 
 ```
 
-```{r fig.height=10, fig.width=12}
+```{r plt-sAA-flow-aftr, fig.height=10, fig.width=12}
 # Use function
 plot_perception(combined_data_diff, "sAA_flow_After_group", c("Low", "High"))
 
+
+```
+
+## PCA perception
+
+## NA values omitted
+We will do the analysis first by omitting na values.
+
+
+```{r df-flavor-pca-na-omit}
+
+# Scale the Data
+
+df_flavor_pca <- combined_data %>% 
+  select(c(Sample_ID, Sample_Name, Attribute, Time, Value)) %>%
+  mutate(Sample_Name = str_replace_all(Sample_Name, " ", "_")) %>% 
+  pivot_wider(id_cols = Sample_ID,
+              names_from = c(Sample_Name, Attribute, Time), 
+              names_glue = "{Sample_Name}_{Attribute}_{Time}", 
+              values_from = Value) %>% 
+  select(-"Sample_ID") %>% 
+  na.omit()
+
+# Perform PCA
+pca <- df_flavor_pca %>%
+  prcomp(center = FALSE, scale. = FALSE)
+
+# Print the summary of the PCA object
+summary(pca)
+
+
+```
+
+```{r flavor-scree-na-omit}
+# Scree plot of variances
+fviz_eig(pca)
+
+```
+
+
+
+```{r flavor-contrib-na-omit, eval=FALSE, include=FALSE}
+# Plot the variable factors 
+fviz_pca_var(pca, col.var="contrib", 
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+             repel = TRUE)
+
+```
+
+
+```{r}
+# Default PCA plot
+fviz_pca_ind(pca)
+
+fviz_pca_ind(pca, 
+             ellipse.type = "convex", 
+             palette = "jco",
+             title = "PCA plot with convex hull")
+
+          
+```
+
+
+```{r}
+
+# Preserve Sample_ID in rownames 
+rownames(df_flavor_pca) <- df_flavor_pca$Sample_ID
+
+# Remove Sample_ID from df_flavor_pca
+df_flavor_pca$Sample_ID <- NULL
+
+# Perform PCA
+pca_results <- prcomp(df_flavor_pca, center = FALSE, scale. = FALSE)
+
+
+```
+
+```{r}
+# Extract scores and convert to a dataframe
+pca_df <- as.data.frame(pca_results$x)
+
+# Add back Sample_ID
+pca_df$Sample_ID <- rownames(pca_df)
+
+```
+
+```{r}
+# Subset combined_data for required variables
+combined_subset <- combined_data %>%
+  select(Sample_ID, Primer1_Diploid, Primer2_Diploid, sAA_Before, sAA_After, sAA_Change)
+
+# Merge dataframes by Sample_ID
+pca_final_df <- inner_join(pca_df, combined_subset, by = "Sample_ID")
+
+```
+
+```{r}
+library(ggplot2)
+
+# Function to create PCA plot
+create_pca_plot <- function(data, col_var){
+  col_var <- rlang::sym(col_var) # Convert string to symbol for tidy evaluation
+  plot <- ggplot(data, aes(x = PC1, y = PC2, color = !!col_var)) +
+    geom_point() +
+    scale_color_gradient(low = "blue", high = "yellow") +
+    theme_minimal() +
+    labs(color = rlang::quo_name(col_var), # Need to convert symbol back to string for this part
+         title = paste("PC1 vs PC2 colored by", rlang::quo_name(col_var)))
+  return(plot)
+}
+
+```
+
+
+```{r}
+# Now call the function for each variable
+print(create_pca_plot(pca_final_df, "Primer1_Diploid"))
+print(create_pca_plot(pca_final_df, "Primer2_Diploid"))
+print(create_pca_plot(pca_final_df, "sAA_Before"))
+print(create_pca_plot(pca_final_df, "sAA_After"))
+print(create_pca_plot(pca_final_df, "sAA_Change"))
+
+```
+
+```{r}
+# Compute the distance matrix
+dist_matrix <- dist(df_flavor_pca)
+
+# Perform hierarchical clustering 
+hclust_results <- hclust(dist_matrix)
+
+# Now plot the dendrogram
+plot(hclust_results)
 
 ```
 

@@ -358,7 +358,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Analysis v2</h1>
 <h4 class="author">Tina Lasisi</h4>
-<h4 class="date">25 July, 2023</h4>
+<h4 class="date">30 July, 2023</h4>
 
 </div>
 
@@ -387,7 +387,7 @@ aria-hidden="true"></span> </a>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2023-07-25
+<strong>Last updated:</strong> 2023-07-30
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -521,15 +521,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtinalasisiGozaAMYCNVtreeb5db62c16564a512ad4937891c3ee62e7802e59etargetblankb5db62ca">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtinalasisiGozaAMYCNVtree5387c89da81497743fe7e89c96463d3efc4ac86btargetblank5387c89a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/tree/b5db62c16564a512ad4937891c3ee62e7802e59e" target="_blank">b5db62c</a>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/tree/5387c89da81497743fe7e89c96463d3efc4ac86b" target="_blank">5387c89</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomtinalasisiGozaAMYCNVtreeb5db62c16564a512ad4937891c3ee62e7802e59etargetblankb5db62ca"
+id="strongRepositoryversionstrongahrefhttpsgithubcomtinalasisiGozaAMYCNVtree5387c89da81497743fe7e89c96463d3efc4ac86btargetblank5387c89a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -539,7 +539,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/tree/b5db62c16564a512ad4937891c3ee62e7802e59e" target="_blank">b5db62c</a>.
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/tree/5387c89da81497743fe7e89c96463d3efc4ac86b" target="_blank">5387c89</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -607,6 +607,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/5387c89da81497743fe7e89c96463d3efc4ac86b/analysis/analysisv2.Rmd" target="_blank">5387c89</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-25
+</td>
+<td>
+Update v2 analyses
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/tinalasisi/Goza_AMY_CNV/5387c89da81497743fe7e89c96463d3efc4ac86b/docs/analysisv2.html" target="_blank">5387c89</a>
+</td>
+<td>
+Tina Lasisi
+</td>
+<td>
+2023-07-25
+</td>
+<td>
+Update v2 analyses
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -767,8 +801,9 @@ Publish repo
 </div>
 </div>
 </div>
-<div id="clusters" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> Clusters</h1>
+<div id="clusters---cnv-saa-flavor" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Clusters -
+CNV-sAA-flavor</h1>
 <pre class="r"><code>df_saliva &lt;- read_csv(&quot;data/df_saliva.csv&quot;) %&gt;% 
   rename(TP_Before_1 = Total_Protein_Before_1_ug_mL,
          TP_Before_2 = Total_Protein_Before_2_ug_mL,
@@ -1428,8 +1463,10 @@ Tina Lasisi
 </div>
 </div>
 </div>
-<div id="correlations" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> Correlations</h1>
+<div id="correlations---cnv-saa-flavor" class="section level1"
+number="2">
+<h1><span class="header-section-number">2</span> Correlations -
+CNV-sAA-flavor</h1>
 <p>Below is a general set of scatterplots looking at correlations
 between different variables.</p>
 <pre class="r"><code># Select only numeric columns
@@ -3886,13 +3923,7 @@ ggplot(data_diff, aes(x = Time, y = Difference, color = Attribute)) +
   geom_line() +
   labs(x = &#39;Time&#39;, y = &#39;Difference in Perception&#39;, color = &#39;Attribute&#39;) +
   theme_classic()</code></pre>
-<div class="figure" style="text-align: center">
-<img src="figure/analysisv2.Rmd/fig-diff-starch-free-1.png" alt="Positive values indicate higher perception in Free Limonene and negative values indicate higher perception in Starch-Limonene IC" width="672" />
-<p class="caption">
-Positive values indicate higher perception in Free Limonene and negative
-values indicate higher perception in Starch-Limonene IC
-</p>
-</div>
+<p><img src="figure/analysisv2.Rmd/fig-diff-starch-free-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig-diff-starch-free-1">
 Past versions of fig-diff-starch-free-1.png
@@ -3952,84 +3983,13 @@ flavor_prop_CNV &lt;- combined_data_CNV %&gt;%
   mutate(proportion_flavor = count_flavor / sum(count_flavor))
 
 # Merge both data frames
-final_data &lt;- merge(flavor_prop_all, flavor_prop_CNV, by = c(&quot;Time&quot;, &quot;Attribute&quot;, &quot;Sample_Name&quot;))
-
-# plot
+final_data &lt;- merge(flavor_prop_all, flavor_prop_CNV, by = c(&quot;Time&quot;, &quot;Attribute&quot;, &quot;Sample_Name&quot;))</code></pre>
+<pre class="r"><code># plot
 ggplot(final_data, aes(x = Time, y = overall_prop, fill = CNV_group)) +
   geom_col(aes(fill = CNV_group, y = overall_prop * proportion_flavor), position = &quot;stack&quot;) +
   facet_grid(Attribute ~ Sample_Name) +
   labs(x = &#39;Time&#39;, y = &#39;Proportion Perceiving Flavor&#39;, fill = &#39;Copy Number Group&#39;)</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-21-1">
-Past versions of unnamed-chunk-21-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-21-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/b5db62c16564a512ad4937891c3ee62e7802e59e/docs/figure/analysisv2.Rmd/unnamed-chunk-21-1.png" target="_blank">b5db62c</a>
-</td>
-<td>
-Tina Lasisi
-</td>
-<td>
-2023-07-22
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/6e019773d11bd25f82f5d91be75b101a2da374d8/docs/figure/analysisv2.Rmd/unnamed-chunk-21-1.png" target="_blank">6e01977</a>
-</td>
-<td>
-Tina Lasisi
-</td>
-<td>
-2023-07-22
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/170c8ef65fdd1fd4c40944e49aab0563198a7516/docs/figure/analysisv2.Rmd/unnamed-chunk-21-1.png" target="_blank">170c8ef</a>
-</td>
-<td>
-Tina Lasisi
-</td>
-<td>
-2023-07-14
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/07ec9306556753cb5847b51e0594ab20e52e480d/docs/figure/analysisv2.Rmd/unnamed-chunk-21-1.png" target="_blank">07ec930</a>
-</td>
-<td>
-Tina Lasisi
-</td>
-<td>
-2023-07-12
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/analysisv2.Rmd/fig-prop-percept-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <pre class="r"><code># Reshape data to wide format
 df_wide1 &lt;- data_long %&gt;%
     pivot_wider(
@@ -4121,144 +4081,90 @@ combined_data_diff &lt;- df_wide_diff %&gt;%
 }</code></pre>
 <pre class="r"><code># Use function
 plot_perception(combined_data_diff, &quot;CNV_group&quot;, c(&quot;Low&quot;, &quot;High&quot;))</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-26-1.png" width="1152" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-26-1">
-Past versions of unnamed-chunk-26-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-26-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/b5db62c16564a512ad4937891c3ee62e7802e59e/docs/figure/analysisv2.Rmd/unnamed-chunk-26-1.png" target="_blank">b5db62c</a>
-</td>
-<td>
-Tina Lasisi
-</td>
-<td>
-2023-07-22
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/eb2e32f709faaf9e78b11c8e22c1e29ade2d49bc/docs/figure/analysisv2.Rmd/unnamed-chunk-26-1.png" target="_blank">eb2e32f</a>
-</td>
-<td>
-Tina Lasisi
-</td>
-<td>
-2023-07-22
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/analysisv2.Rmd/plt-cnv-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <pre class="r"><code># Use function
 plot_perception(combined_data_diff, &quot;sAA_After_group&quot;, c(&quot;Low&quot;, &quot;High&quot;))</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-27-1.png" width="1152" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-27-1">
-Past versions of unnamed-chunk-27-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-27-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/b5db62c16564a512ad4937891c3ee62e7802e59e/docs/figure/analysisv2.Rmd/unnamed-chunk-27-1.png" target="_blank">b5db62c</a>
-</td>
-<td>
-Tina Lasisi
-</td>
-<td>
-2023-07-22
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/analysisv2.Rmd/plt-sAA-after-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <pre class="r"><code># Use function
 plot_perception(combined_data_diff, &quot;sAA_Change_group&quot;, c(&quot;Low&quot;, &quot;High&quot;))</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-28-1.png" width="1152" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-28-1">
-Past versions of unnamed-chunk-28-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-28-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/b5db62c16564a512ad4937891c3ee62e7802e59e/docs/figure/analysisv2.Rmd/unnamed-chunk-28-1.png" target="_blank">b5db62c</a>
-</td>
-<td>
-Tina Lasisi
-</td>
-<td>
-2023-07-22
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/analysisv2.Rmd/plt-sAA-change-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <pre class="r"><code># Use function
 plot_perception(combined_data_diff, &quot;sAA_flow_After_group&quot;, c(&quot;Low&quot;, &quot;High&quot;))</code></pre>
-<p><img src="figure/analysisv2.Rmd/unnamed-chunk-29-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/analysisv2.Rmd/plt-sAA-flow-aftr-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<div id="pca-perception" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> PCA perception</h2>
+</div>
+<div id="na-values-omitted-1" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> NA values
+omitted</h2>
+<p>We will do the analysis first by omitting na values.</p>
+<pre class="r"><code># Scale the Data
+
+df_flavor_pca &lt;- combined_data %&gt;% 
+  select(c(Sample_ID, Sample_Name, Attribute, Time, Value)) %&gt;%
+  mutate(Sample_Name = str_replace_all(Sample_Name, &quot; &quot;, &quot;_&quot;)) %&gt;% 
+  pivot_wider(id_cols = Sample_ID,
+              names_from = c(Sample_Name, Attribute, Time), 
+              names_glue = &quot;{Sample_Name}_{Attribute}_{Time}&quot;, 
+              values_from = Value) %&gt;% 
+  select(-&quot;Sample_ID&quot;) %&gt;% 
+  na.omit()
+
+# Perform PCA
+pca &lt;- df_flavor_pca %&gt;%
+  prcomp(center = FALSE, scale. = FALSE)
+
+# Print the summary of the PCA object
+summary(pca)</code></pre>
+<pre><code>Importance of components:
+                           PC1     PC2     PC3     PC4     PC5     PC6    PC7
+Standard deviation     18.2535 4.99317 4.97281 4.41068 3.85666 3.67874 3.3216
+Proportion of Variance  0.5919 0.04429 0.04393 0.03456 0.02642 0.02404 0.0196
+Cumulative Proportion   0.5919 0.63617 0.68010 0.71466 0.74108 0.76512 0.7847
+                           PC8     PC9   PC10    PC11    PC12    PC13    PC14
+Standard deviation     3.02438 2.75815 2.6310 2.60493 2.48653 2.40547 2.27843
+Proportion of Variance 0.01625 0.01351 0.0123 0.01205 0.01098 0.01028 0.00922
+Cumulative Proportion  0.80097 0.81448 0.8268 0.83883 0.84982 0.86010 0.86932
+                          PC15    PC16    PC17    PC18    PC19    PC20    PC21
+Standard deviation     2.18471 2.11490 2.03262 2.00597 1.87861 1.84941 1.80367
+Proportion of Variance 0.00848 0.00795 0.00734 0.00715 0.00627 0.00608 0.00578
+Cumulative Proportion  0.87780 0.88574 0.89308 0.90023 0.90650 0.91257 0.91835
+                          PC22    PC23    PC24    PC25    PC26    PC27    PC28
+Standard deviation     1.72317 1.68228 1.61595 1.53318 1.48960 1.37905 1.37235
+Proportion of Variance 0.00527 0.00503 0.00464 0.00418 0.00394 0.00338 0.00335
+Cumulative Proportion  0.92363 0.92866 0.93329 0.93747 0.94141 0.94479 0.94814
+                          PC29    PC30    PC31    PC32    PC33    PC34    PC35
+Standard deviation     1.32717 1.29721 1.29284 1.28048 1.25055 1.24461 1.15083
+Proportion of Variance 0.00313 0.00299 0.00297 0.00291 0.00278 0.00275 0.00235
+Cumulative Proportion  0.95126 0.95425 0.95722 0.96014 0.96291 0.96566 0.96802
+                          PC36    PC37    PC38    PC39    PC40    PC41    PC42
+Standard deviation     1.12837 1.10730 1.06453 1.04644 1.00247 0.97212 0.94228
+Proportion of Variance 0.00226 0.00218 0.00201 0.00195 0.00179 0.00168 0.00158
+Cumulative Proportion  0.97028 0.97246 0.97447 0.97642 0.97820 0.97988 0.98146
+                          PC43    PC44    PC45    PC46    PC47    PC48    PC49
+Standard deviation     0.92595 0.90800 0.87504 0.83733 0.80917 0.79406 0.77772
+Proportion of Variance 0.00152 0.00146 0.00136 0.00125 0.00116 0.00112 0.00107
+Cumulative Proportion  0.98298 0.98444 0.98580 0.98705 0.98821 0.98933 0.99041
+                          PC50    PC51    PC52    PC53   PC54    PC55    PC56
+Standard deviation     0.74292 0.72956 0.71575 0.69309 0.6716 0.64335 0.63190
+Proportion of Variance 0.00098 0.00095 0.00091 0.00085 0.0008 0.00074 0.00071
+Cumulative Proportion  0.99139 0.99233 0.99324 0.99410 0.9949 0.99563 0.99634
+                          PC57    PC58    PC59    PC60    PC61    PC62
+Standard deviation     0.62355 0.61066 0.59338 0.58686 0.56850 0.52645
+Proportion of Variance 0.00069 0.00066 0.00063 0.00061 0.00057 0.00049
+Cumulative Proportion  0.99703 0.99770 0.99832 0.99893 0.99951 1.00000</code></pre>
+<pre class="r"><code># Scree plot of variances
+fviz_eig(pca)</code></pre>
+<p><img src="figure/analysisv2.Rmd/flavor-scree-na-omit-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Default PCA plot
+fviz_pca_ind(pca)</code></pre>
+<p><img src="figure/analysisv2.Rmd/unnamed-chunk-25-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-29-1">
-Past versions of unnamed-chunk-29-1.png
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-25-1">
+Past versions of unnamed-chunk-25-1.png
 </button>
 </p>
-<div id="fig-unnamed-chunk-29-1" class="collapse">
+<div id="fig-unnamed-chunk-25-1" class="collapse">
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
 <thead>
@@ -4277,7 +4183,7 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/b5db62c16564a512ad4937891c3ee62e7802e59e/docs/figure/analysisv2.Rmd/unnamed-chunk-29-1.png" target="_blank">b5db62c</a>
+<a href="https://github.com/tinalasisi/Goza_AMY_CNV/blob/eb2e32f709faaf9e78b11c8e22c1e29ade2d49bc/docs/figure/analysisv2.Rmd/unnamed-chunk-25-1.png" target="_blank">eb2e32f</a>
 </td>
 <td>
 Tina Lasisi
@@ -4290,6 +4196,63 @@ Tina Lasisi
 </table>
 </div>
 </div>
+<pre class="r"><code>fviz_pca_ind(pca, 
+             ellipse.type = &quot;convex&quot;, 
+             palette = &quot;jco&quot;,
+             title = &quot;PCA plot with convex hull&quot;)</code></pre>
+<p><img src="figure/analysisv2.Rmd/unnamed-chunk-25-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Preserve Sample_ID in rownames 
+rownames(df_flavor_pca) &lt;- df_flavor_pca$Sample_ID
+
+# Remove Sample_ID from df_flavor_pca
+df_flavor_pca$Sample_ID &lt;- NULL
+
+# Perform PCA
+pca_results &lt;- prcomp(df_flavor_pca, center = FALSE, scale. = FALSE)</code></pre>
+<pre class="r"><code># Extract scores and convert to a dataframe
+pca_df &lt;- as.data.frame(pca_results$x)
+
+# Add back Sample_ID
+pca_df$Sample_ID &lt;- rownames(pca_df)</code></pre>
+<pre class="r"><code># Subset combined_data for required variables
+combined_subset &lt;- combined_data %&gt;%
+  select(Sample_ID, Primer1_Diploid, Primer2_Diploid, sAA_Before, sAA_After, sAA_Change)
+
+# Merge dataframes by Sample_ID
+pca_final_df &lt;- inner_join(pca_df, combined_subset, by = &quot;Sample_ID&quot;)</code></pre>
+<pre class="r"><code>library(ggplot2)
+
+# Function to create PCA plot
+create_pca_plot &lt;- function(data, col_var){
+  col_var &lt;- rlang::sym(col_var) # Convert string to symbol for tidy evaluation
+  plot &lt;- ggplot(data, aes(x = PC1, y = PC2, color = !!col_var)) +
+    geom_point() +
+    scale_color_gradient(low = &quot;blue&quot;, high = &quot;yellow&quot;) +
+    theme_minimal() +
+    labs(color = rlang::quo_name(col_var), # Need to convert symbol back to string for this part
+         title = paste(&quot;PC1 vs PC2 colored by&quot;, rlang::quo_name(col_var)))
+  return(plot)
+}</code></pre>
+<pre class="r"><code># Now call the function for each variable
+print(create_pca_plot(pca_final_df, &quot;Primer1_Diploid&quot;))</code></pre>
+<p><img src="figure/analysisv2.Rmd/unnamed-chunk-30-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>print(create_pca_plot(pca_final_df, &quot;Primer2_Diploid&quot;))</code></pre>
+<p><img src="figure/analysisv2.Rmd/unnamed-chunk-30-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>print(create_pca_plot(pca_final_df, &quot;sAA_Before&quot;))</code></pre>
+<p><img src="figure/analysisv2.Rmd/unnamed-chunk-30-3.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>print(create_pca_plot(pca_final_df, &quot;sAA_After&quot;))</code></pre>
+<p><img src="figure/analysisv2.Rmd/unnamed-chunk-30-4.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>print(create_pca_plot(pca_final_df, &quot;sAA_Change&quot;))</code></pre>
+<p><img src="figure/analysisv2.Rmd/unnamed-chunk-30-5.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Compute the distance matrix
+dist_matrix &lt;- dist(df_flavor_pca)
+
+# Perform hierarchical clustering 
+hclust_results &lt;- hclust(dist_matrix)
+
+# Now plot the dendrogram
+plot(hclust_results)</code></pre>
+<p><img src="figure/analysisv2.Rmd/unnamed-chunk-31-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -4364,6 +4327,7 @@ loaded via a namespace (and not attached):
 [115] rpart_4.1.19       coda_0.19-4        minqa_1.2.5       
 [118] rmarkdown_2.21     carData_3.0-5      git2r_0.32.0      
 [121] getPass_0.2-2      base64enc_0.1-3   </code></pre>
+</div>
 </div>
 </div>
 
